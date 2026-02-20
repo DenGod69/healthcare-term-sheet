@@ -3524,7 +3524,7 @@
                 setMarginValue('gmPctNumber', gmPctVal, 'pct');
                 document.getElementById('gmPctNumber').classList.toggle('negative-value', gmPctVal < 0);
 
-                const costWkForNm = payWk + burdensWk + (flatExpenses > 0 ? (hoursWeek / flatExpenses) * hoursWeek : 0);
+                const costWkForNm = payWk + burdensWk + (expenseBurdenPerHr * hoursWeek);
                 const netMarginWkForNm = netBillWk - costWkForNm;
                 const nmPctVal = netBillWk > 0 ? (netMarginWkForNm / netBillWk * 100) : 0;
                 setMarginValue('nmPctNumber', nmPctVal, 'pct');
