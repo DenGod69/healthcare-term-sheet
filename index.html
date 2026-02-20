@@ -385,6 +385,25 @@
             min-height: 100vh;
         }
 
+        /* On desktop: breakdown-sidebar merges below margin-sidebar in the same column */
+        .breakdown-sidebar {
+            background: linear-gradient(180deg, #1a3a2a 0%, #0d1b2a 100%);
+            color: white;
+            padding: 0 16px 20px;
+            grid-column: 3;
+        }
+        .breakdown-sidebar h3 {
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 16px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid rgba(67, 233, 123, 0.5);
+            text-align: center;
+            display: none; /* hidden on desktop — it's a continuation of margin-sidebar */
+        }
+
         .comp-sidebar {
             background: linear-gradient(180deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
             color: white;
