@@ -2633,23 +2633,28 @@
             }
         });
 
-        // Facility Zip Code — auto-detect state and control OT hours/day visibility
+        // Facility Zip Code — auto-detect state for OT dropdown, but does NOT trigger OT hours/day visibility
+        // OT hours/day visibility is only triggered by the GSA zip code in the Travel/Per Diem tab
         document.getElementById('facilityZip').addEventListener('input', function() {
             const zip = this.value.trim();
             if (zip.length === 5 && /^\d{5}$/.test(zip)) {
-                zipCodeApplied = true;
                 const st = zipToState(zip);
                 if (st) {
-                    autoDetectState(st);
+                    // Set the OT dropdown but don't show hoursPerDay — that's travel-tab only
+                    const upper = st.toUpperCase().trim();
+                    const select = document.getElementById('otStateSelect');
+                    if (STATE_OT_RULES[upper]) {
+                        select.value = upper;
+                    } else {
+                        select.value = 'FEDERAL';
+                    }
+                    updateOTState();
                 }
                 // Also populate GSA zip if empty
                 const gsaZip = document.getElementById('gsaZipCode');
                 if (gsaZip && !gsaZip.value) {
                     gsaZip.value = zip;
                 }
-            } else {
-                zipCodeApplied = false;
-                updateHoursPerDayVisibility();
             }
         });
         // Auto-fill OT/DT rates when regular pay rate changes
