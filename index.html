@@ -3153,6 +3153,15 @@
                 flatExpenses += parseFloat(elem.querySelector('.custom-expense-amount').value) || 0;
             });
 
+            // --- Expense burden per hour: flat $ / total contract hours ---
+            const totalHours = hoursWeek * weeks;
+            let expenseBurdenPerHr = 0;
+            if (flatExpenses > 0 && totalHours > 0) {
+                expenseBurdenPerHr = flatExpenses / totalHours;
+            } else if (flatExpenses > 0 && hoursWeek > 0) {
+                expenseBurdenPerHr = flatExpenses / hoursWeek;
+            }
+
             // ================================================================
             // MODE 1: RATE-ONLY (no hours entered) — show markup from raw rates
             // ================================================================
