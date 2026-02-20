@@ -2802,14 +2802,14 @@
             // Burdens (WC + ER) apply to payroll wages only, NOT GSA stipends
             const payrollOnly = effectivePay - (hoursWeek > 0 ? gsaWkCost * (weeks || 1) : 0);
             const burdensTotal = payrollOnly * burdenPct;
-            // Expenses: contract total uses flat one-time cost; weekly snapshot uses burden rate
+            // Expenses: contract total uses flat one-time cost; weekly uses burden rate × hours
             let expensesForTotal;
             if (subtotalPay > 0) {
-                // Contract mode (weeks entered) — flat one-time expenses
+                // Contract mode (weeks entered) — flat one-time expenses added to total cost
                 expensesForTotal = expenses;
             } else if (hoursWeek > 0 && expenses > 0) {
-                // Weekly snapshot — burden rate (hrs/flat) × hours
-                expensesForTotal = (hoursWeek / expenses) * hoursWeek;
+                // Weekly snapshot — expense burden per hour × hours/wk
+                expensesForTotal = expenseBurdenPerHr * hoursWeek;
             } else {
                 expensesForTotal = 0;
             }
