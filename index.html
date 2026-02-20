@@ -3365,13 +3365,12 @@
                     expNote.style.display = 'none';
                 }
             } else {
-                // WEEKLY SNAPSHOT: use burden rate (hrs/flat) for per-hour margin
-                const expBurdenRate = flatExpenses > 0 ? hoursWeek / flatExpenses : 0;
-                const expCostWk = expBurdenRate * hoursWeek;
+                // WEEKLY SNAPSHOT: expense burden per hr already calculated above
+                const expCostWk = expenseBurdenPerHr * hoursWeek;
                 const costWk = payWk + burdensWk + expCostWk;
                 const netMarginWk = netBillWk - costWk;
                 const netMarginWkPct = netBillWk > 0 ? (netMarginWk / netBillWk * 100) : 0;
-                const netMarginHr = netMarginWk / hoursWeek;
+                const netMarginHr = hoursWeek > 0 ? netMarginWk / hoursWeek : 0;
 
                 setMarginValue('nmTotalDollar', netMarginWk, '$');
                 setMarginValue('nmPercent', netMarginWkPct, 'pct');
@@ -3382,7 +3381,7 @@
                 // Show expense context note
                 if (flatExpenses > 0) {
                     expNote.style.display = 'block';
-                    expNote.textContent = 'Burden rate: ' + hoursWeek + ' hrs \u00F7 $' + flatExpenses.toFixed(2) + ' = $' + expBurdenRate.toFixed(2) + '/hr \u2014 enter weeks for contract total';
+                    expNote.textContent = '$' + flatExpenses.toFixed(2) + ' \u00F7 ' + hoursWeek + ' hrs/wk = $' + expenseBurdenPerHr.toFixed(2) + '/hr \u2014 enter contract weeks for accurate amortization';
                     expNote.style.color = '#ffa500';
                 } else {
                     expNote.style.display = 'none';
