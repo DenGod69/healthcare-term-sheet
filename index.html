@@ -934,6 +934,10 @@
                         <label for="facilityCity">City, State <span class="required">*</span></label>
                         <input type="text" id="facilityCity" name="facilityCity" placeholder="e.g., Austin, TX" required>
                     </div>
+                    <div class="form-group">
+                        <label for="facilityZip">Facility Zip</label>
+                        <input type="text" id="facilityZip" name="facilityZip" placeholder="e.g., 90210" maxlength="5">
+                    </div>
                 </div>
 
                 <div class="form-row">
@@ -978,9 +982,9 @@
                         <label for="endDate">End Date (Auto)</label>
                         <input type="date" id="endDate" name="endDate" readonly style="background-color:#f5f5f5;" tabindex="-1">
                     </div>
-                    <div class="form-group">
-                        <label for="hoursPerDay">Shift Hours/Day (OT) <span class="required">*</span></label>
-                        <input type="number" id="hoursPerDay" name="hoursPerDay" placeholder="12" step="0.5" min="1" max="24" required tabindex="3">
+                    <div class="form-group" id="hoursPerDayGroup" style="display:none;">
+                        <label for="hoursPerDay">Shift Hours/Day (OT)</label>
+                        <input type="number" id="hoursPerDay" name="hoursPerDay" placeholder="12" step="0.5" min="1" max="24" tabindex="3">
                     </div>
                     <div class="form-group">
                         <label for="hoursPerWeek">Hours Per Week <span class="required">*</span></label>
@@ -1401,6 +1405,18 @@
                 <div class="metric-tile-value" id="nmTotalDollar">$0.00</div>
                 <div class="metric-tile-sub" id="nmPercent">0.00%</div>
             </div>
+            <!-- Gross Margin % -->
+            <div class="metric-tile gross">
+                <div class="metric-tile-label">GM %</div>
+                <div class="metric-tile-value" id="gmPctNumber" style="font-size:18px;">0.00%</div>
+                <div class="metric-tile-sub">Gross Margin Rate</div>
+            </div>
+            <!-- Net Margin % -->
+            <div class="metric-tile net">
+                <div class="metric-tile-label">Net Margin %</div>
+                <div class="metric-tile-value" id="nmPctNumber" style="font-size:18px;">0.00%</div>
+                <div class="metric-tile-sub">Net Margin Rate</div>
+            </div>
         </div>
 
         <hr class="margin-divider" style="margin:6px 0;">
@@ -1460,6 +1476,52 @@
 
         <hr class="margin-divider" style="margin:6px 0;">
 
+        <!-- NET PROFIT BREAKDOWN (after burdens & expenses) -->
+        <div class="margin-section-label" id="netBreakdownLabel">Net Profit Breakdown</div>
+
+        <div class="metrics-grid">
+            <div class="metric-tile net">
+                <div class="metric-tile-label">Per Hour</div>
+                <div class="metric-tile-value" id="netProfitHr" style="font-size:15px;">$0.00</div>
+                <div class="metric-tile-sub"><span id="netBillHrSub">$0</span> bill / <span id="netCostHrSub">$0</span> cost</div>
+            </div>
+            <div class="metric-tile net">
+                <div class="metric-tile-label">Per Day</div>
+                <div class="metric-tile-value" id="netProfitDay" style="font-size:15px;">$0.00</div>
+                <div class="metric-tile-sub"><span id="netBillDaySub">$0</span> bill / <span id="netCostDaySub">$0</span> cost</div>
+            </div>
+            <div class="metric-tile net">
+                <div class="metric-tile-label">Per Week</div>
+                <div class="metric-tile-value" id="netProfitWk" style="font-size:15px;">$0.00</div>
+                <div class="metric-tile-sub"><span id="netBillWkSub">$0</span> bill / <span id="netCostWkSub">$0</span> cost</div>
+            </div>
+            <div class="metric-tile net">
+                <div class="metric-tile-label">Per Month</div>
+                <div class="metric-tile-value" id="netProfitMo" style="font-size:15px;">$0.00</div>
+                <div class="metric-tile-sub"><span id="netBillMoSub">$0</span> bill / <span id="netCostMoSub">$0</span> cost</div>
+            </div>
+        </div>
+
+        <!-- WEEKS TO COVER EXPENSES -->
+        <div id="weeksToCoverSection" style="display:none; margin-top:8px;">
+            <div class="margin-section-label">Expense Recovery</div>
+            <div style="background:rgba(255,255,255,0.06); border-radius:8px; padding:12px; border-left:3px solid #ff9f43;">
+                <div style="display:flex; justify-content:space-between; align-items:center;">
+                    <div>
+                        <div style="font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:1px; color:rgba(255,255,255,0.5);">Weeks to Cover Expenses</div>
+                        <div style="font-size:9px; color:rgba(255,255,255,0.35); margin-top:2px;" id="weeksToCoverDetail">$0 expenses / $0 net profit/wk</div>
+                    </div>
+                    <div id="weeksToCoverValue" style="font-size:22px; font-weight:900; font-family:'Monaco','Menlo',monospace; color:#ff9f43;">--</div>
+                </div>
+                <div style="background:rgba(255,255,255,0.1); border-radius:4px; height:6px; margin-top:8px; overflow:hidden;">
+                    <div id="weeksToCoverBar" style="height:100%; background:linear-gradient(90deg,#43e97b,#ff9f43); border-radius:4px; width:0%; transition:width 0.3s;"></div>
+                </div>
+                <div style="font-size:9px; color:rgba(255,255,255,0.35); margin-top:4px; text-align:right;" id="weeksToCoverPct">0% of contract</div>
+            </div>
+        </div>
+
+        <hr class="margin-divider" style="margin:6px 0;">
+
         <!-- OT/DT MARGIN BREAKDOWN -->
         <div class="margin-section-label">OT/DT Margin Breakdown</div>
 
@@ -1510,6 +1572,44 @@
         // ============================================================
         // STATE OT RULES — Daily/Weekly overtime thresholds by state
         // ============================================================
+        // Track whether a zip code has been applied (for OT field visibility)
+        let zipCodeApplied = false;
+
+        // Show/hide the hoursPerDay field based on zip code + state OT rules
+        function updateHoursPerDayVisibility() {
+            const stateCode = document.getElementById('otStateSelect').value;
+            const rules = STATE_OT_RULES[stateCode] || STATE_OT_RULES['FEDERAL'];
+            const group = document.getElementById('hoursPerDayGroup');
+            if (!group) return;
+
+            if (zipCodeApplied && rules.dailyOT) {
+                group.style.display = '';
+            } else {
+                group.style.display = 'none';
+                // Auto-default the value silently when hidden
+                silentAutoDefaultHoursPerDay();
+            }
+        }
+
+        // Set hoursPerDay silently (no visibility check, always sets a value)
+        function silentAutoDefaultHoursPerDay() {
+            const hpdInput = document.getElementById('hoursPerDay');
+            const hpw = parseFloat(document.getElementById('hoursPerWeek').value) || 0;
+            if (hpw < 20) return;
+
+            let defaultHpd = 12;
+            if (hpw === 40) defaultHpd = 8;
+            else if (hpw === 36) defaultHpd = 12;
+            else if (hpw === 48) defaultHpd = 12;
+            else if (hpw === 24) defaultHpd = 8;
+            else if (hpw === 32) defaultHpd = 8;
+            else if (hpw % 12 === 0) defaultHpd = 12;
+            else if (hpw % 10 === 0) defaultHpd = 10;
+            else if (hpw % 8 === 0) defaultHpd = 8;
+
+            hpdInput.value = defaultHpd;
+        }
+
         const STATE_OT_RULES = {
             'FEDERAL': { name: 'Federal (FLSA)', dailyOT: null, dailyDT: null, weeklyOT: 40, seventhDay: false, desc: 'OT (1.5x) after 40 hrs/week' },
             'CA': { name: 'California', dailyOT: 8, dailyDT: 12, weeklyOT: 40, seventhDay: true, desc: 'Daily OT (1.5x) >8hrs, DT (2x) >12hrs, 7th consecutive day rule' },
@@ -1642,6 +1742,7 @@
                 select.value = 'FEDERAL';
             }
             autoDefaultHoursPerDay();
+            updateHoursPerDayVisibility();
             updateOTState();
         }
 
@@ -1768,10 +1869,14 @@
             document.getElementById('gsaMealDay').textContent = '$' + rates.meals.toFixed(2);
 
             // Auto-detect state OT rules from zip code
+            zipCodeApplied = true;
             const detectedState = zipToState(zip);
             if (detectedState) {
                 autoDetectState(detectedState);
             }
+            // Sync facility zip if empty
+            const facZip = document.getElementById('facilityZip');
+            if (facZip && !facZip.value) facZip.value = zip;
 
             calculateGSA();
         }
@@ -2440,15 +2545,52 @@
             const id = 'expense-' + Date.now();
 
             const html = `
-                <div class="custom-expense-row" id="${id}" style="display:grid; grid-template-columns:1fr 150px 30px; gap:8px; align-items:center; background:#f9f9f9; padding:10px; border-radius:4px;">
+                <div class="custom-expense-row" id="${id}" style="display:grid; grid-template-columns:1fr 150px 30px 30px; gap:8px; align-items:center; background:#fff8e1; padding:10px; border-radius:4px; border:2px dashed #ffc107;">
                     <input type="text" placeholder="Category Name" class="custom-expense-name" style="padding:6px; border:1px solid #ddd; border-radius:3px; font-size:12px;">
                     <input type="number" placeholder="Amount" step="0.01" min="0" class="custom-expense-amount" style="padding:6px; border:1px solid #ddd; border-radius:3px; font-size:12px; font-family:'Monaco','Menlo',monospace; text-align:right;">
-                    <button type="button" class="btn-remove" onclick="removeExpenseCategory('${id}')">✕</button>
+                    <button type="button" style="background:#43e97b; color:white; border:none; border-radius:3px; font-size:12px; padding:4px 10px; cursor:pointer; font-weight:700;" onclick="confirmExpenseCategory('${id}')" title="Add expense">✓</button>
+                    <button type="button" class="btn-remove" onclick="removeExpenseCategory('${id}')" title="Remove">✕</button>
                 </div>
             `;
 
             container.insertAdjacentHTML('beforeend', html);
             document.querySelector(`#${id} .custom-expense-amount`).addEventListener('change', calculateAllRows);
+            document.querySelector(`#${id} .custom-expense-amount`).addEventListener('input', calculateAllRows);
+        }
+
+        function confirmExpenseCategory(id) {
+            const row = document.getElementById(id);
+            if (!row) return;
+            const name = row.querySelector('.custom-expense-name').value.trim();
+            const amount = parseFloat(row.querySelector('.custom-expense-amount').value) || 0;
+
+            if (!name) {
+                row.querySelector('.custom-expense-name').style.borderColor = '#e74c3c';
+                row.querySelector('.custom-expense-name').focus();
+                return;
+            }
+            if (amount <= 0) {
+                row.querySelector('.custom-expense-amount').style.borderColor = '#e74c3c';
+                row.querySelector('.custom-expense-amount').focus();
+                return;
+            }
+
+            // Lock the inputs and mark as confirmed
+            row.querySelector('.custom-expense-name').readOnly = true;
+            row.querySelector('.custom-expense-name').style.background = '#f5f5f5';
+            row.querySelector('.custom-expense-amount').readOnly = true;
+            row.querySelector('.custom-expense-amount').style.background = '#f5f5f5';
+            row.style.background = '#e8f5e9';
+            row.style.border = '2px solid #43e97b';
+
+            // Remove the ✓ button (already confirmed)
+            const confirmBtn = row.querySelector('button[title="Add expense"]');
+            if (confirmBtn) confirmBtn.remove();
+
+            // Adjust grid to 3 columns now
+            row.style.gridTemplateColumns = '1fr 150px 30px';
+
+            calculateAllRows();
         }
 
         function removeExpenseCategory(id) {
@@ -2473,12 +2615,14 @@
         });
         document.getElementById('hoursPerWeek').addEventListener('change', function() {
             autoDefaultHoursPerDay();
+            updateHoursPerDayVisibility();
             calculateGSA();
             updateOTState();
             calculateAllRows();
         });
         document.getElementById('otStateSelect').addEventListener('change', function() {
             autoDefaultHoursPerDay();
+            updateHoursPerDayVisibility();
             updateOTState();
             autoFillOTRates();
             calculateAllRows();
@@ -2489,6 +2633,26 @@
             const match = val.match(/,\s*([A-Za-z]{2})\s*$/);
             if (match) {
                 autoDetectState(match[1]);
+            }
+        });
+
+        // Facility Zip Code — auto-detect state and control OT hours/day visibility
+        document.getElementById('facilityZip').addEventListener('input', function() {
+            const zip = this.value.trim();
+            if (zip.length === 5 && /^\d{5}$/.test(zip)) {
+                zipCodeApplied = true;
+                const st = zipToState(zip);
+                if (st) {
+                    autoDetectState(st);
+                }
+                // Also populate GSA zip if empty
+                const gsaZip = document.getElementById('gsaZipCode');
+                if (gsaZip && !gsaZip.value) {
+                    gsaZip.value = zip;
+                }
+            } else {
+                zipCodeApplied = false;
+                updateHoursPerDayVisibility();
             }
         });
         // Auto-fill OT/DT rates when regular pay rate changes
@@ -2765,6 +2929,34 @@
                 heroEl.textContent = '$' + nmRate.toFixed(2) + '/hr';
                 heroEl.style.color = nmRate >= 0 ? '#ffd700' : '#ff6b6b';
 
+                // --- GM % and NM % as standalone numbers ---
+                const gmPctVal = regBillRate > 0 ? ((regBillRate - grossPayRate) / regBillRate * 100) : 0;
+                setMarginValue('gmPctNumber', gmPctVal, 'pct');
+                document.getElementById('gmPctNumber').classList.toggle('negative-value', gmPctVal < 0);
+                setMarginValue('nmPctNumber', nmPct, 'pct');
+                document.getElementById('nmPctNumber').classList.toggle('negative-value', nmPct < 0);
+
+                // --- Net Profit Breakdown (rate-only) ---
+                document.getElementById('netBreakdownLabel').textContent = 'Net Profit Snapshot';
+                setMarginValue('netProfitHr', nmRate, '$');
+                document.getElementById('netBillHrSub').textContent = '$' + netBillRate.toFixed(2);
+                document.getElementById('netCostHrSub').textContent = '$' + totalCostHr.toFixed(2);
+
+                setMarginValue('netProfitDay', 0, '$');
+                document.getElementById('netBillDaySub').textContent = '--';
+                document.getElementById('netCostDaySub').textContent = '--';
+
+                setMarginValue('netProfitWk', 0, '$');
+                document.getElementById('netBillWkSub').textContent = '--';
+                document.getElementById('netCostWkSub').textContent = '--';
+
+                setMarginValue('netProfitMo', 0, '$');
+                document.getElementById('netBillMoSub').textContent = '--';
+                document.getElementById('netCostMoSub').textContent = '--';
+
+                // --- Weeks to cover expenses (rate-only: hidden) ---
+                document.getElementById('weeksToCoverSection').style.display = 'none';
+
                 return;
             }
 
@@ -3001,6 +3193,123 @@
                 heroEl.textContent = '$' + weeklyMarginHero.toFixed(2);
                 heroEl.style.color = weeklyMarginHero >= 0 ? '#ffd700' : '#ff6b6b';
             }
+
+            // ================================================================
+            // GM % and NM % as standalone numbers (Mode 2)
+            // ================================================================
+            if (weeks > 0) {
+                const totalBillContract = billWk * weeks;
+                const grossWagesContract = payWk * weeks;
+                const grossMarginContract = totalBillContract - grossWagesContract;
+                const gmPctVal = totalBillContract > 0 ? (grossMarginContract / totalBillContract * 100) : 0;
+                setMarginValue('gmPctNumber', gmPctVal, 'pct');
+                document.getElementById('gmPctNumber').classList.toggle('negative-value', gmPctVal < 0);
+
+                const netBillContract = totalBillContract * (1 - vmsPercent / 100);
+                const totalCostContract = parseFloat(document.getElementById('totalCost').textContent.replace('$', '')) || 0;
+                const netMarginContract = netBillContract - totalCostContract;
+                const nmPctVal = netBillContract > 0 ? (netMarginContract / netBillContract * 100) : 0;
+                setMarginValue('nmPctNumber', nmPctVal, 'pct');
+                document.getElementById('nmPctNumber').classList.toggle('negative-value', nmPctVal < 0);
+            } else {
+                const gmPctVal = billWk > 0 ? (gmProfitWk / billWk * 100) : 0;
+                setMarginValue('gmPctNumber', gmPctVal, 'pct');
+                document.getElementById('gmPctNumber').classList.toggle('negative-value', gmPctVal < 0);
+
+                const costWkForNm = payWk + burdensWk + (flatExpenses > 0 ? (hoursWeek / flatExpenses) * hoursWeek : 0);
+                const netMarginWkForNm = netBillWk - costWkForNm;
+                const nmPctVal = netBillWk > 0 ? (netMarginWkForNm / netBillWk * 100) : 0;
+                setMarginValue('nmPctNumber', nmPctVal, 'pct');
+                document.getElementById('nmPctNumber').classList.toggle('negative-value', nmPctVal < 0);
+            }
+
+            // ================================================================
+            // NET PROFIT BREAKDOWN — Per Hour, Day, Week, Month (after all burdens + expenses)
+            // ================================================================
+            document.getElementById('netBreakdownLabel').textContent = 'Net Profit Breakdown';
+
+            // Calculate total cost per hour/week (burdens + expenses)
+            const burdenPerHrTotal = (payWk - gsaWkTotal) / hoursWeek * burdenPct;
+            let expBurdenPerHrNP = 0;
+            ['drugScreening', 'backgroundCheck', 'occupationalScreening'].forEach(id => {
+                const flat = parseFloat(document.getElementById(id).value) || 0;
+                if (flat > 0) expBurdenPerHrNP += hoursWeek / flat;
+            });
+            document.querySelectorAll('.custom-expense-row').forEach(elem => {
+                const amt = parseFloat(elem.querySelector('.custom-expense-amount').value) || 0;
+                if (amt > 0) expBurdenPerHrNP += hoursWeek / amt;
+            });
+
+            const netBillHrNP = billHr * (1 - vmsPercent / 100);
+            const totalCostHrNP = payHr + burdenPerHrTotal + expBurdenPerHrNP;
+            const netProfitHrVal = netBillHrNP - totalCostHrNP;
+            const netProfitDayVal = netProfitHrVal * hoursDay;
+            const netProfitWkVal = netProfitHrVal * hoursWeek;
+            const netProfitMoVal = netProfitWkVal * 4.33;
+
+            const netBillDayVal = netBillHrNP * hoursDay;
+            const netBillWkVal = netBillHrNP * hoursWeek;
+            const netBillMoVal = netBillWkVal * 4.33;
+            const totalCostDayVal = totalCostHrNP * hoursDay;
+            const totalCostWkVal = totalCostHrNP * hoursWeek;
+            const totalCostMoVal = totalCostWkVal * 4.33;
+
+            setMarginValue('netProfitHr', netProfitHrVal, '$');
+            document.getElementById('netBillHrSub').textContent = '$' + netBillHrNP.toFixed(2);
+            document.getElementById('netCostHrSub').textContent = '$' + totalCostHrNP.toFixed(2);
+
+            setMarginValue('netProfitDay', netProfitDayVal, '$');
+            document.getElementById('netBillDaySub').textContent = '$' + netBillDayVal.toFixed(2);
+            document.getElementById('netCostDaySub').textContent = '$' + totalCostDayVal.toFixed(2);
+
+            setMarginValue('netProfitWk', netProfitWkVal, '$');
+            document.getElementById('netBillWkSub').textContent = '$' + netBillWkVal.toFixed(2);
+            document.getElementById('netCostWkSub').textContent = '$' + totalCostWkVal.toFixed(2);
+
+            setMarginValue('netProfitMo', netProfitMoVal, '$');
+            document.getElementById('netBillMoSub').textContent = '$' + netBillMoVal.toFixed(2);
+            document.getElementById('netCostMoSub').textContent = '$' + totalCostMoVal.toFixed(2);
+
+            // ================================================================
+            // WEEKS TO COVER EXPENSES
+            // ================================================================
+            const weeksToCoverSection = document.getElementById('weeksToCoverSection');
+            if (flatExpenses > 0 && netProfitWkVal > 0) {
+                const weeksToCover = flatExpenses / netProfitWkVal;
+                weeksToCoverSection.style.display = '';
+                const wtcValue = document.getElementById('weeksToCoverValue');
+                wtcValue.textContent = weeksToCover.toFixed(1) + ' wks';
+                wtcValue.style.color = weeksToCover <= 2 ? '#43e97b' : weeksToCover <= 4 ? '#ff9f43' : '#ff4444';
+
+                document.getElementById('weeksToCoverDetail').textContent =
+                    '$' + flatExpenses.toFixed(2) + ' expenses / $' + netProfitWkVal.toFixed(2) + ' net profit/wk';
+
+                // Progress bar: % of contract weeks needed to cover expenses
+                if (weeks > 0) {
+                    const pctOfContract = Math.min((weeksToCover / weeks) * 100, 100);
+                    document.getElementById('weeksToCoverBar').style.width = pctOfContract + '%';
+                    document.getElementById('weeksToCoverBar').style.background = pctOfContract <= 20
+                        ? 'linear-gradient(90deg,#43e97b,#38f9d7)'
+                        : pctOfContract <= 40
+                        ? 'linear-gradient(90deg,#43e97b,#ff9f43)'
+                        : 'linear-gradient(90deg,#ff9f43,#ff4444)';
+                    document.getElementById('weeksToCoverPct').textContent = pctOfContract.toFixed(1) + '% of ' + weeks + '-week contract';
+                } else {
+                    document.getElementById('weeksToCoverBar').style.width = '0%';
+                    document.getElementById('weeksToCoverPct').textContent = 'Enter contract weeks for %';
+                }
+            } else if (flatExpenses > 0 && netProfitWkVal <= 0) {
+                weeksToCoverSection.style.display = '';
+                document.getElementById('weeksToCoverValue').textContent = '∞';
+                document.getElementById('weeksToCoverValue').style.color = '#ff4444';
+                document.getElementById('weeksToCoverDetail').textContent =
+                    '$' + flatExpenses.toFixed(2) + ' expenses — net profit/wk is $' + netProfitWkVal.toFixed(2);
+                document.getElementById('weeksToCoverBar').style.width = '100%';
+                document.getElementById('weeksToCoverBar').style.background = '#ff4444';
+                document.getElementById('weeksToCoverPct').textContent = 'Negative margin — expenses never recovered';
+            } else {
+                weeksToCoverSection.style.display = 'none';
+            }
         }
 
         // ============================================================
@@ -3014,7 +3323,7 @@
 
             // Static inputs by ID
             const inputIds = [
-                'assignmentId', 'dealStatus', 'positionTitle', 'facilityName', 'facilityCity',
+                'assignmentId', 'dealStatus', 'positionTitle', 'facilityName', 'facilityCity', 'facilityZip',
                 'candidateName', 'candidateEmail', 'candidatePhone', 'licenseNumber', 'licenseExpiry',
                 'startDate', 'contractWeeks', 'hoursPerDay', 'hoursPerWeek', 'otStateSelect',
                 'gsaZipCode', 'gsaLodgingHr', 'gsaLodgingWeek', 'gsaMealHr', 'gsaMealWeek',
@@ -3028,6 +3337,7 @@
                 const el = document.getElementById(id);
                 if (el) data[id] = el.value;
             });
+            data.zipCodeApplied = zipCodeApplied;
 
             // Pay rates by data-type
             data.payRates = {};
@@ -3108,7 +3418,7 @@
         function restoreFormData(data) {
             // Static inputs by ID
             const inputIds = [
-                'assignmentId', 'dealStatus', 'positionTitle', 'facilityName', 'facilityCity',
+                'assignmentId', 'dealStatus', 'positionTitle', 'facilityName', 'facilityCity', 'facilityZip',
                 'candidateName', 'candidateEmail', 'candidatePhone', 'licenseNumber', 'licenseExpiry',
                 'startDate', 'contractWeeks', 'hoursPerDay', 'hoursPerWeek', 'otStateSelect',
                 'gsaZipCode', 'gsaLodgingHr', 'gsaLodgingWeek', 'gsaMealHr', 'gsaMealWeek',
@@ -3118,6 +3428,8 @@
                 'workersComp', 'erCost',
                 'specialRequirements'
             ];
+            // Restore zip code applied state
+            if (data.zipCodeApplied) zipCodeApplied = true;
             inputIds.forEach(id => {
                 const el = document.getElementById(id);
                 if (el && data[id] !== undefined && data[id] !== '') {
@@ -3193,6 +3505,7 @@
             }
 
             // Recalculate everything
+            updateHoursPerDayVisibility();
             updateOTState();
             updateGSAMaxDisplay();
             updateGSATotals();
