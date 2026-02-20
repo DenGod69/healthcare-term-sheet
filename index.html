@@ -385,6 +385,14 @@
             min-height: 100vh;
         }
 
+        /* Desktop: wrapper holds both right-column sidebars as one scrollable column */
+        .right-column-wrapper {
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            overflow-y: auto;
+        }
+
         /* On desktop: breakdown-sidebar merges below margin-sidebar in the same column */
         .breakdown-sidebar {
             background: linear-gradient(180deg, #1a3a2a 0%, #0d1b2a 100%);
