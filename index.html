@@ -1864,12 +1864,14 @@
             document.getElementById('gsaLodgingDay').textContent = '$' + rates.lodging.toFixed(2);
             document.getElementById('gsaMealDay').textContent = '$' + rates.meals.toFixed(2);
 
-            // Auto-detect state OT rules from zip code
+            // Auto-detect state OT rules from zip code (Travel/Per Diem tab)
+            // This is the ONLY path that triggers OT hours/day visibility
             zipCodeApplied = true;
             const detectedState = zipToState(zip);
             if (detectedState) {
                 autoDetectState(detectedState);
             }
+            updateHoursPerDayVisibility();
             // Sync facility zip if empty
             const facZip = document.getElementById('facilityZip');
             if (facZip && !facZip.value) facZip.value = zip;
