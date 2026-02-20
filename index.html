@@ -2613,14 +2613,14 @@
         });
         document.getElementById('hoursPerWeek').addEventListener('change', function() {
             autoDefaultHoursPerDay();
-            updateHoursPerDayVisibility();
+            if (zipCodeApplied) updateHoursPerDayVisibility();
             calculateGSA();
             updateOTState();
             calculateAllRows();
         });
         document.getElementById('otStateSelect').addEventListener('change', function() {
             autoDefaultHoursPerDay();
-            updateHoursPerDayVisibility();
+            if (zipCodeApplied) updateHoursPerDayVisibility();
             updateOTState();
             autoFillOTRates();
             calculateAllRows();
