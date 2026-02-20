@@ -3496,7 +3496,7 @@
                 heroEl.textContent = '$' + weeklyMarginHero.toFixed(2);
                 heroEl.style.color = weeklyMarginHero >= 0 ? '#ffd700' : '#ff6b6b';
             } else {
-                const costWkHero = payWk + burdensWk + (flatExpenses > 0 ? (hoursWeek / flatExpenses) * hoursWeek : 0);
+                const costWkHero = payWk + burdensWk + (expenseBurdenPerHr * hoursWeek);
                 const weeklyMarginHero = netBillWk - costWkHero;
                 const heroEl = document.getElementById('heroWeeklyMargin');
                 heroEl.textContent = '$' + weeklyMarginHero.toFixed(2);
