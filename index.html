@@ -2697,17 +2697,14 @@
             const vmsPercent = parseFloat(document.getElementById('vmsPercent').value) || 0;
 
             // --- Cost & Expenses (flat $ → burden rate per hour) ---
-            // Burden Rate = Hours Per Week / Flat $ (e.g., 36 hrs / $30 = 1.20)
+            // Expense burden/hr = Total flat expenses / Total contract hours
+            // e.g., $655 / (36 hrs/wk × 13 wks) = $655 / 468 = $1.40/hr
             const expenseItems = ['drugScreening', 'backgroundCheck', 'occupationalScreening'];
             let expenses = 0;
-            let expenseBurdenPerHr = 0;
             expenseItems.forEach(id => {
                 const flat = parseFloat(document.getElementById(id).value) || 0;
-                const burdenRate = flat > 0 ? hoursWeek / flat : 0;
-                document.getElementById(id + 'Hr').textContent = flat > 0 && hoursWeek > 0 ? '$' + burdenRate.toFixed(2) : '--';
                 document.getElementById(id + 'Total').textContent = '$' + flat.toFixed(2);
                 expenses += flat;
-                expenseBurdenPerHr += burdenRate;
             });
 
             // Custom expense categories
@@ -2715,20 +2712,43 @@
             document.querySelectorAll('.custom-expense-row').forEach(elem => {
                 const amt = parseFloat(elem.querySelector('.custom-expense-amount').value) || 0;
                 customExpenseTotal += amt;
-                expenseBurdenPerHr += amt > 0 ? hoursWeek / amt : 0;
             });
             expenses += customExpenseTotal;
 
+            // Calculate expense burden per hour: flat $ / total contract hours
+            let expenseBurdenPerHr = 0;
+            if (expenses > 0 && totalHours > 0) {
+                expenseBurdenPerHr = expenses / totalHours;
+            } else if (expenses > 0 && hoursWeek > 0) {
+                // Fallback: amortize over 1 week if no contract weeks entered
+                expenseBurdenPerHr = expenses / hoursWeek;
+            }
+
+            // Update per-item $/hr display
+            expenseItems.forEach(id => {
+                const flat = parseFloat(document.getElementById(id).value) || 0;
+                if (flat > 0 && totalHours > 0) {
+                    document.getElementById(id + 'Hr').textContent = '$' + (flat / totalHours).toFixed(2);
+                } else if (flat > 0 && hoursWeek > 0) {
+                    document.getElementById(id + 'Hr').textContent = '$' + (flat / hoursWeek).toFixed(2);
+                } else {
+                    document.getElementById(id + 'Hr').textContent = '--';
+                }
+            });
+
             // Total expense row
             document.getElementById('totalExpensesFlat').textContent = '$' + expenses.toFixed(2);
-            document.getElementById('totalExpensesHr').textContent = (expenses > 0 && hoursWeek > 0) ? '$' + expenseBurdenPerHr.toFixed(2) : '--';
+            document.getElementById('totalExpensesHr').textContent = (expenses > 0 && (totalHours > 0 || hoursWeek > 0)) ? '$' + expenseBurdenPerHr.toFixed(2) : '--';
             document.getElementById('totalExpenses').textContent = '$' + expenses.toFixed(2);
-            if (hoursWeek > 0 && expenses > 0) {
+            if (totalHours > 0 && expenses > 0) {
                 document.getElementById('expenseContractHrs').textContent =
-                    'Burden Rate = ' + hoursWeek + ' hrs/wk \u00F7 $' + expenses.toFixed(2) + ' = $' + expenseBurdenPerHr.toFixed(2) + '/hr';
+                    '$' + expenses.toFixed(2) + ' \u00F7 ' + totalHours + ' contract hrs (' + hoursWeek + ' hrs/wk \u00D7 ' + weeks + ' wks) = $' + expenseBurdenPerHr.toFixed(2) + '/hr';
+            } else if (hoursWeek > 0 && expenses > 0) {
+                document.getElementById('expenseContractHrs').textContent =
+                    '$' + expenses.toFixed(2) + ' \u00F7 ' + hoursWeek + ' hrs/wk = $' + expenseBurdenPerHr.toFixed(2) + '/hr \u2014 enter contract weeks for accurate amortization';
             } else if (expenses > 0) {
                 document.getElementById('expenseContractHrs').textContent =
-                    'One-time expenses: $' + expenses.toFixed(2) + ' \u2014 enter hrs/wk to calculate burden rate';
+                    'One-time expenses: $' + expenses.toFixed(2) + ' \u2014 enter hrs/wk & weeks to calculate burden rate';
             } else {
                 document.getElementById('expenseContractHrs').textContent = '';
             }
