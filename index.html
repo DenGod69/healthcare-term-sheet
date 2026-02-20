@@ -3477,16 +3477,8 @@
             const netBillHr = billHr * (1 - vmsPercent / 100);
             // Burden per hour: WC+ER on payroll only (exclude GSA)
             const burdenHrForMarkup = (payHr - (gsaWkTotal / hoursWeek)) * burdenPct;
-            // Expense burden per hour (hrs/wk ÷ flat expense)
-            let expBurdenHrForMarkup = 0;
-            ['drugScreening', 'backgroundCheck', 'occupationalScreening'].forEach(id => {
-                const flat = parseFloat(document.getElementById(id).value) || 0;
-                if (flat > 0) expBurdenHrForMarkup += hoursWeek / flat;
-            });
-            document.querySelectorAll('.custom-expense-row').forEach(elem => {
-                const amt = parseFloat(elem.querySelector('.custom-expense-amount').value) || 0;
-                if (amt > 0) expBurdenHrForMarkup += hoursWeek / amt;
-            });
+            // Expense burden per hour = flat expenses / total contract hours
+            const expBurdenHrForMarkup = expenseBurdenPerHr;
             const totalCostHrForMarkup = payHr + burdenHrForMarkup + expBurdenHrForMarkup;
             const markup = totalCostHrForMarkup > 0 ? netBillHr / totalCostHrForMarkup : 0;
             const markupEl = document.getElementById('netMarkupMultiplier');
