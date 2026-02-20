@@ -2828,7 +2828,7 @@
             const grossMarginPerHr = regBillRate - regPayRate - gsaHrCost;
             const burdenPctGM = grossMarginPerHr > 0 ? (totalBurdenPerHr / grossMarginPerHr * 100) : 0;
 
-            document.getElementById('burdenExpenseHr').textContent = hoursWeek > 0 ? '$' + expenseBurdenPerHr.toFixed(2) + '/hr' : (expenses > 0 ? '$' + expenses.toFixed(2) + ' flat' : '$0.00/hr');
+            document.getElementById('burdenExpenseHr').textContent = expenseBurdenPerHr > 0 ? '$' + expenseBurdenPerHr.toFixed(2) + '/hr' : (expenses > 0 ? '$' + expenses.toFixed(2) + ' flat' : '$0.00/hr');
             document.getElementById('burdenTaxAmt').textContent = '$' + burdenPerHr.toFixed(2) + '/hr';
             document.getElementById('burdenTotalAmt').textContent = '$' + totalBurdenPerHr.toFixed(2) + '/hr';
             const totalBurdenWk = totalBurdenPerHr * hoursWeek;
