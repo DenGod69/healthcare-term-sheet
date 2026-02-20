@@ -763,13 +763,219 @@
             margin: 14px 0;
         }
 
+        /* ====== TABLET: main content on top, sidebars side-by-side below ====== */
         @media (max-width: 1200px) {
             .page-layout {
-                grid-template-columns: 1fr;
+                grid-template-columns: 1fr 1fr;
+                grid-template-rows: auto auto;
             }
-            .comp-sidebar, .margin-sidebar {
+            .container {
+                grid-column: 1 / -1;
+                grid-row: 1;
+                order: 1;
+            }
+            .comp-sidebar {
+                grid-column: 1;
+                grid-row: 2;
+                order: 2;
                 position: relative;
                 height: auto;
+            }
+            .margin-sidebar {
+                grid-column: 2;
+                grid-row: 2;
+                order: 3;
+                position: relative;
+                height: auto;
+            }
+        }
+
+        /* ====== PHONE: compact sidebars side-by-side, form stacked ====== */
+        @media (max-width: 768px) {
+            body {
+                padding: 0;
+            }
+            .page-layout {
+                grid-template-columns: 1fr 1fr;
+                grid-template-rows: auto auto;
+                gap: 0;
+            }
+            .container {
+                grid-column: 1 / -1;
+                grid-row: 1;
+                order: 1;
+                border-radius: 0;
+            }
+            .comp-sidebar {
+                grid-column: 1;
+                grid-row: 2;
+                order: 2;
+                position: relative;
+                height: auto;
+                padding: 12px 8px;
+            }
+            .margin-sidebar {
+                grid-column: 2;
+                grid-row: 2;
+                order: 3;
+                position: relative;
+                height: auto;
+                padding: 12px 8px;
+            }
+
+            /* Compact sidebar typography */
+            .comp-sidebar h3,
+            .margin-sidebar h3 {
+                font-size: 11px;
+                margin-bottom: 10px;
+                padding-bottom: 6px;
+            }
+            .comp-period-header,
+            .margin-section-label {
+                font-size: 10px;
+                letter-spacing: 0.8px;
+                margin-bottom: 5px;
+            }
+            .comp-detail-row,
+            .margin-detail-row {
+                font-size: 11px;
+                padding: 3px 0;
+            }
+            .metric-tile {
+                padding: 6px;
+                border-left-width: 2px;
+            }
+            .metric-tile-label {
+                font-size: 8px;
+                letter-spacing: 0.6px;
+            }
+            .metric-tile-value {
+                font-size: 13px !important;
+                line-height: 1.1;
+            }
+            .metric-tile-sub {
+                font-size: 7px;
+            }
+            .metrics-grid {
+                gap: 4px;
+                margin-bottom: 6px;
+            }
+            .comp-divider,
+            .margin-divider {
+                margin: 8px 0;
+            }
+
+            /* Sidebar hero compact */
+            .sidebar-hero {
+                gap: 4px;
+                margin-bottom: 8px;
+            }
+            .sidebar-hero-item {
+                padding: 6px 4px;
+            }
+            .sidebar-hero-label {
+                font-size: 8px;
+            }
+            .sidebar-hero-value {
+                font-size: 15px;
+            }
+            .sidebar-hero-sub {
+                font-size: 7px;
+            }
+
+            /* Markup badge compact */
+            .markup-badge {
+                padding: 8px;
+                margin-bottom: 8px;
+            }
+            .markup-badge-label {
+                font-size: 8px;
+            }
+            .markup-badge-value {
+                font-size: 22px;
+            }
+
+            /* Metric details compact */
+            .metric-details-header {
+                font-size: 9px;
+            }
+
+            /* Form compact */
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            .content {
+                padding: 12px;
+            }
+            .header h1 {
+                font-size: 16px;
+            }
+            .header p {
+                font-size: 11px;
+            }
+            .section-title {
+                font-size: 13px;
+                padding: 8px 10px;
+            }
+            label {
+                font-size: 12px;
+            }
+            input[type="text"],
+            input[type="email"],
+            input[type="date"],
+            input[type="number"],
+            input[type="tel"],
+            select,
+            textarea {
+                font-size: 14px;
+                padding: 8px 10px;
+            }
+            .custom-pay-type {
+                grid-template-columns: 1fr;
+            }
+            .rate-panels {
+                grid-template-columns: 1fr;
+            }
+            .cost-table th,
+            .cost-table td {
+                padding: 6px 4px;
+                font-size: 11px;
+            }
+            .cost-table input {
+                font-size: 12px;
+                padding: 5px 4px;
+            }
+            button {
+                font-size: 12px;
+                padding: 8px 14px;
+            }
+        }
+
+        /* ====== VERY SMALL PHONES (< 480px): tighten further ====== */
+        @media (max-width: 480px) {
+            .comp-sidebar,
+            .margin-sidebar {
+                padding: 8px 5px;
+            }
+            .metric-tile-value {
+                font-size: 11px !important;
+            }
+            .metric-tile-label {
+                font-size: 7px;
+            }
+            .metric-tile-sub {
+                font-size: 6px;
+            }
+            .comp-detail-row,
+            .margin-detail-row {
+                font-size: 10px;
+            }
+            .sidebar-hero-value {
+                font-size: 13px;
+            }
+            .comp-sidebar h3,
+            .margin-sidebar h3 {
+                font-size: 10px;
             }
         }
 
@@ -791,21 +997,6 @@
             }
             .button-group {
                 display: none;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .form-row {
-                grid-template-columns: 1fr;
-            }
-            .content {
-                padding: 15px;
-            }
-            .custom-pay-type {
-                grid-template-columns: 1fr;
-            }
-            .rate-panels {
-                grid-template-columns: 1fr;
             }
         }
     </style>
