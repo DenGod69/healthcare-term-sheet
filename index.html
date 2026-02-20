@@ -2739,12 +2739,14 @@
             }
         });
 
-        // For local contracts (no GSA), also auto-detect state from zip entry alone
+        // GSA zip change — also triggers OT visibility (travel tab zip)
         document.getElementById('gsaZipCode').addEventListener('change', function() {
             const zip = this.value.trim();
             if (zip.length === 5 && /^\d{5}$/.test(zip)) {
+                zipCodeApplied = true;
                 const st = zipToState(zip);
                 if (st) autoDetectState(st);
+                updateHoursPerDayVisibility();
             }
         });
 
