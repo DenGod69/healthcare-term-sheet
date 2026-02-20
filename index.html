@@ -1,0 +1,3264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Healthcare Travel Staffing - Deal Sheet</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 15px;
+            color: #333;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 16px 20px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 22px;
+            margin-bottom: 3px;
+            font-weight: 700;
+        }
+
+        .header p {
+            font-size: 13px;
+            opacity: 0.95;
+        }
+
+        .content {
+            padding: 16px 20px;
+        }
+
+        .section-title {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 12px 15px;
+            border-radius: 6px;
+            font-size: 15px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            margin-top: 16px;
+        }
+
+        .section-title:first-child {
+            margin-top: 0;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: #333;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.4px;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="date"],
+        input[type="number"],
+        input[type="tel"],
+        select,
+        textarea {
+            padding: 10px 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 4px;
+            font-size: 15px;
+            font-family: inherit;
+            transition: all 0.3s;
+            background-color: #fafafa;
+        }
+
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        input[type="date"]:focus,
+        input[type="number"]:focus,
+        input[type="tel"]:focus,
+        select:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #667eea;
+            background-color: white;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 60px;
+            font-size: 12px;
+        }
+
+        .required {
+            color: #e74c3c;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 25px;
+            justify-content: center;
+            padding-top: 20px;
+            border-top: 2px solid #f0f0f0;
+            flex-wrap: wrap;
+        }
+
+        button {
+            padding: 10px 22px;
+            font-size: 14px;
+            font-weight: 600;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-submit {
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+            color: white;
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(67, 233, 123, 0.3);
+        }
+
+        .btn-reset {
+            background-color: #e0e0e0;
+            color: #333;
+        }
+
+        .btn-reset:hover {
+            background-color: #d0d0d0;
+        }
+
+        .btn-print {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+        }
+
+        .btn-print:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(79, 172, 254, 0.3);
+        }
+
+        .btn-add {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            color: white;
+            font-size: 11px;
+            padding: 6px 14px;
+        }
+
+        .btn-add:hover {
+            transform: translateY(-2px);
+        }
+
+        .btn-remove {
+            background-color: #ff6b6b;
+            color: white;
+            font-size: 10px;
+            padding: 4px 10px;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        .btn-remove:hover {
+            background-color: #ff5252;
+        }
+
+        /* Excel-style Cost Sheet Table */
+        .cost-sheet {
+            overflow-x: auto;
+            margin-bottom: 14px;
+        }
+
+        .cost-table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: white;
+            border-radius: 6px;
+            overflow: hidden;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+            font-size: 14px;
+        }
+
+        .cost-table thead {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .cost-table th {
+            padding: 12px;
+            text-align: left;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.4px;
+            font-size: 13px;
+            border-bottom: 2px solid #eee;
+        }
+
+        .cost-table td {
+            padding: 10px 12px;
+            border-bottom: 1px solid #f0f0f0;
+            font-size: 14px;
+        }
+
+        .cost-table tbody tr:hover {
+            background-color: #fafafa;
+        }
+
+        .cost-table input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+            font-size: 14px;
+            font-family: 'Monaco', 'Menlo', monospace;
+            text-align: right;
+        }
+
+        .cost-table input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.1);
+        }
+
+        .cost-table .calc-cell {
+            background-color: #f5f5f5;
+            font-weight: 700;
+            text-align: right;
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 14px;
+        }
+
+        .cost-table .total-row {
+            background-color: #f0f0f0;
+            font-weight: 700;
+        }
+
+        .cost-table .total-row td {
+            border-top: 2px solid #667eea;
+            border-bottom: 2px solid #667eea;
+        }
+
+        /* Summary Cards */
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 12px;
+            margin-top: 15px;
+        }
+
+        .summary-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 6px 12px rgba(102, 126, 234, 0.2);
+            transition: transform 0.3s;
+        }
+
+        .summary-card:hover {
+            transform: translateY(-3px);
+        }
+
+        .summary-card:nth-child(2) {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+
+        .summary-card:nth-child(3) {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+
+        .summary-card:nth-child(4) {
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+        }
+
+        .summary-label {
+            font-size: 10px;
+            font-weight: 700;
+            opacity: 0.9;
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+        }
+
+        .summary-value {
+            font-size: 20px;
+            font-weight: 800;
+            font-family: 'Monaco', 'Menlo', monospace;
+        }
+
+        .custom-pay-type {
+            background-color: #f9f9f9;
+            padding: 10px;
+            margin-bottom: 8px;
+            border-radius: 4px;
+            display: grid;
+            grid-template-columns: 1fr 100px 100px 100px 30px;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .custom-pay-type input {
+            padding: 6px;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+            font-size: 12px;
+        }
+
+        .gsa-result {
+            background-color: #e3f2fd;
+            border-left: 4px solid #667eea;
+            padding: 12px;
+            margin-top: 10px;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        .rate-type-btn {
+            padding: 7px 16px;
+            font-size: 13px;
+            font-weight: 600;
+            border: 2px solid #667eea;
+            border-radius: 20px;
+            cursor: pointer;
+            background: white;
+            color: #667eea;
+            transition: all 0.2s;
+        }
+
+        .rate-type-btn:hover {
+            background: rgba(102, 126, 234, 0.1);
+        }
+
+        .rate-type-btn.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-color: #667eea;
+        }
+
+        .rate-panels {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        /* Candidate Compensation Breakdown Sidebar */
+        .page-layout {
+            display: grid;
+            grid-template-columns: 280px 1fr 320px;
+            gap: 0;
+            min-height: 100vh;
+        }
+
+        .comp-sidebar {
+            background: linear-gradient(180deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            color: white;
+            padding: 20px 16px;
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            overflow-y: auto;
+        }
+
+        .comp-sidebar h3 {
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 16px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid rgba(102, 126, 234, 0.5);
+            text-align: center;
+        }
+
+        .comp-period {
+            margin-bottom: 16px;
+        }
+
+        .comp-period-header {
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            color: rgba(255,255,255,0.5);
+            margin-bottom: 8px;
+        }
+
+        .comp-card {
+            background: rgba(255,255,255,0.08);
+            border-radius: 8px;
+            padding: 12px;
+            margin-bottom: 8px;
+            border-left: 3px solid #667eea;
+            transition: background 0.2s;
+        }
+
+        .comp-card:hover {
+            background: rgba(255,255,255,0.12);
+        }
+
+        .comp-card-label {
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: rgba(255,255,255,0.6);
+            margin-bottom: 4px;
+        }
+
+        .comp-card-value {
+            font-size: 22px;
+            font-weight: 800;
+            font-family: 'Monaco', 'Menlo', monospace;
+            color: #43e97b;
+        }
+
+        .comp-card-sub {
+            font-size: 10px;
+            color: rgba(255,255,255,0.4);
+            margin-top: 2px;
+        }
+
+        .comp-card.highlight {
+            border-left-color: #43e97b;
+            background: rgba(67, 233, 123, 0.1);
+        }
+
+        .comp-card.bill-highlight {
+            border-left-color: #4facfe;
+        }
+
+        .comp-card.bill-highlight .comp-card-value {
+            color: #4facfe;
+        }
+
+        .comp-card.margin-highlight {
+            border-left-color: #f093fb;
+        }
+
+        .comp-card.margin-highlight .comp-card-value {
+            color: #f093fb;
+        }
+
+        .comp-divider {
+            border: none;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            margin: 14px 0;
+        }
+
+        .comp-detail-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 13px;
+            padding: 5px 0;
+            color: rgba(255,255,255,0.7);
+        }
+
+        .comp-detail-row span:last-child {
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-weight: 600;
+            color: rgba(255,255,255,0.9);
+        }
+
+        /* Right Sidebar - Margin Analysis */
+        .margin-sidebar {
+            background: linear-gradient(180deg, #0d1b2a 0%, #1b2838 50%, #1a3a2a 100%);
+            color: white;
+            padding: 20px 16px;
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            overflow-y: auto;
+        }
+
+        .margin-sidebar h3 {
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 16px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid rgba(67, 233, 123, 0.5);
+            text-align: center;
+        }
+
+        .markup-badge {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255,255,255,0.06);
+            border: 2px solid rgba(255, 215, 0, 0.4);
+            border-radius: 10px;
+            padding: 14px;
+            margin-bottom: 12px;
+            text-align: center;
+        }
+
+        .markup-badge-inner {
+            text-align: center;
+        }
+
+        .markup-badge-label {
+            font-size: 9px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: rgba(255,255,255,0.5);
+            margin-bottom: 4px;
+        }
+
+        .markup-badge-value {
+            font-size: 32px;
+            font-weight: 900;
+            font-family: 'Monaco', 'Menlo', monospace;
+            color: #ffd700;
+            line-height: 1;
+        }
+
+        .markup-badge-sub {
+            font-size: 9px;
+            color: rgba(255,255,255,0.4);
+            margin-top: 4px;
+        }
+
+        .margin-section-label {
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            color: rgba(255,255,255,0.5);
+            margin-bottom: 8px;
+            margin-top: 4px;
+        }
+
+        .margin-card {
+            background: rgba(255,255,255,0.08);
+            border-radius: 8px;
+            padding: 12px;
+            margin-bottom: 8px;
+            border-left: 3px solid #43e97b;
+            transition: background 0.2s;
+        }
+
+        .margin-card:hover {
+            background: rgba(255,255,255,0.12);
+        }
+
+        .margin-card-label {
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: rgba(255,255,255,0.6);
+            margin-bottom: 4px;
+        }
+
+        .margin-card-value {
+            font-size: 22px;
+            font-weight: 800;
+            font-family: 'Monaco', 'Menlo', monospace;
+            color: #43e97b;
+        }
+
+        .margin-card-sub {
+            font-size: 10px;
+            color: rgba(255,255,255,0.4);
+            margin-top: 2px;
+        }
+
+        .margin-card.gross {
+            border-left-color: #4facfe;
+        }
+        .margin-card.gross .margin-card-value {
+            color: #4facfe;
+        }
+
+        .margin-card.net {
+            border-left-color: #f093fb;
+        }
+        .margin-card.net .margin-card-value {
+            color: #f093fb;
+        }
+
+        .margin-card.profit {
+            border-left-color: #43e97b;
+        }
+        .margin-card.profit .margin-card-value {
+            color: #43e97b;
+        }
+
+        .margin-detail-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 13px;
+            padding: 5px 0;
+            color: rgba(255,255,255,0.7);
+        }
+
+        .margin-detail-row span:last-child {
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-weight: 600;
+            color: rgba(255,255,255,0.9);
+        }
+
+        /* Sidebar hero top area */
+        .sidebar-hero {
+            display: flex;
+            justify-content: space-between;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+        .sidebar-hero-item {
+            flex: 1;
+            text-align: center;
+            background: rgba(255,255,255,0.06);
+            border-radius: 8px;
+            padding: 10px 6px;
+        }
+        .sidebar-hero-label {
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: rgba(255,255,255,0.5);
+            margin-bottom: 4px;
+        }
+        .sidebar-hero-value {
+            font-size: 20px;
+            font-weight: 900;
+            font-family: 'Monaco', 'Menlo', monospace;
+            line-height: 1.1;
+        }
+        .sidebar-hero-sub {
+            font-size: 9px;
+            color: rgba(255,255,255,0.35);
+            margin-top: 2px;
+        }
+
+        /* 2x2 metrics grid */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6px;
+            margin-bottom: 10px;
+        }
+        .metric-tile {
+            background: rgba(255,255,255,0.06);
+            border-radius: 8px;
+            padding: 8px;
+            border-left: 3px solid #43e97b;
+        }
+        .metric-tile:hover {
+            background: rgba(255,255,255,0.10);
+        }
+        .metric-tile-label {
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: rgba(255,255,255,0.5);
+            margin-bottom: 2px;
+        }
+        .metric-tile-value {
+            font-size: 16px;
+            font-weight: 800;
+            font-family: 'Monaco', 'Menlo', monospace;
+            line-height: 1.1;
+        }
+        .metric-tile-sub {
+            font-size: 9px;
+            color: rgba(255,255,255,0.35);
+            margin-top: 2px;
+        }
+        .metric-tile.markup { border-left-color: #ffd700; }
+        .metric-tile.markup .metric-tile-value { color: #ffd700; }
+        .metric-tile.gross { border-left-color: #4facfe; }
+        .metric-tile.gross .metric-tile-value { color: #4facfe; }
+        .metric-tile.burden { border-left-color: #ff9f43; }
+        .metric-tile.burden .metric-tile-value { color: #ff9f43; }
+        .metric-tile.net { border-left-color: #f093fb; }
+        .metric-tile.net .metric-tile-value { color: #f093fb; }
+        .metric-tile.profit-tile { border-left-color: #43e97b; }
+        .metric-tile.profit-tile .metric-tile-value { color: #43e97b; }
+        .metric-tile.ot-tile { border-left-color: #e67e22; }
+        .metric-tile.ot-tile .metric-tile-value { color: #e67e22; }
+
+        /* Expandable detail sections below grid */
+        .metric-details {
+            margin-bottom: 6px;
+            padding: 0 2px;
+        }
+        .metric-details-header {
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: rgba(255,255,255,0.45);
+            margin-bottom: 4px;
+            padding-top: 4px;
+        }
+
+        .negative-value {
+            color: #ff4444 !important;
+        }
+
+        .gsa-over-max {
+            border: 2px solid #ff4444 !important;
+            background-color: #fff0f0 !important;
+            animation: gsaFlash 0.4s ease;
+        }
+        @keyframes gsaFlash {
+            0%, 100% { background-color: #fff0f0; }
+            50% { background-color: #ffd0d0; }
+        }
+        .gsa-max-label {
+            font-size: 9px;
+            color: #999;
+            text-align: right;
+            padding: 0 4px;
+        }
+        .gsa-max-label.exceeded {
+            color: #ff4444;
+            font-weight: 700;
+        }
+
+        .margin-divider {
+            border: none;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            margin: 14px 0;
+        }
+
+        @media (max-width: 1200px) {
+            .page-layout {
+                grid-template-columns: 1fr;
+            }
+            .comp-sidebar, .margin-sidebar {
+                position: relative;
+                height: auto;
+            }
+        }
+
+        @media print {
+            body {
+                background-color: white;
+                padding: 0;
+            }
+            .page-layout {
+                grid-template-columns: 1fr;
+            }
+            .comp-sidebar, .margin-sidebar {
+                display: none;
+            }
+            .container {
+                max-width: 100%;
+                box-shadow: none;
+                border-radius: 0;
+            }
+            .button-group {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            .content {
+                padding: 15px;
+            }
+            .custom-pay-type {
+                grid-template-columns: 1fr;
+            }
+            .rate-panels {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Auto-Restore Banner -->
+    <div id="restoreBanner" style="display:none; position:fixed; top:0; left:0; right:0; z-index:9999; background:linear-gradient(135deg,#667eea,#764ba2); color:white; padding:12px 20px; align-items:center; justify-content:center; gap:15px; font-size:13px; box-shadow:0 2px 12px rgba(0,0,0,0.3);">
+        <span>Previous session found (<span id="restoreBannerTime"></span>). Restore your data?</span>
+        <button onclick="restoreSavedSession()" style="padding:6px 16px; background:white; color:#667eea; border:none; border-radius:4px; font-weight:700; font-size:12px; cursor:pointer;">Restore Session</button>
+        <button onclick="dismissRestore()" style="padding:6px 16px; background:rgba(255,255,255,0.2); color:white; border:1px solid rgba(255,255,255,0.4); border-radius:4px; font-weight:600; font-size:12px; cursor:pointer;">Start Fresh</button>
+        <span id="autoSaveIndicator" style="position:absolute; right:20px; font-size:10px; opacity:0.4;">Auto-save active</span>
+    </div>
+
+    <div class="page-layout">
+    <!-- CANDIDATE COMPENSATION SIDEBAR -->
+    <div class="comp-sidebar">
+        <h3>💰 Candidate Compensation</h3>
+
+        <!-- PAY TOTALS GRID (2x2) -->
+        <div class="comp-period-header">Pay Totals</div>
+        <div class="metrics-grid" style="margin-bottom:10px;">
+            <div class="metric-tile profit-tile">
+                <div class="metric-tile-label">Hourly Rate</div>
+                <div class="metric-tile-value" id="compHourlyPay" style="font-size:16px;">$0.00</div>
+                <div class="metric-tile-sub">Blended rate</div>
+            </div>
+            <div class="metric-tile profit-tile">
+                <div class="metric-tile-label">Daily Pay</div>
+                <div class="metric-tile-value" id="compDailyPay" style="font-size:16px;">$0.00</div>
+                <div class="metric-tile-sub">Per scheduled day</div>
+            </div>
+            <div class="metric-tile profit-tile">
+                <div class="metric-tile-label">Weekly Pay</div>
+                <div class="metric-tile-value" id="compWeeklyPay" style="font-size:16px;">$0.00</div>
+                <div class="metric-tile-sub">Gross weekly</div>
+            </div>
+            <div class="metric-tile profit-tile">
+                <div class="metric-tile-label">Monthly Pay</div>
+                <div class="metric-tile-value" id="compMonthlyPay" style="font-size:16px;">$0.00</div>
+                <div class="metric-tile-sub">×4.33 weeks</div>
+            </div>
+        </div>
+
+        <hr class="comp-divider">
+
+        <!-- HOURLY BREAKDOWN -->
+        <div class="comp-period">
+            <div class="comp-period-header">Hourly Breakdown</div>
+            <div class="comp-detail-row"><span>Regular</span><span id="compHrReg">$0.00</span></div>
+            <div class="comp-detail-row"><span>Overtime (1.5x)</span><span id="compHrOT">$0.00</span></div>
+            <div class="comp-detail-row comp-dt-row" style="display:none;"><span>Double Time (2x)</span><span id="compHrDT">$0.00</span></div>
+            <div class="comp-detail-row"><span>Differential</span><span id="compHrDiff">$0.00</span></div>
+            <div class="comp-detail-row"><span>On-Call</span><span id="compHrOncall">$0.00</span></div>
+            <div class="comp-detail-row"><span>Callback</span><span id="compHrCallback">$0.00</span></div>
+            <div class="comp-detail-row"><span>Charge</span><span id="compHrCharge">$0.00</span></div>
+            <div class="comp-detail-row"><span>Holiday</span><span id="compHrHoliday">$0.00</span></div>
+            <div class="comp-detail-row"><span>GSA Stipend</span><span id="compHrGSA">$0.00</span></div>
+        </div>
+
+        <hr class="comp-divider">
+
+        <!-- WEEKLY BREAKDOWN -->
+        <div class="comp-period">
+            <div class="comp-period-header">Weekly Breakdown</div>
+            <div class="comp-detail-row"><span>Regular</span><span id="compWkReg">$0.00</span></div>
+            <div class="comp-detail-row"><span>Overtime (1.5x)</span><span id="compWkOT">$0.00</span></div>
+            <div class="comp-detail-row comp-dt-row" style="display:none;"><span>Double Time (2x)</span><span id="compWkDT">$0.00</span></div>
+            <div class="comp-detail-row"><span>Differential</span><span id="compWkDiff">$0.00</span></div>
+            <div class="comp-detail-row"><span>On-Call</span><span id="compWkOncall">$0.00</span></div>
+            <div class="comp-detail-row"><span>Callback</span><span id="compWkCallback">$0.00</span></div>
+            <div class="comp-detail-row"><span>Charge</span><span id="compWkCharge">$0.00</span></div>
+            <div class="comp-detail-row"><span>Holiday</span><span id="compWkHoliday">$0.00</span></div>
+            <div class="comp-detail-row"><span>GSA Stipend</span><span id="compWkGSA">$0.00</span></div>
+        </div>
+
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div class="container">
+        <div class="header" style="position:relative;">
+            <h1>🏥 Healthcare Travel Staffing Deal Sheet</h1>
+            <p>Assignment & Financial Analysis | Real-Time Cost Calculations</p>
+            <div style="position:absolute; top:12px; right:15px; display:flex; align-items:center; gap:8px;">
+                <span id="autoSaveStatus" style="font-size:10px; color:rgba(255,255,255,0.5);">Auto-save active</span>
+                <button type="button" onclick="clearSavedData()" style="padding:4px 10px; background:rgba(255,255,255,0.15); color:rgba(255,255,255,0.8); border:1px solid rgba(255,255,255,0.3); border-radius:3px; font-size:10px; cursor:pointer; font-weight:600;">New Deal</button>
+            </div>
+        </div>
+
+        <div class="content">
+            <form id="dealForm">
+                <!-- ASSIGNMENT INFORMATION -->
+                <div class="section-title">📋 Assignment & Candidate Details</div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="assignmentId">Assignment ID <span class="required">*</span></label>
+                        <input type="text" id="assignmentId" name="assignmentId" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="dealStatus">Status <span class="required">*</span></label>
+                        <select id="dealStatus" name="dealStatus" required>
+                            <option value="">Select Status</option>
+                            <option value="prospecting">Prospecting</option>
+                            <option value="negotiating">Negotiating</option>
+                            <option value="pending">Pending Approval</option>
+                            <option value="active">Active</option>
+                            <option value="completed">Completed</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="createdDate">Deal Created</label>
+                        <input type="date" id="createdDate" name="createdDate" readonly>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="positionTitle">Position Title <span class="required">*</span></label>
+                        <input type="text" id="positionTitle" name="positionTitle" placeholder="e.g., RN - ICU" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="facilityName">Facility Name <span class="required">*</span></label>
+                        <input type="text" id="facilityName" name="facilityName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="facilityCity">City, State <span class="required">*</span></label>
+                        <input type="text" id="facilityCity" name="facilityCity" placeholder="e.g., Austin, TX" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="candidateName">Candidate Name <span class="required">*</span></label>
+                        <input type="text" id="candidateName" name="candidateName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="candidateEmail">Email <span class="required">*</span></label>
+                        <input type="email" id="candidateEmail" name="candidateEmail" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="candidatePhone">Phone <span class="required">*</span></label>
+                        <input type="tel" id="candidatePhone" name="candidatePhone" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="licenseNumber">License Number <span class="required">*</span></label>
+                        <input type="text" id="licenseNumber" name="licenseNumber" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="licenseExpiry">License Expiry <span class="required">*</span></label>
+                        <input type="date" id="licenseExpiry" name="licenseExpiry" required>
+                    </div>
+                </div>
+
+                <!-- ASSIGNMENT DATES & HOURS -->
+                <div class="section-title">📅 Assignment Duration & Hours</div>
+                
+                <div class="form-row" style="grid-template-columns: repeat(5, 1fr);">
+                    <div class="form-group">
+                        <label for="startDate">Start Date <span class="required">*</span></label>
+                        <input type="date" id="startDate" name="startDate" required tabindex="1">
+                    </div>
+                    <div class="form-group">
+                        <label for="contractWeeks">Contract Weeks <span class="required">*</span></label>
+                        <input type="number" id="contractWeeks" name="contractWeeks" placeholder="e.g., 13" min="1" required tabindex="2">
+                    </div>
+                    <div class="form-group">
+                        <label for="endDate">End Date (Auto)</label>
+                        <input type="date" id="endDate" name="endDate" readonly style="background-color:#f5f5f5;" tabindex="-1">
+                    </div>
+                    <div class="form-group">
+                        <label for="hoursPerDay">Shift Hours/Day (OT) <span class="required">*</span></label>
+                        <input type="number" id="hoursPerDay" name="hoursPerDay" placeholder="12" step="0.5" min="1" max="24" required tabindex="3">
+                    </div>
+                    <div class="form-group">
+                        <label for="hoursPerWeek">Hours Per Week <span class="required">*</span></label>
+                        <input type="number" id="hoursPerWeek" name="hoursPerWeek" placeholder="36" required tabindex="4">
+                    </div>
+                </div>
+
+                <!-- STATE OT RULES -->
+                <div class="form-row" style="grid-template-columns: 1fr 2fr;">
+                    <div class="form-group">
+                        <label for="otStateSelect">OT Rules (State)</label>
+                        <select id="otStateSelect" name="otStateSelect" tabindex="5">
+                            <option value="FEDERAL">Federal (FLSA) — Default</option>
+                            <option value="CA">California — Daily OT/DT</option>
+                            <option value="AK">Alaska — Daily OT</option>
+                            <option value="NV">Nevada — Daily OT</option>
+                            <option value="CO">Colorado — Daily OT</option>
+                            <option value="OR">Oregon — Daily OT</option>
+                            <option value="FL">Florida — Daily OT</option>
+                        </select>
+                    </div>
+                    <div class="form-group" style="justify-content:flex-end;">
+                        <div id="otRuleBanner" style="background:rgba(102,126,234,0.1); border-left:4px solid #667eea; padding:8px 12px; border-radius:4px; font-size:13px; color:#555; display:flex; align-items:center; gap:8px;">
+                            <span id="otRuleIcon" style="font-size:16px;">📋</span>
+                            <div>
+                                <strong id="otRuleTitle" style="font-size:12px; color:#667eea;">Federal (FLSA)</strong>
+                                <div id="otRuleDesc" style="font-size:11px; color:#888;">OT (1.5x) after 40 hrs/week</div>
+                                <div id="otRuleBreakdown" style="font-size:11px; color:#667eea; font-weight:600; margin-top:2px; display:none;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- RATE DETAILS -->
+                <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 15px; margin-top: 20px;">
+                    <div class="section-title" style="margin: 0; flex: 1;">💰 Rate Details</div>
+                    <div style="display: flex; gap: 4px;">
+                        <button type="button" class="rate-type-btn active" data-rtype="local" onclick="setRateType('local')">Local</button>
+                        <button type="button" class="rate-type-btn" data-rtype="perdiem" onclick="setRateType('perdiem')">Per Diem</button>
+                        <button type="button" class="rate-type-btn" data-rtype="travel" onclick="setRateType('travel')">Travel</button>
+                    </div>
+                </div>
+
+                <!-- Two-Panel Layout -->
+                <div class="rate-panels">
+                    <!-- LEFT: Candidate Pay Rates -->
+                    <div>
+                        <div style="font-weight:700; font-size:11px; color:#667eea; margin-bottom:6px; text-transform:uppercase; letter-spacing:0.5px;">Candidate Pay Rates</div>
+                        <div class="cost-sheet" style="margin-bottom:0;">
+                            <table class="cost-table">
+                                <thead><tr>
+                                    <th>Type</th>
+                                    <th style="text-align:right;">$/Hr</th>
+                                    <th style="text-align:right;">$/Wk</th>
+                                    <th style="text-align:right;">Total Amount</th>
+                                    <th style="text-align:right;">Bill %</th>
+                                </tr></thead>
+                                <tbody>
+                                    <tr><td><strong>Regular</strong> <span id="regHoursLabel" style="font-size:9px; color:#667eea; font-weight:600;"></span></td>
+                                        <td><input type="number" class="pay-rate" data-type="regular" step="0.01" min="0"></td>
+                                        <td class="calc-cell" data-calc="regular-rate-week">$0.00</td>
+                                        <td class="calc-cell" data-calc="regular-total">$0.00</td>
+                                        <td class="calc-cell" data-calc="regular-bill-pct">0.00%</td></tr>
+                                    <tr><td><strong>OT</strong> <span id="otHoursLabel" style="font-size:9px; color:#e67e22; font-weight:600;"></span></td>
+                                        <td><input type="number" class="pay-rate" data-type="ot" step="0.01" min="0"></td>
+                                        <td class="calc-cell" data-calc="ot-rate-week">$0.00</td>
+                                        <td class="calc-cell" data-calc="ot-total">$0.00</td>
+                                        <td class="calc-cell" data-calc="ot-bill-pct">0.00%</td></tr>
+                                    <tr id="dtPayRow" style="display:none;"><td><strong>DT (2x)</strong> <span id="dtHoursLabel" style="font-size:9px; color:#c0392b; font-weight:600;"></span></td>
+                                        <td><input type="number" class="pay-rate" data-type="dt" step="0.01" min="0"></td>
+                                        <td class="calc-cell" data-calc="dt-rate-week">$0.00</td>
+                                        <td class="calc-cell" data-calc="dt-total">$0.00</td>
+                                        <td class="calc-cell" data-calc="dt-bill-pct">0.00%</td></tr>
+                                    <tr><td><strong>Differential</strong></td>
+                                        <td><input type="number" class="pay-rate" data-type="diff" step="0.01" min="0"></td>
+                                        <td class="calc-cell" data-calc="diff-rate-week">$0.00</td>
+                                        <td class="calc-cell" data-calc="diff-total">$0.00</td>
+                                        <td class="calc-cell" data-calc="diff-bill-pct">0.00%</td></tr>
+                                    <tr><td><strong>On-Call</strong></td>
+                                        <td><input type="number" class="pay-rate" data-type="oncall" step="0.01" min="0"></td>
+                                        <td class="calc-cell" data-calc="oncall-rate-week">$0.00</td>
+                                        <td class="calc-cell" data-calc="oncall-total">$0.00</td>
+                                        <td class="calc-cell" data-calc="oncall-bill-pct">0.00%</td></tr>
+                                    <tr><td><strong>Callback</strong></td>
+                                        <td><input type="number" class="pay-rate" data-type="callback" step="0.01" min="0"></td>
+                                        <td class="calc-cell" data-calc="callback-rate-week">$0.00</td>
+                                        <td class="calc-cell" data-calc="callback-total">$0.00</td>
+                                        <td class="calc-cell" data-calc="callback-bill-pct">0.00%</td></tr>
+                                    <tr><td><strong>Charge</strong></td>
+                                        <td><input type="number" class="pay-rate" data-type="charge" step="0.01" min="0"></td>
+                                        <td class="calc-cell" data-calc="charge-rate-week">$0.00</td>
+                                        <td class="calc-cell" data-calc="charge-total">$0.00</td>
+                                        <td class="calc-cell" data-calc="charge-bill-pct">0.00%</td></tr>
+                                    <tr><td><strong>Holiday</strong></td>
+                                        <td><input type="number" class="pay-rate" data-type="holiday" step="0.01" min="0"></td>
+                                        <td class="calc-cell" data-calc="holiday-rate-week">$0.00</td>
+                                        <td class="calc-cell" data-calc="holiday-total">$0.00</td>
+                                        <td class="calc-cell" data-calc="holiday-bill-pct">0.00%</td></tr>
+                                    <tr class="total-row"><td colspan="3"><strong>CONTRACT GROSS PAY</strong><br><span style="font-size:9px; font-weight:400; color:#888;">Reg Rate + Lodging + M&IE over contract duration</span></td>
+                                        <td class="calc-cell" id="subtotal-pay">$0.00</td>
+                                        <td class="calc-cell" id="subtotal-bill-pct">0.00%</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- RIGHT: GSA Calculations (Per Diem & Travel only) -->
+                    <div id="gsaPanel" style="display:none;">
+                        <div style="font-weight:700; font-size:11px; color:#667eea; margin-bottom:6px; text-transform:uppercase; letter-spacing:0.5px;">📍 GSA Calculations</div>
+
+                        <!-- GSA Location Lookup -->
+                        <div style="background-color: #f9f9f9; padding: 10px; border-radius: 6px; margin-bottom: 10px; border-left: 4px solid #667eea;">
+                            <div style="font-weight: 600; margin-bottom: 6px; color: #333; font-size: 11px;">GSA Rate Lookup</div>
+                            <div style="display:flex; gap:6px; align-items:flex-end;">
+                                <div class="form-group" style="flex:1; margin-bottom:0;">
+                                    <label for="gsaZipCode" style="font-size:10px;">Zip Code</label>
+                                    <input type="text" id="gsaZipCode" placeholder="Enter zip code" style="font-size:12px;" maxlength="5">
+                                </div>
+                                <button type="button" onclick="lookupGSARate()" style="padding:8px 14px; background:linear-gradient(135deg,#667eea,#764ba2); color:white; border:none; border-radius:4px; font-size:11px; font-weight:600; cursor:pointer; white-space:nowrap;">Lookup</button>
+                            </div>
+                            <div id="gsaLocationInfo" style="margin-top:6px; font-size:10px; color:#666; display:none;">
+                                <span id="gsaLocationName" style="font-weight:600;"></span><br>
+                                <span id="gsaRateDisplay">
+                                    Max Lodging: <strong><span id="gsaMaxLodging">--</span></strong> |
+                                    M&I: <strong><span id="gsaMaxMeal">--</span></strong>
+                                </span>
+                            </div>
+                            <div id="gsaLookupError" style="margin-top:6px; font-size:10px; color:#e74c3c; display:none;"></div>
+                            <div id="gsaLookupLoading" style="margin-top:6px; font-size:10px; color:#667eea; display:none;">Loading rates...</div>
+                        </div>
+
+                        <!-- GSA Stipend Rates -->
+                        <div class="cost-sheet" style="margin-bottom:0;">
+                            <table class="cost-table">
+                                <thead><tr>
+                                    <th>Stipend</th>
+                                    <th style="text-align:right;">$/Day</th>
+                                    <th style="text-align:right;">$/Hr</th>
+                                    <th style="text-align:right;">$/Wk</th>
+                                    <th style="text-align:right;">Total Amount</th>
+                                    <th style="text-align:right;">Bill %</th>
+                                </tr></thead>
+                                <tbody>
+                                    <tr><td><strong>Lodging</strong></td>
+                                        <td class="calc-cell" id="gsaLodgingDay">$0.00</td>
+                                        <td><input type="number" id="gsaLodgingHr" class="gsa-hr-input" step="0.01" min="0"></td>
+                                        <td><input type="number" id="gsaLodgingWeek" class="gsa-wk-input" step="0.01" min="0"></td>
+                                        <td class="calc-cell" id="gsaLodgingTotal">$0.00</td>
+                                        <td class="calc-cell" id="gsaLodgingBillPct">0.00%</td></tr>
+                                    <tr style="background:#f9f5ff; line-height:1;">
+                                        <td style="font-size:8px; color:#999; padding:1px 4px;">max</td>
+                                        <td class="gsa-max-label">--</td>
+                                        <td class="gsa-max-label" id="gsaLodgingMaxHr">--</td>
+                                        <td class="gsa-max-label" id="gsaLodgingMaxWk">--</td>
+                                        <td colspan="2"></td></tr>
+                                    <tr><td><strong>M&I</strong></td>
+                                        <td class="calc-cell" id="gsaMealDay">$0.00</td>
+                                        <td><input type="number" id="gsaMealHr" class="gsa-hr-input" step="0.01" min="0"></td>
+                                        <td><input type="number" id="gsaMealWeek" class="gsa-wk-input" step="0.01" min="0"></td>
+                                        <td class="calc-cell" id="gsaMealTotal">$0.00</td>
+                                        <td class="calc-cell" id="gsaMealBillPct">0.00%</td></tr>
+                                    <tr style="background:#f9f5ff; line-height:1;">
+                                        <td style="font-size:8px; color:#999; padding:1px 4px;">max</td>
+                                        <td class="gsa-max-label">--</td>
+                                        <td class="gsa-max-label" id="gsaMealMaxHr">--</td>
+                                        <td class="gsa-max-label" id="gsaMealMaxWk">--</td>
+                                        <td colspan="2"></td></tr>
+                                    <tr class="total-row"><td><strong>GSA TOTAL</strong></td>
+                                        <td class="calc-cell" id="gsaTotalDay">$0.00</td>
+                                        <td class="calc-cell" id="gsaTotalHr">$0.00</td>
+                                        <td class="calc-cell" id="gsaTotalWeek">$0.00</td>
+                                        <td class="calc-cell" id="gsaTotalAmount">$0.00</td>
+                                        <td class="calc-cell" id="gsaTotalBillPct">0.00%</td></tr>
+                                </tbody>
+                            </table>
+                            <input type="hidden" id="gsaLodgingDayVal" value="0">
+                            <input type="hidden" id="gsaMealDayVal" value="0">
+                            <!-- GSA Subtotal Summary -->
+                            <div id="gsaSubtotalBar" style="margin-top:8px; padding:8px 12px; background:linear-gradient(135deg,#667eea,#764ba2); border-radius:6px; display:flex; justify-content:space-between; align-items:center; color:white; font-size:11px;">
+                                <div><strong>GSA Contract Total:</strong> <span id="gsaContractWeeksLabel">0 wks</span> × <span id="gsaWeeklyLabel">$0.00/wk</span></div>
+                                <div style="font-size:16px; font-weight:700;" id="gsaGrandTotalDisplay">$0.00</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- BILL RATE DETAILS (below both panels) -->
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 15px; margin-bottom: 0;">
+                    <div class="section-title" style="margin: 0; flex: 1;">💵 Bill Rate Details</div>
+                    <button type="button" class="btn-add" onclick="addCustomPayType()">+ Add Custom Type</button>
+                </div>
+
+                <!-- VMS Fee Input -->
+                <div style="background-color:#f0f7ff; padding:10px 14px; border-radius:6px; border-left:3px solid #764ba2; margin-bottom:10px; display:flex; align-items:center; gap:10px;">
+                    <label for="vmsPercent" style="margin-bottom:0; font-size:11px; white-space:nowrap; font-weight:700;">VMS FEE</label>
+                    <input type="number" id="vmsPercent" step="0.01" min="0" max="100" placeholder="0.00"
+                        style="width:70px; padding:5px 6px; border:2px solid #764ba2; border-radius:4px; font-size:12px; font-family:'Monaco','Menlo',monospace; text-align:right;">
+                    <span style="font-size:11px; color:#555;">%</span>
+                    <span id="vmsLabel" style="font-size:10px; color:#764ba2; font-weight:600;"></span>
+                </div>
+
+                <div class="cost-sheet" style="margin-bottom:0;">
+                    <table class="cost-table">
+                        <thead><tr>
+                            <th>Billing Details</th>
+                            <th style="text-align:right;">$/Hr</th>
+                            <th style="text-align:right;">$/Wk</th>
+                            <th style="text-align:right;">Total Amount</th>
+                            <th style="text-align:right;">Bill %</th>
+                        </tr></thead>
+                        <tbody>
+                            <!-- Regular Bill Rate -->
+                            <tr><td><strong>Bill Rate</strong> <span id="billRegHrsLabel" style="font-size:9px; color:#667eea; font-weight:600;"></span></td>
+                                <td style="text-align:right;"><input type="number" class="bill-rate" data-type="regular" step="0.01" min="0" style="width:90px;"></td>
+                                <td class="calc-cell" id="billRegWeek">$0.00</td>
+                                <td class="calc-cell" id="billRegTotal">$0.00</td>
+                                <td class="calc-cell" id="billRegPct">0.00%</td></tr>
+                            <!-- Net Bill Rate (VMS applied) -->
+                            <tr id="netBillRegRow" style="display:none; background:#f8f4ff;"><td><strong>Net Bill Rate</strong> <span id="vmsTagReg" style="font-size:9px; color:#764ba2;"></span></td>
+                                <td class="calc-cell" id="netRegBillRate" style="font-weight:700;">$0.00</td>
+                                <td class="calc-cell" id="netRegWeek">$0.00</td>
+                                <td class="calc-cell" id="netRegTotal">$0.00</td>
+                                <td class="calc-cell" id="netRegBillPct">0.00%</td></tr>
+                            <!-- OT Bill Rate -->
+                            <tr><td><strong>OT Bill Rate</strong> <span id="billOTHrsLabel" style="font-size:9px; color:#e67e22; font-weight:600;"></span></td>
+                                <td style="text-align:right;"><input type="number" class="bill-rate" data-type="ot" step="0.01" min="0" style="width:90px;"></td>
+                                <td class="calc-cell" id="billOTWeek">$0.00</td>
+                                <td class="calc-cell" id="billOTTotal">$0.00</td>
+                                <td class="calc-cell" id="billOTPct">0.00%</td></tr>
+                            <!-- Net OT Bill Rate (VMS applied) -->
+                            <tr id="netBillOTRow" style="display:none; background:#f8f4ff;"><td><strong>OT Net Bill Rate</strong> <span id="vmsTagOT" style="font-size:9px; color:#764ba2;"></span></td>
+                                <td class="calc-cell" id="netOTBillRate" style="font-weight:700;">$0.00</td>
+                                <td class="calc-cell" id="netOTWeek">$0.00</td>
+                                <td class="calc-cell" id="netOTTotal">$0.00</td>
+                                <td class="calc-cell" id="netOTBillPct">0.00%</td></tr>
+                            <!-- DT Bill Rate -->
+                            <tr id="dtBillRow" style="display:none;"><td><strong>DT Bill Rate</strong> <span id="billDTHrsLabel" style="font-size:9px; color:#c0392b; font-weight:600;"></span></td>
+                                <td style="text-align:right;"><input type="number" class="bill-rate" data-type="dt" step="0.01" min="0" style="width:90px;"></td>
+                                <td class="calc-cell" id="billDTWeek">$0.00</td>
+                                <td class="calc-cell" id="billDTTotal">$0.00</td>
+                                <td class="calc-cell" id="billDTPct">0.00%</td></tr>
+                            <!-- Net DT Bill Rate (VMS applied) -->
+                            <tr id="netBillDTRow" style="display:none; background:#f8f4ff;"><td><strong>DT Net Bill Rate</strong> <span id="vmsTagDT" style="font-size:9px; color:#764ba2;"></span></td>
+                                <td class="calc-cell" id="netDTBillRate" style="font-weight:700;">$0.00</td>
+                                <td class="calc-cell" id="netDTWeek">$0.00</td>
+                                <td class="calc-cell" id="netDTTotal">$0.00</td>
+                                <td class="calc-cell" id="netDTBillPct">0.00%</td></tr>
+                            <!-- Other Bill Rates -->
+                            <tr><td><strong>Differential</strong></td>
+                                <td style="text-align:right;"><input type="number" class="bill-rate" data-type="diff" step="0.01" min="0" style="width:90px;"></td>
+                                <td class="calc-cell" id="billDiffWeek">$0.00</td>
+                                <td class="calc-cell" id="billDiffTotal">$0.00</td>
+                                <td class="calc-cell" id="billDiffPct">0.00%</td></tr>
+                            <tr><td><strong>On-Call</strong></td>
+                                <td style="text-align:right;"><input type="number" class="bill-rate" data-type="oncall" step="0.01" min="0" style="width:90px;"></td>
+                                <td class="calc-cell" id="billOncallWeek">$0.00</td>
+                                <td class="calc-cell" id="billOncallTotal">$0.00</td>
+                                <td class="calc-cell" id="billOncallPct">0.00%</td></tr>
+                            <tr><td><strong>Callback</strong></td>
+                                <td style="text-align:right;"><input type="number" class="bill-rate" data-type="callback" step="0.01" min="0" style="width:90px;"></td>
+                                <td class="calc-cell" id="billCallbackWeek">$0.00</td>
+                                <td class="calc-cell" id="billCallbackTotal">$0.00</td>
+                                <td class="calc-cell" id="billCallbackPct">0.00%</td></tr>
+                            <tr><td><strong>Charge</strong></td>
+                                <td style="text-align:right;"><input type="number" class="bill-rate" data-type="charge" step="0.01" min="0" style="width:90px;"></td>
+                                <td class="calc-cell" id="billChargeWeek">$0.00</td>
+                                <td class="calc-cell" id="billChargeTotal">$0.00</td>
+                                <td class="calc-cell" id="billChargePct">0.00%</td></tr>
+                            <tr><td><strong>Holiday</strong></td>
+                                <td style="text-align:right;"><input type="number" class="bill-rate" data-type="holiday" step="0.01" min="0" style="width:90px;"></td>
+                                <td class="calc-cell" id="billHolidayWeek">$0.00</td>
+                                <td class="calc-cell" id="billHolidayTotal">$0.00</td>
+                                <td class="calc-cell" id="billHolidayPct">0.00%</td></tr>
+                            <!-- Subtotal -->
+                            <tr class="total-row"><td><strong>TOTAL BILL</strong></td>
+                                <td class="calc-cell" id="billTotalHr">$0.00</td>
+                                <td class="calc-cell" id="billTotalWeek">$0.00</td>
+                                <td class="calc-cell" id="billTotalAmount">$0.00</td>
+                                <td class="calc-cell" id="billTotalPct">100.00%</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- CUSTOM PAY TYPES (added via button next to Bill Rate Details) -->
+                <div id="customPayTypes" style="display: grid; gap: 8px; margin-top: 8px;">
+                    <!-- Custom pay types will be added here -->
+                </div>
+
+                <!-- COST & EXPENSES -->
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0;">
+                    <div class="section-title" style="margin-bottom: 15px; flex: 1;">💲 Cost & Expenses</div>
+                    <button type="button" class="btn-add" onclick="addExpenseCategory()">+ Add Category</button>
+                </div>
+
+                <div class="cost-sheet" style="margin-bottom:10px;">
+                    <table class="cost-table">
+                        <thead><tr>
+                            <th>Expense</th>
+                            <th style="text-align:right;">Flat $</th>
+                            <th style="text-align:right;">$/Hr Burden</th>
+                            <th style="text-align:right;">Total</th>
+                        </tr></thead>
+                        <tbody>
+                            <tr><td><strong>Drug Screening</strong></td>
+                                <td><input type="number" id="drugScreening" class="expense-input" step="0.01" min="0" placeholder="0.00"></td>
+                                <td class="calc-cell" id="drugScreeningHr">$0.00</td>
+                                <td class="calc-cell" id="drugScreeningTotal">$0.00</td></tr>
+                            <tr><td><strong>Background Check</strong></td>
+                                <td><input type="number" id="backgroundCheck" class="expense-input" step="0.01" min="0" placeholder="0.00"></td>
+                                <td class="calc-cell" id="backgroundCheckHr">$0.00</td>
+                                <td class="calc-cell" id="backgroundCheckTotal">$0.00</td></tr>
+                            <tr><td><strong>Occupational Screening</strong></td>
+                                <td><input type="number" id="occupationalScreening" class="expense-input" step="0.01" min="0" placeholder="0.00"></td>
+                                <td class="calc-cell" id="occupationalScreeningHr">$0.00</td>
+                                <td class="calc-cell" id="occupationalScreeningTotal">$0.00</td></tr>
+                            <tr class="total-row"><td><strong>TOTAL EXPENSES</strong></td>
+                                <td class="calc-cell" id="totalExpensesFlat">$0.00</td>
+                                <td class="calc-cell" id="totalExpensesHr">$0.00</td>
+                                <td class="calc-cell" id="totalExpenses">$0.00</td></tr>
+                        </tbody>
+                    </table>
+                    <div id="expenseContractHrs" style="font-size:10px; color:#888; margin-top:4px; text-align:right;"></div>
+                </div>
+                <div id="customExpenses" style="display: grid; gap: 8px;">
+                    <!-- Custom expense categories added here -->
+                </div>
+
+                <!-- BURDENS & FEES -->
+                <div class="section-title">📊 Burdens, Taxes & Fees</div>
+
+                <div class="form-row" style="grid-template-columns: repeat(2, 1fr);">
+                    <div class="form-group">
+                        <label for="workersComp">WC - Workers Comp (%)</label>
+                        <input type="number" id="workersComp" step="0.01" min="0" max="100" placeholder="0.00">
+                        <div id="workersCompHr" style="font-size:11px; font-weight:700; color:#667eea; margin-top:4px; font-family:'Monaco','Menlo',monospace;">$0.00/hr</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="erCost">ER Cost - Employer Cost (%)</label>
+                        <input type="number" id="erCost" step="0.01" min="0" max="100" placeholder="0.00">
+                        <div id="erCostHr" style="font-size:11px; font-weight:700; color:#667eea; margin-top:4px; font-family:'Monaco','Menlo',monospace;">$0.00/hr</div>
+                    </div>
+                </div>
+
+                <!-- NOTES -->
+                <div class="section-title">📝 Notes</div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="specialRequirements">Special Requirements</label>
+                        <textarea id="specialRequirements" placeholder="Any special requirements or notes..."></textarea>
+                    </div>
+                </div>
+
+                <!-- Hidden financial values (used by sidebar calculations) -->
+                <div style="display:none;">
+                    <span id="totalCost">$0.00</span>
+                    <span id="totalBill">$0.00</span>
+                    <span id="netMargin">$0.00</span>
+                    <span id="marginPercent">0%</span>
+                </div>
+
+                <!-- BUTTONS -->
+                <div class="button-group">
+                    <button type="submit" class="btn-submit">💾 Save Deal</button>
+                    <button type="button" class="btn-print" onclick="window.print()">🖨️ Print/PDF</button>
+                    <button type="reset" class="btn-reset">🔄 Clear Form</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- RIGHT SIDEBAR - MARGIN & MARKUP ANALYSIS -->
+    <div class="margin-sidebar">
+        <h3>Margin & Markup</h3>
+
+        <!-- HERO: Weekly Pay + Weekly Bill side by side, Weekly Margin below -->
+        <div class="sidebar-hero">
+            <div class="sidebar-hero-item" style="border-bottom:2px solid #4facfe;">
+                <div class="sidebar-hero-label">Weekly Bill Amount</div>
+                <div class="sidebar-hero-value" id="heroWeeklyBill" style="color:#4facfe;">$0.00</div>
+                <div class="sidebar-hero-sub">Net bill per week</div>
+            </div>
+            <div class="sidebar-hero-item" style="border-bottom:2px solid #43e97b;">
+                <div class="sidebar-hero-label">Weekly Gross</div>
+                <div class="sidebar-hero-value" id="heroWeeklyPay" style="color:#43e97b;">$0.00</div>
+                <div class="sidebar-hero-sub">Total gross pay/wk</div>
+            </div>
+        </div>
+        <div class="sidebar-hero-item" style="border-bottom:2px solid #ffd700; text-align:center; margin-bottom:10px; padding:10px 6px; background:rgba(255,255,255,0.06); border-radius:8px;">
+            <div class="sidebar-hero-label">Weekly Margin</div>
+            <div class="sidebar-hero-value" id="heroWeeklyMargin" style="color:#ffd700; font-size:24px;">$0.00</div>
+            <div class="sidebar-hero-sub">Net margin per week</div>
+        </div>
+
+        <!-- 2x2 METRICS GRID -->
+        <div class="metrics-grid">
+            <!-- Net Markup -->
+            <div class="metric-tile markup">
+                <div class="metric-tile-label">Net Markup</div>
+                <div class="metric-tile-value" id="netMarkupMultiplier">1.00x</div>
+                <div class="metric-tile-sub">Net Bill / Total Cost</div>
+            </div>
+            <!-- Gross Margin -->
+            <div class="metric-tile gross">
+                <div class="metric-tile-label">Gross Margin</div>
+                <div class="metric-tile-value" id="gmTotalDollar">$0.00</div>
+                <div class="metric-tile-sub" id="gmPercent">0.00%</div>
+            </div>
+            <!-- Burden % of GM -->
+            <div class="metric-tile burden">
+                <div class="metric-tile-label">Burden % of GM</div>
+                <div class="metric-tile-value" id="burdenPctOfGM">0.00%</div>
+                <div class="metric-tile-sub">Total Burden / GM</div>
+            </div>
+            <!-- Net Margin -->
+            <div class="metric-tile net">
+                <div class="metric-tile-label">Net Margin</div>
+                <div class="metric-tile-value" id="nmTotalDollar">$0.00</div>
+                <div class="metric-tile-sub" id="nmPercent">0.00%</div>
+            </div>
+        </div>
+
+        <hr class="margin-divider" style="margin:6px 0;">
+
+        <!-- DETAIL ROWS: Gross Margin -->
+        <div class="metric-details">
+            <div class="metric-details-header">Gross Margin Details</div>
+            <div class="margin-detail-row"><span>Total Bill</span><span id="gmBillTotal">$0.00</span></div>
+            <div class="margin-detail-row"><span>Gross Wages</span><span id="gmGrossWages">$0.00</span></div>
+        </div>
+
+        <!-- DETAIL ROWS: Burden -->
+        <div class="metric-details">
+            <div class="metric-details-header">Burden Details</div>
+            <div class="margin-detail-row"><span>Expense $/Hr</span><span id="burdenExpenseHr">$0.00/hr</span></div>
+            <div class="margin-detail-row"><span>Burdens $/Hr (WC + ER)</span><span id="burdenTaxAmt">$0.00/hr</span></div>
+            <div class="margin-detail-row" style="border-top:1px solid rgba(255,255,255,0.15); padding-top:4px; margin-top:3px;"><span><strong>Total Burden $/Hr</strong></span><span id="burdenTotalAmt" style="color:#ff9f43;">$0.00/hr</span></div>
+            <div class="margin-detail-row" style="padding-top:3px;"><span><strong>Total Burden $/Wk</strong></span><span id="burdenTotalWk" style="color:#ff9f43;">$0.00/wk</span></div>
+        </div>
+
+        <!-- DETAIL ROWS: Net Margin -->
+        <div class="metric-details">
+            <div class="metric-details-header">Net Margin Details</div>
+            <div class="margin-detail-row"><span>Net Margin/Hr</span><span id="nmPerHour">$0.00</span></div>
+            <div class="margin-detail-row"><span>Net Bill</span><span id="nmNetBill">$0.00</span></div>
+            <div class="margin-detail-row"><span>Total Cost</span><span id="nmTotalCost">$0.00</span></div>
+            <div id="expenseNote" style="display:none; font-size:10px; color:#ffa500; padding:4px 8px; margin-top:2px; background:rgba(255,165,0,0.08); border-radius:4px;"></div>
+        </div>
+
+        <hr class="margin-divider" style="margin:6px 0;">
+
+        <!-- GM PROFIT BREAKDOWN (2x2 grid) -->
+        <div class="margin-section-label" id="gmBreakdownLabel">GM Profit Breakdown</div>
+
+        <div class="metrics-grid">
+            <div class="metric-tile profit-tile">
+                <div class="metric-tile-label">Per Hour</div>
+                <div class="metric-tile-value" id="gmProfitHr" style="font-size:15px;">$0.00</div>
+                <div class="metric-tile-sub"><span id="gmBillHr">$0</span> bill / <span id="gmPayHr">$0</span> pay</div>
+            </div>
+            <div class="metric-tile profit-tile">
+                <div class="metric-tile-label">Per Day</div>
+                <div class="metric-tile-value" id="gmProfitDay" style="font-size:15px;">$0.00</div>
+                <div class="metric-tile-sub"><span id="gmBillDay">$0</span> bill / <span id="gmPayDay">$0</span> pay</div>
+            </div>
+            <div class="metric-tile profit-tile">
+                <div class="metric-tile-label">Per Week</div>
+                <div class="metric-tile-value" id="gmProfitWk" style="font-size:15px;">$0.00</div>
+                <div class="metric-tile-sub"><span id="gmBillWk">$0</span> bill / <span id="gmPayWk">$0</span> pay</div>
+            </div>
+            <div class="metric-tile profit-tile">
+                <div class="metric-tile-label">Per Month</div>
+                <div class="metric-tile-value" id="gmProfitMo" style="font-size:15px;">$0.00</div>
+                <div class="metric-tile-sub"><span id="gmBillMo">$0</span> bill / <span id="gmPayMo">$0</span> pay</div>
+            </div>
+        </div>
+
+        <hr class="margin-divider" style="margin:6px 0;">
+
+        <!-- OT/DT MARGIN BREAKDOWN -->
+        <div class="margin-section-label">OT/DT Margin Breakdown</div>
+
+        <div class="metrics-grid">
+            <div class="metric-tile ot-tile">
+                <div class="metric-tile-label">Reg Margin/Hr</div>
+                <div class="metric-tile-value" id="otRegMarginHr" style="font-size:15px;">$0.00</div>
+                <div class="metric-tile-sub"><span id="otRegHrs">0</span> hrs @ <span id="otRegBillHr">$0</span>/<span id="otRegPayHr">$0</span></div>
+            </div>
+            <div class="metric-tile ot-tile">
+                <div class="metric-tile-label">OT Margin/Hr</div>
+                <div class="metric-tile-value" id="otOtMarginHr" style="font-size:15px;">$0.00</div>
+                <div class="metric-tile-sub"><span id="otOtHrs">0</span> hrs @ <span id="otOtBillHr">$0</span>/<span id="otOtPayHr">$0</span></div>
+            </div>
+            <div class="metric-tile ot-tile ot-dt-tile" style="display:none; border-left-color:#c0392b;">
+                <div class="metric-tile-label">DT Margin/Hr</div>
+                <div class="metric-tile-value" id="otDtMarginHr" style="font-size:15px; color:#c0392b;">$0.00</div>
+                <div class="metric-tile-sub"><span id="otDtHrs">0</span> hrs @ <span id="otDtBillHr">$0</span>/<span id="otDtPayHr">$0</span></div>
+            </div>
+            <div class="metric-tile ot-tile">
+                <div class="metric-tile-label">Reg Profit/Wk</div>
+                <div class="metric-tile-value" id="otRegProfitWk" style="font-size:15px;">$0.00</div>
+                <div class="metric-tile-sub">After burden (WC+ER)</div>
+            </div>
+            <div class="metric-tile ot-tile">
+                <div class="metric-tile-label">OT Profit/Wk</div>
+                <div class="metric-tile-value" id="otOtProfitWk" style="font-size:15px;">$0.00</div>
+                <div class="metric-tile-sub">After burden (WC+ER)</div>
+            </div>
+            <div class="metric-tile ot-tile ot-dt-tile" style="display:none; border-left-color:#c0392b;">
+                <div class="metric-tile-label">DT Profit/Wk</div>
+                <div class="metric-tile-value" id="otDtProfitWk" style="font-size:15px; color:#c0392b;">$0.00</div>
+                <div class="metric-tile-sub">After burden (WC+ER)</div>
+            </div>
+        </div>
+        <div class="metric-details">
+            <div class="margin-detail-row"><span>Reg Burden/Hr (WC+ER)</span><span id="otRegBurdenHr">$0.00</span></div>
+            <div class="margin-detail-row"><span>OT Burden/Hr (WC+ER)</span><span id="otOtBurdenHr">$0.00</span></div>
+            <div class="margin-detail-row ot-dt-detail" style="display:none;"><span>DT Burden/Hr (WC+ER)</span><span id="otDtBurdenHr">$0.00</span></div>
+            <div class="margin-detail-row"><span>Total Weekly Profit</span><span id="otTotalProfitWk">$0.00</span></div>
+            <div class="margin-detail-row"><span>OT/DT % of Total Profit</span><span id="otPctOfProfit">0.00%</span></div>
+        </div>
+    </div>
+
+    </div><!-- end page-layout -->
+
+    <script>
+        // ============================================================
+        // STATE OT RULES — Daily/Weekly overtime thresholds by state
+        // ============================================================
+        const STATE_OT_RULES = {
+            'FEDERAL': { name: 'Federal (FLSA)', dailyOT: null, dailyDT: null, weeklyOT: 40, seventhDay: false, desc: 'OT (1.5x) after 40 hrs/week' },
+            'CA': { name: 'California', dailyOT: 8, dailyDT: 12, weeklyOT: 40, seventhDay: true, desc: 'Daily OT (1.5x) >8hrs, DT (2x) >12hrs, 7th consecutive day rule' },
+            'AK': { name: 'Alaska', dailyOT: 8, dailyDT: null, weeklyOT: 40, seventhDay: false, desc: 'Daily OT (1.5x) >8hrs (employers with 4+ employees)' },
+            'NV': { name: 'Nevada', dailyOT: 8, dailyDT: null, weeklyOT: 40, seventhDay: false, desc: 'Daily OT (1.5x) >8hrs (if earning <1.5x min wage)' },
+            'CO': { name: 'Colorado', dailyOT: 12, dailyDT: null, weeklyOT: 40, seventhDay: false, desc: 'Daily OT (1.5x) >12hrs/day' },
+            'OR': { name: 'Oregon', dailyOT: 10, dailyDT: null, weeklyOT: 40, seventhDay: false, desc: 'Daily OT (1.5x) >10hrs (manufacturing)' },
+            'FL': { name: 'Florida', dailyOT: 10, dailyDT: null, weeklyOT: 40, seventhDay: false, desc: 'Manual laborers: legal day = 10hrs, OT (1.5x) beyond' }
+        };
+
+        // Calculate OT/DT hour breakdown based on state rules
+        // Returns: { regHrs, otHrs, dtHrs, totalHours, daysPerWeek }
+        function calculateOTBreakdown(hoursPerDay, hoursPerWeek, stateCode) {
+            const rules = STATE_OT_RULES[stateCode] || STATE_OT_RULES['FEDERAL'];
+            const totalHours = hoursPerWeek;
+            const daysPerWeek = hoursPerDay > 0 ? totalHours / hoursPerDay : 0;
+            let regHrs = 0, otHrs = 0, dtHrs = 0;
+
+            // If no hours/day entered or no daily OT rule, fallback to weekly-only rules
+            if (!rules.dailyOT || hoursPerDay <= 0) {
+                // Federal rules only — weekly threshold
+                regHrs = Math.min(totalHours, rules.weeklyOT);
+                otHrs = Math.max(totalHours - rules.weeklyOT, 0);
+                return { regHrs, otHrs, dtHrs, totalHours, daysPerWeek };
+            }
+
+            // State daily rules — calculate per-day breakdown
+            const dailyOTThreshold = rules.dailyOT;
+            const dailyDTThreshold = rules.dailyDT || Infinity;
+
+            const dailyReg = Math.min(hoursPerDay, dailyOTThreshold);
+            const dailyOT = Math.min(Math.max(hoursPerDay - dailyOTThreshold, 0), dailyDTThreshold - dailyOTThreshold);
+            const dailyDT = rules.dailyDT ? Math.max(hoursPerDay - dailyDTThreshold, 0) : 0;
+
+            // Handle 7th consecutive day (California)
+            let regularDays = daysPerWeek;
+            if (rules.seventhDay && daysPerWeek >= 7) {
+                regularDays = 6;
+                // 7th day: first dailyOTThreshold hrs at 1.5x, remainder at 2x
+                const day7OT = Math.min(hoursPerDay, dailyOTThreshold);
+                const day7DT = Math.max(hoursPerDay - dailyOTThreshold, 0);
+                otHrs += day7OT;
+                dtHrs += day7DT;
+            }
+
+            // Sum regular days
+            regHrs = dailyReg * regularDays;
+            otHrs += dailyOT * regularDays;
+            dtHrs += dailyDT * regularDays;
+
+            // Apply weekly OT rule as catch-all: if reg > weekly threshold, overflow to OT
+            if (regHrs > rules.weeklyOT) {
+                otHrs += regHrs - rules.weeklyOT;
+                regHrs = rules.weeklyOT;
+            }
+
+            return { regHrs, otHrs, dtHrs, totalHours, daysPerWeek };
+        }
+
+        // Update OT state dropdown, banner, DT row visibility, and recalculate
+        function updateOTState() {
+            const stateCode = document.getElementById('otStateSelect').value;
+            const rules = STATE_OT_RULES[stateCode] || STATE_OT_RULES['FEDERAL'];
+
+            // Update banner
+            const banner = document.getElementById('otRuleBanner');
+            const title = document.getElementById('otRuleTitle');
+            const desc = document.getElementById('otRuleDesc');
+            const breakdown = document.getElementById('otRuleBreakdown');
+            const icon = document.getElementById('otRuleIcon');
+
+            title.textContent = rules.name;
+            desc.textContent = rules.desc;
+
+            if (stateCode === 'FEDERAL') {
+                banner.style.borderLeftColor = '#667eea';
+                banner.style.background = 'rgba(102,126,234,0.1)';
+                title.style.color = '#667eea';
+                icon.textContent = '📋';
+            } else {
+                banner.style.borderLeftColor = '#e67e22';
+                banner.style.background = 'rgba(230,126,34,0.1)';
+                title.style.color = '#e67e22';
+                icon.textContent = '⚠️';
+            }
+
+            // Show/hide DT rows in pay table, bill table, and comp sidebar
+            const hasDT = !!rules.dailyDT;
+            const dtPayRow = document.getElementById('dtPayRow');
+            const dtBillRow = document.getElementById('dtBillRow');
+            const netDtBillRow = document.getElementById('netBillDTRow');
+            if (dtPayRow) dtPayRow.style.display = hasDT ? '' : 'none';
+            if (dtBillRow) dtBillRow.style.display = hasDT ? '' : 'none';
+            if (netDtBillRow) netDtBillRow.style.display = 'none'; // shown by VMS logic
+            // Comp sidebar DT detail rows
+            document.querySelectorAll('.comp-dt-row').forEach(el => el.style.display = hasDT ? '' : 'none');
+
+            // Show hour breakdown in banner
+            const hpd = parseFloat(document.getElementById('hoursPerDay').value) || 0;
+            const hpw = parseFloat(document.getElementById('hoursPerWeek').value) || 0;
+            if (hpd > 0 && hpw > 0) {
+                const b = calculateOTBreakdown(hpd, hpw, stateCode);
+                let text = 'Reg: ' + b.regHrs.toFixed(1) + 'hrs | OT: ' + b.otHrs.toFixed(1) + 'hrs';
+                if (b.dtHrs > 0) text += ' | DT: ' + b.dtHrs.toFixed(1) + 'hrs';
+                text += ' (' + b.daysPerWeek.toFixed(1) + ' days/wk)';
+                breakdown.textContent = text;
+                breakdown.style.display = 'block';
+                breakdown.style.color = '#e67e22';
+            } else if (stateCode !== 'FEDERAL' && rules.dailyOT && hpw > 0 && hpd <= 0) {
+                breakdown.textContent = '\u26A0 Enter Hours Per Day to calculate ' + rules.name + ' daily OT split';
+                breakdown.style.display = 'block';
+                breakdown.style.color = '#e74c3c';
+            } else {
+                breakdown.style.display = 'none';
+            }
+
+            // Recalculate everything
+            calculateAllRows();
+        }
+
+        // Auto-detect state from abbreviation and set dropdown
+        function autoDetectState(stateAbbrev) {
+            if (!stateAbbrev) return;
+            const upper = stateAbbrev.toUpperCase().trim();
+            const select = document.getElementById('otStateSelect');
+            // Check if this state has a special rule
+            if (STATE_OT_RULES[upper]) {
+                select.value = upper;
+            } else {
+                select.value = 'FEDERAL';
+            }
+            autoDefaultHoursPerDay();
+            updateOTState();
+        }
+
+        // Auto-default Hours Per Day when Hours Per Week is entered and HPD is empty
+        // Healthcare standard: 12-hour shifts for 36hrs, 8-hour for 40hrs, 10-hour for 30/50hrs
+        function autoDefaultHoursPerDay() {
+            const hpdInput = document.getElementById('hoursPerDay');
+            const hpw = parseFloat(document.getElementById('hoursPerWeek').value) || 0;
+            const currentHpd = parseFloat(hpdInput.value) || 0;
+
+            // Only auto-fill if hoursPerDay is empty AND hoursPerWeek is a realistic weekly total (>=20)
+            if (currentHpd > 0 || hpw < 20) return;
+
+            // Infer common healthcare shift patterns
+            let defaultHpd = 12; // default to 12-hour shifts (most common in travel nursing)
+            if (hpw === 40) defaultHpd = 8;       // 40hrs = 5 × 8
+            else if (hpw === 36) defaultHpd = 12;  // 36hrs = 3 × 12
+            else if (hpw === 48) defaultHpd = 12;  // 48hrs = 4 × 12
+            else if (hpw === 24) defaultHpd = 8;   // 24hrs = 3 × 8
+            else if (hpw === 32) defaultHpd = 8;   // 32hrs = 4 × 8
+            else if (hpw % 12 === 0) defaultHpd = 12;
+            else if (hpw % 10 === 0) defaultHpd = 10;
+            else if (hpw % 8 === 0) defaultHpd = 8;
+
+            hpdInput.value = defaultHpd;
+            console.log('[OT] Auto-defaulted hoursPerDay to', defaultHpd, 'for', hpw, 'hrs/wk');
+        }
+
+        // Auto-fill OT/DT pay and bill rates from regular rate
+        function autoFillOTRates() {
+            const regPay = parseFloat(document.querySelector('.pay-rate[data-type="regular"]').value) || 0;
+            const regBill = parseFloat(document.querySelector('.bill-rate[data-type="regular"]').value) || 0;
+            const stateCode = document.getElementById('otStateSelect').value;
+            const rules = STATE_OT_RULES[stateCode] || STATE_OT_RULES['FEDERAL'];
+
+            // Auto-fill OT = 1.5x if OT field is empty or zero
+            const otPayInput = document.querySelector('.pay-rate[data-type="ot"]');
+            const otBillInput = document.querySelector('.bill-rate[data-type="ot"]');
+            if (regPay > 0 && !(parseFloat(otPayInput.value) > 0)) {
+                otPayInput.value = (regPay * 1.5).toFixed(2);
+            }
+            if (regBill > 0 && !(parseFloat(otBillInput.value) > 0)) {
+                otBillInput.value = (regBill * 1.5).toFixed(2);
+            }
+
+            // Auto-fill DT = 2x if DT field is empty or zero and state has DT
+            if (rules.dailyDT) {
+                const dtPayInput = document.querySelector('.pay-rate[data-type="dt"]');
+                const dtBillInput = document.querySelector('.bill-rate[data-type="dt"]');
+                if (dtPayInput && regPay > 0 && !(parseFloat(dtPayInput.value) > 0)) {
+                    dtPayInput.value = (regPay * 2.0).toFixed(2);
+                }
+                if (dtBillInput && regBill > 0 && !(parseFloat(dtBillInput.value) > 0)) {
+                    dtBillInput.value = (regBill * 2.0).toFixed(2);
+                }
+            }
+        }
+
+        // GSA Per Diem API - Live Lookup by Zip Code
+        const GSA_API_BASE = 'https://api.gsa.gov/travel/perdiem/v2/rates';
+        const GSA_API_KEY = 'DEMO_KEY';
+
+        // Get the current federal fiscal year (FY starts Oct 1)
+        function getGSAFiscalYear() {
+            const now = new Date();
+            return now.getMonth() >= 9 ? now.getFullYear() + 1 : now.getFullYear();
+        }
+
+        // Zip prefix to state mapping (first 3 digits)
+        function zipToState(zip) {
+            const prefix = parseInt(zip.substring(0, 3));
+            // 3-digit prefix ranges for accurate state mapping
+            const map = [
+                [0, 9, 'CT'], [10, 69, 'MA'], [60, 69, 'CT'], [70, 89, 'NJ'], [90, 149, 'NY'],
+                [150, 196, 'PA'], [200, 205, 'DC'], [206, 219, 'MD'], [220, 246, 'VA'], [247, 268, 'WV'],
+                [270, 289, 'NC'], [290, 299, 'SC'], [300, 319, 'GA'], [320, 349, 'FL'], [350, 369, 'AL'],
+                [370, 385, 'TN'], [386, 397, 'MS'], [400, 427, 'KY'], [430, 459, 'OH'], [460, 479, 'IN'],
+                [480, 499, 'MI'], [500, 528, 'IA'], [530, 549, 'WI'], [550, 567, 'MN'], [570, 577, 'SD'],
+                [580, 588, 'ND'], [590, 599, 'MT'], [600, 629, 'IL'], [630, 658, 'MO'], [660, 679, 'KS'],
+                [680, 693, 'NE'], [700, 714, 'LA'], [716, 729, 'AR'], [730, 749, 'OK'], [750, 799, 'TX'],
+                [800, 816, 'CO'], [820, 831, 'WY'], [832, 838, 'ID'], [840, 847, 'UT'], [850, 865, 'AZ'],
+                [870, 884, 'NM'], [889, 898, 'NV'], [900, 961, 'CA'], [970, 979, 'OR'], [980, 994, 'WA'],
+                [995, 999, 'AK'], [967, 968, 'HI']
+            ];
+            for (const [lo, hi, st] of map) {
+                if (prefix >= lo && prefix <= hi) return st;
+            }
+            return null;
+        }
+
+        // Standard CONUS fallback rates (Federal FY default for non-listed areas)
+        const STANDARD_CONUS = { lodging: 107, meals: 68 };
+
+        // Extract rate data from GSA API response
+        function extractGSARates(data) {
+            if (!data.rates || !data.rates.length) return null;
+            const rateEntry = data.rates[0];
+            if (!rateEntry.rate || !rateEntry.rate.length) return null;
+            const rateData = rateEntry.rate[0];
+            const meals = rateData.meals;
+            const months = rateData.months ? rateData.months.month : null;
+            if (!months || !months.length) return null;
+            const maxLodging = Math.max(...months.map(m => parseFloat(m.value) || 0));
+            return {
+                lodging: maxLodging,
+                meals: meals,
+                city: rateData.city || 'Unknown',
+                county: rateData.county || 'Unknown',
+                state: rateEntry.state || ''
+            };
+        }
+
+        // Apply GSA rates to the UI
+        function applyGSARates(rates, zip, label) {
+            const infoEl = document.getElementById('gsaLocationInfo');
+            document.getElementById('gsaLocationName').textContent = label;
+            document.getElementById('gsaMaxLodging').textContent = '$' + rates.lodging.toFixed(2) + '/day';
+            document.getElementById('gsaMaxMeal').textContent = '$' + rates.meals.toFixed(2) + '/day';
+            infoEl.style.display = 'block';
+
+            document.getElementById('gsaLodgingDayVal').value = rates.lodging;
+            document.getElementById('gsaMealDayVal').value = rates.meals;
+            document.getElementById('gsaLodgingDay').textContent = '$' + rates.lodging.toFixed(2);
+            document.getElementById('gsaMealDay').textContent = '$' + rates.meals.toFixed(2);
+
+            // Auto-detect state OT rules from zip code
+            const detectedState = zipToState(zip);
+            if (detectedState) {
+                autoDetectState(detectedState);
+            }
+
+            calculateGSA();
+        }
+
+        // Lookup GSA rates with multi-step fallback:
+        // 1. Try zip code lookup
+        // 2. Try state-level lookup (find closest county match)
+        // 3. Fall back to standard CONUS rates
+        async function lookupGSARate() {
+            const zip = document.getElementById('gsaZipCode').value.trim();
+            const errorEl = document.getElementById('gsaLookupError');
+            const loadingEl = document.getElementById('gsaLookupLoading');
+            const infoEl = document.getElementById('gsaLocationInfo');
+
+            errorEl.style.display = 'none';
+            infoEl.style.display = 'none';
+
+            if (!zip || zip.length < 5) {
+                errorEl.textContent = 'Please enter a valid 5-digit zip code.';
+                errorEl.style.display = 'block';
+                return;
+            }
+
+            loadingEl.style.display = 'block';
+            const year = getGSAFiscalYear();
+
+            try {
+                // STEP 1: Try direct zip code lookup
+                const zipUrl = `${GSA_API_BASE}/zip/${zip}/year/${year}?api_key=${GSA_API_KEY}`;
+                const zipResp = await fetch(zipUrl);
+                const zipData = await zipResp.json();
+                const zipRates = extractGSARates(zipData);
+
+                if (zipRates && zipRates.lodging > 0) {
+                    loadingEl.style.display = 'none';
+                    applyGSARates(zipRates, zip,
+                        `${zipRates.city}, ${zipRates.state} (${zipRates.county} County) - Zip ${zip}`);
+                    return;
+                }
+
+                // STEP 2: Try state-level lookup
+                const state = zipToState(zip);
+                if (state) {
+                    const stateUrl = `${GSA_API_BASE}/state/${state}/year/${year}?api_key=${GSA_API_KEY}`;
+                    const stateResp = await fetch(stateUrl);
+                    const stateData = await stateResp.json();
+
+                    if (stateData.rates && stateData.rates.length) {
+                        // Find any rate entry for the state — use first available
+                        for (const rateEntry of stateData.rates) {
+                            if (rateEntry.rate && rateEntry.rate.length) {
+                                const rd = rateEntry.rate[0];
+                                const months = rd.months ? rd.months.month : null;
+                                if (months && months.length) {
+                                    const maxLodging = Math.max(...months.map(m => parseFloat(m.value) || 0));
+                                    // Use standard CONUS if this is a catch-all, otherwise use the rate
+                                    const lodging = maxLodging > 0 ? maxLodging : STANDARD_CONUS.lodging;
+                                    const meals = rd.meals > 0 ? rd.meals : STANDARD_CONUS.meals;
+
+                                    loadingEl.style.display = 'none';
+                                    applyGSARates({ lodging, meals }, zip,
+                                        `${state} Standard Rate - Zip ${zip} (via state lookup)`);
+                                    return;
+                                }
+                            }
+                        }
+                    }
+                }
+
+                // STEP 3: Fall back to standard CONUS rates
+                loadingEl.style.display = 'none';
+                applyGSARates(STANDARD_CONUS, zip,
+                    `Standard CONUS Rate - Zip ${zip} (no specific area rate found)`);
+
+            } catch (err) {
+                loadingEl.style.display = 'none';
+                // Even on network error, apply standard CONUS so user isn't blocked
+                console.error('GSA API error:', err);
+                applyGSARates(STANDARD_CONUS, zip,
+                    `Standard CONUS Rate - Zip ${zip} (offline fallback)`);
+            }
+        }
+
+        // Set today's date as default
+        document.getElementById('createdDate').valueAsDate = new Date();
+
+        // Calculate end date based on start date + weeks
+        function calculateEndDate() {
+            const startVal = document.getElementById('startDate').value;
+            const weeks = parseFloat(document.getElementById('contractWeeks').value) || 0;
+
+            if (startVal && weeks > 0) {
+                const startDate = new Date(startVal + 'T00:00:00');
+                if (!isNaN(startDate.getTime())) {
+                    const endDate = new Date(startDate);
+                    endDate.setDate(endDate.getDate() + (weeks * 7) - 1);
+                    document.getElementById('endDate').value = endDate.toISOString().split('T')[0];
+                }
+                calculateAllRows();
+            }
+        }
+
+        // Add custom pay type
+        function addCustomPayType() {
+            const customPayTypes = document.getElementById('customPayTypes');
+            const id = 'custom-' + Date.now();
+            
+            const html = `
+                <div class="custom-pay-type" id="${id}">
+                    <input type="text" placeholder="Pay Type Name" class="custom-name">
+                    <input type="number" placeholder="Hourly Rate" step="0.01" min="0" class="custom-pay-rate">
+                    <input type="number" placeholder="Hours/Week" step="0.1" min="0" class="custom-hours">
+                    <input type="number" placeholder="Bill Rate" step="0.01" min="0" class="custom-bill-rate">
+                    <button type="button" class="btn-remove" onclick="removeCustomPayType('${id}')">✕</button>
+                </div>
+            `;
+            
+            customPayTypes.insertAdjacentHTML('beforeend', html);
+            
+            // Add event listeners
+            document.querySelector(`#${id} .custom-pay-rate`).addEventListener('change', calculateAllRows);
+            document.querySelector(`#${id} .custom-hours`).addEventListener('change', calculateAllRows);
+            document.querySelector(`#${id} .custom-bill-rate`).addEventListener('change', calculateAllRows);
+        }
+
+        function removeCustomPayType(id) {
+            document.getElementById(id).remove();
+            calculateAllRows();
+        }
+
+        // Get hours allocation for a pay type using state OT rules
+        function getHoursForType(payType) {
+            const hpd = parseFloat(document.getElementById('hoursPerDay').value) || 0;
+            const hpw = parseFloat(document.getElementById('hoursPerWeek').value) || 0;
+            const stateCode = document.getElementById('otStateSelect').value;
+            const b = calculateOTBreakdown(hpd, hpw, stateCode);
+
+            if (payType === 'regular' || payType === 'ot' || payType === 'dt') {
+                console.log('[OT Debug] getHoursForType(' + payType + '):', { hpd, hpw, stateCode, regHrs: b.regHrs, otHrs: b.otHrs, dtHrs: b.dtHrs });
+            }
+
+            if (payType === 'regular') return b.regHrs;
+            if (payType === 'ot') return b.otHrs;
+            if (payType === 'dt') return b.dtHrs;
+            return hpw; // diff, oncall, callback, charge, holiday use total hours
+        }
+
+        function calculateRow(payType) {
+            const payRateEl = document.querySelector(`.pay-rate[data-type="${payType}"]`);
+            if (!payRateEl) return;
+            const hourlyRate = parseFloat(payRateEl.value) || 0;
+            const hours = getHoursForType(payType);
+            const weeks = parseFloat(document.getElementById('contractWeeks').value) || 0;
+
+            const rateWeek = hourlyRate * hours;
+            const totalPay = rateWeek * weeks;
+
+            const weekCell = document.querySelector(`[data-calc="${payType}-rate-week"]`);
+            const totalCell = document.querySelector(`[data-calc="${payType}-total"]`);
+            if (weekCell) weekCell.textContent = '$' + rateWeek.toFixed(2);
+            if (totalCell) totalCell.textContent = '$' + totalPay.toFixed(2);
+        }
+
+        // Update all hours labels (reg/OT/DT) from state OT breakdown — called once per recalc cycle
+        function updateHoursLabels() {
+            const hpd = parseFloat(document.getElementById('hoursPerDay').value) || 0;
+            const hpw = parseFloat(document.getElementById('hoursPerWeek').value) || 0;
+            const stateCode = document.getElementById('otStateSelect').value;
+            const b = calculateOTBreakdown(hpd, hpw, stateCode);
+
+            console.log('[OT Debug] updateHoursLabels:', { hpd, hpw, stateCode, regHrs: b.regHrs, otHrs: b.otHrs, dtHrs: b.dtHrs });
+
+            document.getElementById('regHoursLabel').textContent = '(' + b.regHrs.toFixed(1) + ' hrs)';
+            document.getElementById('otHoursLabel').textContent = '(' + b.otHrs.toFixed(1) + ' hrs)';
+            document.getElementById('billRegHrsLabel').textContent = '(' + b.regHrs.toFixed(1) + ' hrs)';
+            document.getElementById('billOTHrsLabel').textContent = '(' + b.otHrs.toFixed(1) + ' hrs)';
+
+            const dtHoursLabel = document.getElementById('dtHoursLabel');
+            const billDTHrsLabel = document.getElementById('billDTHrsLabel');
+            if (dtHoursLabel) dtHoursLabel.textContent = b.dtHrs > 0 ? '(' + b.dtHrs.toFixed(1) + ' hrs)' : '';
+            if (billDTHrsLabel) billDTHrsLabel.textContent = b.dtHrs > 0 ? '(' + b.dtHrs.toFixed(1) + ' hrs)' : '';
+        }
+
+        // Rate type toggle (Local / Per Diem / Travel)
+        function setRateType(type) {
+            document.querySelectorAll('.rate-type-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelector(`.rate-type-btn[data-rtype="${type}"]`).classList.add('active');
+
+            const gsaPanel = document.getElementById('gsaPanel');
+
+            if (type === 'local') {
+                gsaPanel.style.display = 'none';
+            } else {
+                gsaPanel.style.display = 'block';
+            }
+
+            // Recalculate GSA from day rates when switching modes
+            calculateGSA();
+        }
+
+        // Calculate GSA rates — called when GSA location changes or hours/weeks change
+        // $/Day is static from GSA lookup. $/Hr and $/Wk are editable and linked.
+        // Max $/Wk = daily rate × 7; Max $/Hr = Max $/Wk ÷ Hours/Week
+        // Users can adjust LOWER but NOT above max.
+        function calculateGSA() {
+            const lodgingDay = parseFloat(document.getElementById('gsaLodgingDayVal').value) || 0;
+            const mealDay = parseFloat(document.getElementById('gsaMealDayVal').value) || 0;
+            const hoursWeek = parseFloat(document.getElementById('hoursPerWeek').value) || 0;
+
+            // Max rates based on daily rate × 7 ÷ hours/week
+            const lodgingMaxWk = lodgingDay * 7;
+            const mealMaxWk = mealDay * 7;
+            const lodgingMaxHr = hoursWeek > 0 ? lodgingMaxWk / hoursWeek : 0;
+            const mealMaxHr = hoursWeek > 0 ? mealMaxWk / hoursWeek : 0;
+
+            // Set initial values to the max (full GSA rate)
+            document.getElementById('gsaLodgingHr').value = lodgingMaxHr.toFixed(2);
+            document.getElementById('gsaMealHr').value = mealMaxHr.toFixed(2);
+            document.getElementById('gsaLodgingWeek').value = lodgingMaxWk.toFixed(2);
+            document.getElementById('gsaMealWeek').value = mealMaxWk.toFixed(2);
+
+            // Display max rate limits
+            updateGSAMaxDisplay();
+            updateGSATotals();
+        }
+
+        // Update the max rate labels in the GSA table
+        function updateGSAMaxDisplay() {
+            const lodgingDay = parseFloat(document.getElementById('gsaLodgingDayVal').value) || 0;
+            const mealDay = parseFloat(document.getElementById('gsaMealDayVal').value) || 0;
+            const hoursWeek = parseFloat(document.getElementById('hoursPerWeek').value) || 0;
+
+            const lodgingMaxWk = lodgingDay * 7;
+            const mealMaxWk = mealDay * 7;
+            const lodgingMaxHr = hoursWeek > 0 ? lodgingMaxWk / hoursWeek : 0;
+            const mealMaxHr = hoursWeek > 0 ? mealMaxWk / hoursWeek : 0;
+
+            document.getElementById('gsaLodgingMaxHr').textContent = lodgingMaxHr > 0 ? '$' + lodgingMaxHr.toFixed(2) : '--';
+            document.getElementById('gsaLodgingMaxWk').textContent = lodgingMaxWk > 0 ? '$' + lodgingMaxWk.toFixed(2) : '--';
+            document.getElementById('gsaMealMaxHr').textContent = mealMaxHr > 0 ? '$' + mealMaxHr.toFixed(2) : '--';
+            document.getElementById('gsaMealMaxWk').textContent = mealMaxWk > 0 ? '$' + mealMaxWk.toFixed(2) : '--';
+        }
+
+        // Clamp GSA value: returns clamped value and flags the input if exceeded
+        function clampGSA(inputEl, value, maxVal) {
+            if (maxVal > 0 && value > maxVal) {
+                inputEl.classList.add('gsa-over-max');
+                setTimeout(() => inputEl.classList.remove('gsa-over-max'), 600);
+                inputEl.value = maxVal.toFixed(2);
+                return maxVal;
+            }
+            inputEl.classList.remove('gsa-over-max');
+            return value;
+        }
+
+        // Called when user edits $/Hr — clamp to max, recalculate $/Wk
+        function gsaHrChanged(which) {
+            const hoursWeek = parseFloat(document.getElementById('hoursPerWeek').value) || 0;
+            const dayVal = which === 'lodging'
+                ? parseFloat(document.getElementById('gsaLodgingDayVal').value) || 0
+                : parseFloat(document.getElementById('gsaMealDayVal').value) || 0;
+            const maxHr = hoursWeek > 0 ? (dayVal * 7) / hoursWeek : 0;
+
+            const hrId = which === 'lodging' ? 'gsaLodgingHr' : 'gsaMealHr';
+            const wkId = which === 'lodging' ? 'gsaLodgingWeek' : 'gsaMealWeek';
+            const hrInput = document.getElementById(hrId);
+            let hr = parseFloat(hrInput.value) || 0;
+
+            // Clamp to max
+            hr = clampGSA(hrInput, hr, maxHr);
+            document.getElementById(wkId).value = (hr * hoursWeek).toFixed(2);
+            updateGSATotals();
+        }
+
+        // Called when user edits $/Wk — clamp to max, recalculate $/Hr
+        function gsaWkChanged(which) {
+            const hoursWeek = parseFloat(document.getElementById('hoursPerWeek').value) || 0;
+            const dayVal = which === 'lodging'
+                ? parseFloat(document.getElementById('gsaLodgingDayVal').value) || 0
+                : parseFloat(document.getElementById('gsaMealDayVal').value) || 0;
+            const maxWk = dayVal * 7;
+
+            const wkId = which === 'lodging' ? 'gsaLodgingWeek' : 'gsaMealWeek';
+            const hrId = which === 'lodging' ? 'gsaLodgingHr' : 'gsaMealHr';
+            const wkInput = document.getElementById(wkId);
+            let wk = parseFloat(wkInput.value) || 0;
+
+            // Clamp to max
+            wk = clampGSA(wkInput, wk, maxWk);
+            document.getElementById(hrId).value = hoursWeek > 0 ? (wk / hoursWeek).toFixed(2) : '0.00';
+            updateGSATotals();
+        }
+
+        // Recalculate GSA totals row and amounts (bill % set by calculateAllRows)
+        function updateGSATotals() {
+            const lodgingDay = parseFloat(document.getElementById('gsaLodgingDayVal').value) || 0;
+            const mealDay = parseFloat(document.getElementById('gsaMealDayVal').value) || 0;
+            const lodgingHr = parseFloat(document.getElementById('gsaLodgingHr').value) || 0;
+            const mealHr = parseFloat(document.getElementById('gsaMealHr').value) || 0;
+            const lodgingWeek = parseFloat(document.getElementById('gsaLodgingWeek').value) || 0;
+            const mealWeek = parseFloat(document.getElementById('gsaMealWeek').value) || 0;
+            const weeks = parseFloat(document.getElementById('contractWeeks').value) || 0;
+
+            const lodgingTotal = lodgingWeek * weeks;
+            const mealTotal = mealWeek * weeks;
+            const grandTotal = lodgingTotal + mealTotal;
+
+            // Update totals
+            document.getElementById('gsaLodgingTotal').textContent = '$' + lodgingTotal.toFixed(2);
+            document.getElementById('gsaMealTotal').textContent = '$' + mealTotal.toFixed(2);
+            document.getElementById('gsaTotalDay').textContent = '$' + (lodgingDay + mealDay).toFixed(2);
+            document.getElementById('gsaTotalHr').textContent = '$' + (lodgingHr + mealHr).toFixed(2);
+            document.getElementById('gsaTotalWeek').textContent = '$' + (lodgingWeek + mealWeek).toFixed(2);
+            document.getElementById('gsaTotalAmount').textContent = '$' + grandTotal.toFixed(2);
+
+            // Update subtotal bar
+            document.getElementById('gsaContractWeeksLabel').textContent = weeks + ' wks';
+            document.getElementById('gsaWeeklyLabel').textContent = '$' + (lodgingWeek + mealWeek).toFixed(2) + '/wk';
+            document.getElementById('gsaGrandTotalDisplay').textContent = '$' + grandTotal.toFixed(2);
+
+            calculateAllRows();
+        }
+
+        // Calculate VMS % and Net Bill Rates with full breakdown
+        function calculateVMS() {
+            const vmsPercent = parseFloat(document.getElementById('vmsPercent').value) || 0;
+            const regBillRate = parseFloat(document.querySelector('.bill-rate[data-type="regular"]').value) || 0;
+            const otBillRate = parseFloat(document.querySelector('.bill-rate[data-type="ot"]').value) || 0;
+            const dtBillRate = parseFloat(document.querySelector('.bill-rate[data-type="dt"]').value) || 0;
+            const hoursWeek = parseFloat(document.getElementById('hoursPerWeek').value) || 0;
+            const weeks = parseFloat(document.getElementById('contractWeeks').value) || 0;
+
+            const netReg = regBillRate * (1 - vmsPercent / 100);
+            const netOT = otBillRate * (1 - vmsPercent / 100);
+            const netDT = dtBillRate * (1 - vmsPercent / 100);
+
+            // Use state OT breakdown for hour split
+            const hpd = parseFloat(document.getElementById('hoursPerDay').value) || 0;
+            const stateCode = document.getElementById('otStateSelect').value;
+            const b = calculateOTBreakdown(hpd, hoursWeek, stateCode);
+            const regHrs = b.regHrs;
+            const otHrs = b.otHrs;
+            const dtHrs = b.dtHrs;
+
+            const billTypeMap = {
+                regular: 'Reg', ot: 'OT', dt: 'DT', diff: 'Diff',
+                oncall: 'Oncall', callback: 'Callback', charge: 'Charge', holiday: 'Holiday'
+            };
+            let totalBillHr = 0, totalBillWeek = 0, totalBillAmount = 0;
+
+            Object.keys(billTypeMap).forEach(type => {
+                const rateEl = document.querySelector(`.bill-rate[data-type="${type}"]`);
+                if (!rateEl) return;
+                const rate = parseFloat(rateEl.value) || 0;
+                const hrs = getHoursForType(type);
+                const wk = rate * hrs;
+                const total = wk * weeks;
+                const tag = billTypeMap[type];
+                document.getElementById('bill' + tag + 'Week').textContent = '$' + wk.toFixed(2);
+                document.getElementById('bill' + tag + 'Total').textContent = '$' + total.toFixed(2);
+                totalBillHr += rate;
+                totalBillWeek += wk;
+                totalBillAmount += total;
+            });
+
+            // Bill rate table bill % (use weekly proportions — works with or without weeks)
+            Object.keys(billTypeMap).forEach(type => {
+                const rateEl = document.querySelector(`.bill-rate[data-type="${type}"]`);
+                if (!rateEl) return;
+                const rate = parseFloat(rateEl.value) || 0;
+                const hrs = getHoursForType(type);
+                const wk = rate * hrs;
+                const pct = totalBillWeek > 0 ? (wk / totalBillWeek * 100).toFixed(2) : '0.00';
+                document.getElementById('bill' + billTypeMap[type] + 'Pct').textContent = pct + '%';
+            });
+
+            // Total Bill row
+            document.getElementById('billTotalHr').textContent = '$' + totalBillHr.toFixed(2);
+            document.getElementById('billTotalWeek').textContent = '$' + totalBillWeek.toFixed(2);
+            document.getElementById('billTotalAmount').textContent = '$' + totalBillAmount.toFixed(2);
+            document.getElementById('billTotalPct').textContent = '100.00%';
+
+            // VMS Net rows — show/hide based on VMS %
+            const netRegRow = document.getElementById('netBillRegRow');
+            const netOTRow = document.getElementById('netBillOTRow');
+            const netDTRow = document.getElementById('netBillDTRow');
+            const vmsTag = vmsPercent + '% VMS Fee';
+            const stateRules = STATE_OT_RULES[stateCode] || STATE_OT_RULES['FEDERAL'];
+
+            if (vmsPercent > 0) {
+                netRegRow.style.display = '';
+                document.getElementById('vmsTagReg').textContent = vmsTag;
+                document.getElementById('netRegBillRate').textContent = '$' + netReg.toFixed(2);
+                document.getElementById('netRegWeek').textContent = '$' + (netReg * regHrs).toFixed(2);
+                document.getElementById('netRegTotal').textContent = '$' + (netReg * regHrs * weeks).toFixed(2);
+                const netRegPct = totalBillWeek > 0 ? ((netReg * regHrs) / totalBillWeek * 100) : 0;
+                document.getElementById('netRegBillPct').textContent = netRegPct.toFixed(2) + '%';
+
+                if (otBillRate > 0) {
+                    netOTRow.style.display = '';
+                    document.getElementById('vmsTagOT').textContent = vmsTag;
+                    document.getElementById('netOTBillRate').textContent = '$' + netOT.toFixed(2);
+                    document.getElementById('netOTWeek').textContent = '$' + (netOT * otHrs).toFixed(2);
+                    document.getElementById('netOTTotal').textContent = '$' + (netOT * otHrs * weeks).toFixed(2);
+                    const netOTPct = totalBillWeek > 0 ? ((netOT * otHrs) / totalBillWeek * 100) : 0;
+                    document.getElementById('netOTBillPct').textContent = netOTPct.toFixed(2) + '%';
+                } else {
+                    netOTRow.style.display = 'none';
+                }
+
+                // DT net bill row (only if state has DT and DT bill rate is set)
+                if (stateRules.dailyDT && dtBillRate > 0) {
+                    netDTRow.style.display = '';
+                    document.getElementById('vmsTagDT').textContent = vmsTag;
+                    document.getElementById('netDTBillRate').textContent = '$' + netDT.toFixed(2);
+                    document.getElementById('netDTWeek').textContent = '$' + (netDT * dtHrs).toFixed(2);
+                    document.getElementById('netDTTotal').textContent = '$' + (netDT * dtHrs * weeks).toFixed(2);
+                    const netDTPct = totalBillWeek > 0 ? ((netDT * dtHrs) / totalBillWeek * 100) : 0;
+                    document.getElementById('netDTBillPct').textContent = netDTPct.toFixed(2) + '%';
+                } else {
+                    netDTRow.style.display = 'none';
+                }
+
+                document.getElementById('vmsLabel').textContent = 'Net rates shown below each bill rate';
+            } else {
+                netRegRow.style.display = 'none';
+                netOTRow.style.display = 'none';
+                netDTRow.style.display = 'none';
+                document.getElementById('vmsLabel').textContent = '';
+            }
+
+            return { netReg, netOT, netDT, vmsPercent };
+        }
+
+        // Calculate all rows
+        function calculateAllRows() {
+            const payTypes = ['regular', 'ot', 'dt', 'diff', 'oncall', 'callback', 'charge', 'holiday'];
+            const hoursWeek = parseFloat(document.getElementById('hoursPerWeek').value) || 0;
+            const weeks = parseFloat(document.getElementById('contractWeeks').value) || 0;
+            const vmsPercent = parseFloat(document.getElementById('vmsPercent').value) || 0;
+
+            // Update hours labels FIRST — this must always succeed regardless of other calculations
+            try { updateHoursLabels(); } catch(e) { console.error('[OT] updateHoursLabels error:', e); }
+
+            let totalPay = 0;
+            let totalBill = 0;
+
+            // Calculate VMS net bill rates and bill rate table
+            try { calculateVMS(); } catch(e) { console.error('[OT] calculateVMS error:', e); }
+
+            // First pass: calculate all pay rows and accumulate totals
+            payTypes.forEach(type => {
+                try {
+                    const payRateEl = document.querySelector(`.pay-rate[data-type="${type}"]`);
+                    if (!payRateEl) return;
+                    calculateRow(type);
+
+                    const payCell = document.querySelector(`[data-calc="${type}-total"]`);
+                    const payAmount = payCell ? (parseFloat(payCell.textContent.replace('$', '')) || 0) : 0;
+                    totalPay += payAmount;
+
+                    const billRateEl = document.querySelector(`.bill-rate[data-type="${type}"]`);
+                    const billRate = billRateEl ? (parseFloat(billRateEl.value) || 0) : 0;
+                    const hrs = getHoursForType(type);
+                    const billAmount = billRate * hrs * weeks;
+                    totalBill += billAmount;
+                } catch(e) { console.error('[OT] calculateRow error for', type, ':', e); }
+            });
+
+            // Add custom pay types
+            document.querySelectorAll('.custom-pay-type').forEach(elem => {
+                const payRate = parseFloat(elem.querySelector('.custom-pay-rate').value) || 0;
+                const billRate = parseFloat(elem.querySelector('.custom-bill-rate').value) || 0;
+                const hours = parseFloat(elem.querySelector('.custom-hours').value) || 0;
+                totalPay += payRate * hours * weeks;
+                totalBill += billRate * hours * weeks;
+            });
+
+            // Add GSA totals to candidate pay (GSA stipends are a cost paid from the bill rate, not additional facility revenue)
+            const gsaTotal = parseFloat(document.getElementById('gsaTotalAmount').textContent.replace('$', '')) || 0;
+            totalPay += gsaTotal;
+
+            // Bill % uses weekly proportions (works with or without contract weeks)
+            const billTotalWeekly = parseFloat(document.getElementById('billTotalWeek').textContent.replace('$', '')) || 0;
+
+            // Pay rate bill %: each pay component weekly / total bill weekly × 100
+            payTypes.forEach(type => {
+                const payRateEl = document.querySelector(`.pay-rate[data-type="${type}"]`);
+                if (!payRateEl) return;
+                const payRate = parseFloat(payRateEl.value) || 0;
+                const hrs = getHoursForType(type);
+                const payWk = payRate * hrs;
+                const pct = billTotalWeekly > 0 ? ((payWk / billTotalWeekly) * 100).toFixed(2) : '0.00';
+                const pctEl = document.querySelector(`[data-calc="${type}-bill-pct"]`);
+                if (pctEl) pctEl.textContent = pct + '%';
+            });
+
+            // GSA bill % (weekly basis)
+            const lodgingWk = parseFloat(document.getElementById('gsaLodgingWeek').value) || 0;
+            const mealWk = parseFloat(document.getElementById('gsaMealWeek').value) || 0;
+            const gsaWkTotal = lodgingWk + mealWk;
+            document.getElementById('gsaLodgingBillPct').textContent = (billTotalWeekly > 0 ? (lodgingWk / billTotalWeekly * 100).toFixed(2) : '0.00') + '%';
+            document.getElementById('gsaMealBillPct').textContent = (billTotalWeekly > 0 ? (mealWk / billTotalWeekly * 100).toFixed(2) : '0.00') + '%';
+            document.getElementById('gsaTotalBillPct').textContent = (billTotalWeekly > 0 ? (gsaWkTotal / billTotalWeekly * 100).toFixed(2) : '0.00') + '%';
+
+            document.getElementById('subtotal-pay').textContent = '$' + totalPay.toFixed(2);
+
+            // Overall bill %: total pay weekly / total bill weekly
+            let totalPayWeekly = 0;
+            payTypes.forEach(type => {
+                const payRateEl = document.querySelector(`.pay-rate[data-type="${type}"]`);
+                if (!payRateEl) return;
+                const payRate = parseFloat(payRateEl.value) || 0;
+                totalPayWeekly += payRate * getHoursForType(type);
+            });
+            totalPayWeekly += gsaWkTotal;
+            const overallPct = billTotalWeekly > 0 ? ((totalPayWeekly / billTotalWeekly) * 100).toFixed(2) : '0.00';
+            document.getElementById('subtotal-bill-pct').textContent = overallPct + '%';
+
+            calculateFinancials(totalPay, totalBill);
+        }
+
+        // Calculate final financials
+        function calculateFinancials(subtotalPay, subtotalBill) {
+            const hoursWeek = parseFloat(document.getElementById('hoursPerWeek').value) || 0;
+            const weeks = parseFloat(document.getElementById('contractWeeks').value) || 0;
+            const totalHours = hoursWeek * weeks;
+            const vmsPercent = parseFloat(document.getElementById('vmsPercent').value) || 0;
+
+            // --- Cost & Expenses (flat $ → burden rate per hour) ---
+            // Burden Rate = Hours Per Week / Flat $ (e.g., 36 hrs / $30 = 1.20)
+            const expenseItems = ['drugScreening', 'backgroundCheck', 'occupationalScreening'];
+            let expenses = 0;
+            let expenseBurdenPerHr = 0;
+            expenseItems.forEach(id => {
+                const flat = parseFloat(document.getElementById(id).value) || 0;
+                const burdenRate = flat > 0 ? hoursWeek / flat : 0;
+                document.getElementById(id + 'Hr').textContent = flat > 0 && hoursWeek > 0 ? '$' + burdenRate.toFixed(2) : '--';
+                document.getElementById(id + 'Total').textContent = '$' + flat.toFixed(2);
+                expenses += flat;
+                expenseBurdenPerHr += burdenRate;
+            });
+
+            // Custom expense categories
+            let customExpenseTotal = 0;
+            document.querySelectorAll('.custom-expense-row').forEach(elem => {
+                const amt = parseFloat(elem.querySelector('.custom-expense-amount').value) || 0;
+                customExpenseTotal += amt;
+                expenseBurdenPerHr += amt > 0 ? hoursWeek / amt : 0;
+            });
+            expenses += customExpenseTotal;
+
+            // Total expense row
+            document.getElementById('totalExpensesFlat').textContent = '$' + expenses.toFixed(2);
+            document.getElementById('totalExpensesHr').textContent = (expenses > 0 && hoursWeek > 0) ? '$' + expenseBurdenPerHr.toFixed(2) : '--';
+            document.getElementById('totalExpenses').textContent = '$' + expenses.toFixed(2);
+            if (hoursWeek > 0 && expenses > 0) {
+                document.getElementById('expenseContractHrs').textContent =
+                    'Burden Rate = ' + hoursWeek + ' hrs/wk \u00F7 $' + expenses.toFixed(2) + ' = $' + expenseBurdenPerHr.toFixed(2) + '/hr';
+            } else if (expenses > 0) {
+                document.getElementById('expenseContractHrs').textContent =
+                    'One-time expenses: $' + expenses.toFixed(2) + ' \u2014 enter hrs/wk to calculate burden rate';
+            } else {
+                document.getElementById('expenseContractHrs').textContent = '';
+            }
+
+            // --- Burdens (WC + ER Cost) ---
+            const workersComp = parseFloat(document.getElementById('workersComp').value) || 0;
+            const erCost = parseFloat(document.getElementById('erCost').value) || 0;
+            const burdenPct = (workersComp + erCost) / 100;
+
+            // Get the base hourly rates directly from inputs (always available)
+            const regPayRate = parseFloat(document.querySelector('.pay-rate[data-type="regular"]').value) || 0;
+            const regBillRate = parseFloat(document.querySelector('.bill-rate[data-type="regular"]').value) || 0;
+            const netBillRateHr = regBillRate * (1 - vmsPercent / 100);
+
+            // Hourly burden rates (work with just hours/week, no contract weeks needed)
+            const burdenPerHr = regPayRate * burdenPct;
+            const totalCostPerHr = regPayRate + burdenPerHr + expenseBurdenPerHr;
+            const netMarginPerHr = netBillRateHr - totalCostPerHr;
+            const marginPctHr = netBillRateHr > 0 ? ((netMarginPerHr / netBillRateHr) * 100) : 0;
+
+            // Contract totals (when weeks are available)
+            // GSA weekly cost (needs to be included in gross pay)
+            const gsaWkCost = parseFloat(document.getElementById('gsaTotalWeek').textContent.replace('$', '')) || 0;
+            const gsaHrCost = hoursWeek > 0 ? gsaWkCost / hoursWeek : 0;
+
+            let effectivePay, effectiveBill;
+            if (subtotalPay > 0) {
+                // Contract mode — subtotalPay already includes GSA from calculateAllRows
+                effectivePay = subtotalPay;
+                effectiveBill = subtotalBill;
+            } else if (hoursWeek > 0) {
+                // Weekly snapshot — include all pay types (reg + OT + DT + others) + GSA
+                let weeklyPayAll = 0;
+                let weeklyBillAll = 0;
+                const allPayTypes = ['regular', 'ot', 'dt', 'diff', 'oncall', 'callback', 'charge', 'holiday'];
+                allPayTypes.forEach(type => {
+                    const rateEl = document.querySelector(`.pay-rate[data-type="${type}"]`);
+                    const billEl = document.querySelector(`.bill-rate[data-type="${type}"]`);
+                    if (rateEl) weeklyPayAll += (parseFloat(rateEl.value) || 0) * getHoursForType(type);
+                    if (billEl) weeklyBillAll += (parseFloat(billEl.value) || 0) * getHoursForType(type);
+                });
+                effectivePay = (weeklyPayAll + gsaWkCost) * (weeks || 1);
+                effectiveBill = weeklyBillAll * (weeks || 1);
+            } else {
+                // No hours — rate snapshot (GSA $/Hr is 0 without hours)
+                effectivePay = regPayRate;
+                effectiveBill = regBillRate;
+            }
+
+            const netBillTotal = effectiveBill * (1 - vmsPercent / 100);
+            // Burdens (WC + ER) apply to payroll wages only, NOT GSA stipends
+            const payrollOnly = effectivePay - (hoursWeek > 0 ? gsaWkCost * (weeks || 1) : 0);
+            const burdensTotal = payrollOnly * burdenPct;
+            // Expenses: contract total uses flat one-time cost; weekly snapshot uses burden rate
+            let expensesForTotal;
+            if (subtotalPay > 0) {
+                // Contract mode (weeks entered) — flat one-time expenses
+                expensesForTotal = expenses;
+            } else if (hoursWeek > 0 && expenses > 0) {
+                // Weekly snapshot — burden rate (hrs/flat) × hours
+                expensesForTotal = (hoursWeek / expenses) * hoursWeek;
+            } else {
+                expensesForTotal = 0;
+            }
+            const totalCost = effectivePay + expensesForTotal + burdensTotal;
+            const netMarginTotal = netBillTotal - totalCost;
+            const marginPctTotal = netBillTotal > 0 ? ((netMarginTotal / netBillTotal) * 100) : 0;
+
+            document.getElementById('totalCost').textContent = '$' + totalCost.toFixed(2);
+            document.getElementById('totalBill').textContent = '$' + netBillTotal.toFixed(2);
+            document.getElementById('netMargin').textContent = '$' + netMarginTotal.toFixed(2);
+            document.getElementById('marginPercent').textContent = marginPctTotal.toFixed(2) + '%';
+
+            // --- Burden % of Gross Margin (all per-hour) ---
+            // Expense $/Hr + Burden $/Hr (WC+ER) = Total Burden $/Hr
+            const totalBurdenPerHr = expenseBurdenPerHr + burdenPerHr;
+            const grossMarginPerHr = regBillRate - regPayRate - gsaHrCost;
+            const burdenPctGM = grossMarginPerHr > 0 ? (totalBurdenPerHr / grossMarginPerHr * 100) : 0;
+
+            document.getElementById('burdenExpenseHr').textContent = hoursWeek > 0 ? '$' + expenseBurdenPerHr.toFixed(2) + '/hr' : (expenses > 0 ? '$' + expenses.toFixed(2) + ' flat' : '$0.00/hr');
+            document.getElementById('burdenTaxAmt').textContent = '$' + burdenPerHr.toFixed(2) + '/hr';
+            document.getElementById('burdenTotalAmt').textContent = '$' + totalBurdenPerHr.toFixed(2) + '/hr';
+            const totalBurdenWk = totalBurdenPerHr * hoursWeek;
+            document.getElementById('burdenTotalWk').textContent = hoursWeek > 0 ? '$' + totalBurdenWk.toFixed(2) + '/wk' : '$0.00/wk';
+            const burdenPctEl = document.getElementById('burdenPctOfGM');
+            burdenPctEl.textContent = burdenPctGM.toFixed(2) + '%';
+            burdenPctEl.classList.toggle('negative-value', burdenPctGM > 100);
+
+            // --- Burden $/hr display below WC and ER input fields ---
+            const wcHr = regPayRate * (workersComp / 100);
+            const erHr = regPayRate * (erCost / 100);
+
+            document.getElementById('workersCompHr').textContent = '$' + wcHr.toFixed(2) + '/hr';
+            document.getElementById('erCostHr').textContent = '$' + erHr.toFixed(2) + '/hr';
+
+            // Update both sidebars after every financial recalculation
+            updateCompSidebar();
+            updateMarginSidebar();
+        }
+
+        // Add custom expense category
+        function addExpenseCategory() {
+            const container = document.getElementById('customExpenses');
+            const id = 'expense-' + Date.now();
+
+            const html = `
+                <div class="custom-expense-row" id="${id}" style="display:grid; grid-template-columns:1fr 150px 30px; gap:8px; align-items:center; background:#f9f9f9; padding:10px; border-radius:4px;">
+                    <input type="text" placeholder="Category Name" class="custom-expense-name" style="padding:6px; border:1px solid #ddd; border-radius:3px; font-size:12px;">
+                    <input type="number" placeholder="Amount" step="0.01" min="0" class="custom-expense-amount" style="padding:6px; border:1px solid #ddd; border-radius:3px; font-size:12px; font-family:'Monaco','Menlo',monospace; text-align:right;">
+                    <button type="button" class="btn-remove" onclick="removeExpenseCategory('${id}')">✕</button>
+                </div>
+            `;
+
+            container.insertAdjacentHTML('beforeend', html);
+            document.querySelector(`#${id} .custom-expense-amount`).addEventListener('change', calculateAllRows);
+        }
+
+        function removeExpenseCategory(id) {
+            document.getElementById(id).remove();
+            calculateAllRows();
+        }
+
+        // (GSA lookup is handled by the live API function above)
+
+        // Event listeners
+        document.getElementById('startDate').addEventListener('change', calculateEndDate);
+        document.getElementById('hoursPerDay').addEventListener('input', function() {
+            updateOTState();
+        });
+        document.getElementById('hoursPerDay').addEventListener('change', function() {
+            updateOTState();
+        });
+        document.getElementById('hoursPerWeek').addEventListener('input', function() {
+            calculateGSA();
+            updateOTState();
+            calculateAllRows();
+        });
+        document.getElementById('hoursPerWeek').addEventListener('change', function() {
+            autoDefaultHoursPerDay();
+            calculateGSA();
+            updateOTState();
+            calculateAllRows();
+        });
+        document.getElementById('otStateSelect').addEventListener('change', function() {
+            autoDefaultHoursPerDay();
+            updateOTState();
+            autoFillOTRates();
+            calculateAllRows();
+        });
+        // Auto-detect state from City, State field
+        document.getElementById('facilityCity').addEventListener('change', function() {
+            const val = this.value.trim();
+            const match = val.match(/,\s*([A-Za-z]{2})\s*$/);
+            if (match) {
+                autoDetectState(match[1]);
+            }
+        });
+        // Auto-fill OT/DT rates when regular pay rate changes
+        document.querySelector('.pay-rate[data-type="regular"]').addEventListener('change', function() {
+            autoFillOTRates();
+        });
+        document.querySelector('.bill-rate[data-type="regular"]').addEventListener('change', function() {
+            autoFillOTRates();
+        });
+        document.getElementById('contractWeeks').addEventListener('input', function() {
+            calculateEndDate();
+            updateGSATotals();
+        });
+        document.getElementById('contractWeeks').addEventListener('change', function() {
+            calculateEndDate();
+            updateGSATotals();
+        });
+
+        // Pay rate listeners (input for real-time, change for final)
+        document.querySelectorAll('.pay-rate').forEach(input => {
+            input.addEventListener('input', calculateAllRows);
+            input.addEventListener('change', calculateAllRows);
+        });
+
+        // VMS % listener
+        document.getElementById('vmsPercent').addEventListener('input', calculateAllRows);
+
+        // Bill rate listeners (input for real-time, change for final)
+        document.querySelectorAll('.bill-rate').forEach(input => {
+            input.addEventListener('input', calculateAllRows);
+            input.addEventListener('change', calculateAllRows);
+        });
+
+        // GSA $/Hr listeners — editing $/Hr recalculates $/Wk
+        document.getElementById('gsaLodgingHr').addEventListener('input', function() {
+            gsaHrChanged('lodging');
+        });
+        document.getElementById('gsaMealHr').addEventListener('input', function() {
+            gsaHrChanged('meal');
+        });
+
+        // GSA $/Wk listeners — editing $/Wk recalculates $/Hr
+        document.getElementById('gsaLodgingWeek').addEventListener('input', function() {
+            gsaWkChanged('lodging');
+        });
+        document.getElementById('gsaMealWeek').addEventListener('input', function() {
+            gsaWkChanged('meal');
+        });
+
+        // Expense listeners (input for real-time, $/hr is auto-calculated)
+        ['drugScreening', 'backgroundCheck', 'occupationalScreening'].forEach(id => {
+            document.getElementById(id).addEventListener('input', calculateAllRows);
+            document.getElementById(id).addEventListener('change', calculateAllRows);
+        });
+
+        // Burden listeners (input for real-time)
+        ['workersComp', 'erCost'].forEach(id => {
+            document.getElementById(id).addEventListener('input', calculateAllRows);
+            document.getElementById(id).addEventListener('change', calculateAllRows);
+        });
+
+        // Form submission
+        document.getElementById('dealForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData);
+            
+            const deals = JSON.parse(localStorage.getItem('deals')) || {};
+            deals[data.assignmentId] = data;
+            localStorage.setItem('deals', JSON.stringify(deals));
+            
+            alert('Deal saved successfully as: ' + data.assignmentId);
+        });
+
+        // Auto-lookup GSA rates when 5-digit zip is entered
+        document.getElementById('gsaZipCode').addEventListener('input', function() {
+            const zip = this.value.trim();
+            if (zip.length === 5 && /^\d{5}$/.test(zip)) {
+                lookupGSARate(); // This also triggers autoDetectState via applyGSARates
+            }
+        });
+
+        // For local contracts (no GSA), also auto-detect state from zip entry alone
+        document.getElementById('gsaZipCode').addEventListener('change', function() {
+            const zip = this.value.trim();
+            if (zip.length === 5 && /^\d{5}$/.test(zip)) {
+                const st = zipToState(zip);
+                if (st) autoDetectState(st);
+            }
+        });
+
+        // ---- Candidate Compensation Sidebar Update ----
+        function updateCompSidebar() {
+            const hoursWeek = parseFloat(document.getElementById('hoursPerWeek').value) || 0;
+            const weeks = parseFloat(document.getElementById('contractWeeks').value) || 0;
+            const hpdInput = parseFloat(document.getElementById('hoursPerDay').value) || 0;
+            const daysPerWeek = hpdInput > 0 ? hoursWeek / hpdInput : (hoursWeek > 0 ? Math.min(hoursWeek / 8, 7) : 5);
+
+            const payTypes = ['regular', 'ot', 'dt', 'diff', 'oncall', 'callback', 'charge', 'holiday'];
+            const labelMap = { regular: 'Reg', ot: 'OT', dt: 'DT', diff: 'Diff', oncall: 'Oncall', callback: 'Callback', charge: 'Charge', holiday: 'Holiday' };
+
+            let totalHr = 0, totalDay = 0, totalWk = 0;
+
+            payTypes.forEach(type => {
+                const rateEl = document.querySelector(`.pay-rate[data-type="${type}"]`);
+                if (!rateEl) return;
+                const rate = parseFloat(rateEl.value) || 0;
+                const hrs = getHoursForType(type);
+                const weeklyAmt = rate * hrs;
+
+                const hrEl = document.getElementById('compHr' + labelMap[type]);
+                const wkEl = document.getElementById('compWk' + labelMap[type]);
+                if (hrEl) hrEl.textContent = '$' + rate.toFixed(2);
+                if (wkEl) wkEl.textContent = '$' + weeklyAmt.toFixed(2);
+
+                // Exclude OT and DT from "total hourly" since they're premium rates
+                if (type !== 'ot' && type !== 'dt') {
+                    totalHr += rate;
+                    totalDay += daysPerWeek > 0 ? weeklyAmt / daysPerWeek : 0;
+                    totalWk += weeklyAmt;
+                } else {
+                    // OT/DT still contribute to weekly/daily totals (they are actual pay)
+                    totalDay += daysPerWeek > 0 ? weeklyAmt / daysPerWeek : 0;
+                    totalWk += weeklyAmt;
+                }
+            });
+
+            // GSA stipend
+            const gsaHr = parseFloat(document.getElementById('gsaTotalHr').textContent.replace('$', '')) || 0;
+            const gsaWk = parseFloat(document.getElementById('gsaTotalWeek').textContent.replace('$', '')) || 0;
+            const gsaDay = daysPerWeek > 0 ? gsaWk / daysPerWeek : 0;
+
+            document.getElementById('compHrGSA').textContent = '$' + gsaHr.toFixed(2);
+            document.getElementById('compWkGSA').textContent = '$' + gsaWk.toFixed(2);
+
+            totalHr += gsaHr;
+            totalDay += gsaDay;
+            totalWk += gsaWk;
+
+            // Totals
+            document.getElementById('compHourlyPay').textContent = '$' + totalHr.toFixed(2);
+            document.getElementById('compDailyPay').textContent = '$' + totalDay.toFixed(2);
+            document.getElementById('compWeeklyPay').textContent = '$' + totalWk.toFixed(2);
+            document.getElementById('compMonthlyPay').textContent = '$' + (totalWk * 4.33).toFixed(2);
+
+        }
+
+        // ---- Margin & Markup Right Sidebar Update ----
+        // Helper: set text and toggle red if negative
+        function setMarginValue(elId, value, format) {
+            const el = document.getElementById(elId);
+            el.textContent = format === 'pct' ? value.toFixed(2) + '%' : '$' + value.toFixed(2);
+            el.classList.toggle('negative-value', value < 0);
+        }
+
+        function updateMarginSidebar() {
+            const hoursWeek = parseFloat(document.getElementById('hoursPerWeek').value) || 0;
+            const hoursDay = parseFloat(document.getElementById('hoursPerDay').value) || 0;
+            const weeks = parseFloat(document.getElementById('contractWeeks').value) || 0;
+            const daysPerWeek = hoursDay > 0 ? hoursWeek / hoursDay : (hoursWeek > 0 ? Math.min(hoursWeek / 8, 7) : 5);
+            const vmsPercent = parseFloat(document.getElementById('vmsPercent').value) || 0;
+            const stateCode = document.getElementById('otStateSelect').value;
+            const stateRules = STATE_OT_RULES[stateCode] || STATE_OT_RULES['FEDERAL'];
+
+            // --- Burden % ---
+            const workersComp = parseFloat(document.getElementById('workersComp').value) || 0;
+            const erCost = parseFloat(document.getElementById('erCost').value) || 0;
+            const burdenPct = (workersComp + erCost) / 100;
+
+            // --- Read raw hourly rates directly from inputs ---
+            const regPayRate = parseFloat(document.querySelector('.pay-rate[data-type="regular"]').value) || 0;
+            const regBillRate = parseFloat(document.querySelector('.bill-rate[data-type="regular"]').value) || 0;
+
+            // --- Flat expenses ---
+            let flatExpenses = 0;
+            ['drugScreening', 'backgroundCheck', 'occupationalScreening'].forEach(id => {
+                flatExpenses += parseFloat(document.getElementById(id).value) || 0;
+            });
+            document.querySelectorAll('.custom-expense-row').forEach(elem => {
+                flatExpenses += parseFloat(elem.querySelector('.custom-expense-amount').value) || 0;
+            });
+
+            // ================================================================
+            // MODE 1: RATE-ONLY (no hours entered) — show markup from raw rates
+            // ================================================================
+            if (hoursWeek === 0) {
+                // Include GSA per hour in gross pay rate (if GSA rates are set)
+                const gsaHrRate = parseFloat(document.getElementById('gsaTotalHr').textContent.replace('$', '')) || 0;
+                const grossPayRate = regPayRate + gsaHrRate;
+
+                const netBillRate = regBillRate * (1 - vmsPercent / 100);
+
+                // Gross margin from rates (bill - gross pay including GSA)
+                const gmRate = regBillRate - grossPayRate;
+                const gmPct = regBillRate > 0 ? (gmRate / regBillRate * 100) : 0;
+
+                // Net margin from rates (after VMS and burdens — expenses shown separately)
+                const burdenPerHr = regPayRate * burdenPct;
+                const totalCostHr = grossPayRate + burdenPerHr;
+                const nmRate = netBillRate - totalCostHr;
+                const nmPct = netBillRate > 0 ? (nmRate / netBillRate * 100) : 0;
+
+                // --- Net Markup = Net Bill / (Gross Wages + Total Burden) ---
+                // No hours → no expense $/Hr, so only include WC/ER burden
+                const netMarkup = totalCostHr > 0 ? netBillRate / totalCostHr : 0;
+                const markupEl = document.getElementById('netMarkupMultiplier');
+                markupEl.textContent = netMarkup > 0 ? netMarkup.toFixed(2) + 'x' : '0.00x';
+                markupEl.classList.toggle('negative-value', netMarkup < 1 && grossPayRate > 0);
+
+                // --- Gross Margin (rate-based) ---
+                setMarginValue('gmTotalDollar', gmRate, '$');
+                setMarginValue('gmPercent', gmPct, 'pct');
+                document.getElementById('gmBillTotal').textContent = '$' + regBillRate.toFixed(2) + '/hr';
+                document.getElementById('gmGrossWages').textContent = '$' + grossPayRate.toFixed(2) + '/hr';
+
+                // --- Net Margin (rate-based with burdens) ---
+                setMarginValue('nmTotalDollar', nmRate, '$');
+                setMarginValue('nmPercent', nmPct, 'pct');
+                setMarginValue('nmPerHour', nmRate, '$');
+                document.getElementById('nmNetBill').textContent = '$' + netBillRate.toFixed(2) + '/hr';
+                document.getElementById('nmTotalCost').textContent = '$' + totalCostHr.toFixed(2) + '/hr';
+
+                // Expense warning note
+                const expNote = document.getElementById('expenseNote');
+                if (flatExpenses > 0) {
+                    expNote.style.display = 'block';
+                    expNote.textContent = '\u26A0 $' + flatExpenses.toFixed(2) + ' in one-time expenses pending \u2014 enter hrs/wk to factor into margin';
+                } else {
+                    expNote.style.display = 'none';
+                }
+
+                // --- GM Profit (just show hourly rates) ---
+                document.getElementById('gmBreakdownLabel').textContent = 'Rate Snapshot';
+                setMarginValue('gmProfitHr', gmRate, '$');
+                document.getElementById('gmBillHr').textContent = '$' + regBillRate.toFixed(2);
+                document.getElementById('gmPayHr').textContent = '$' + grossPayRate.toFixed(2);
+
+                setMarginValue('gmProfitDay', 0, '$');
+                document.getElementById('gmBillDay').textContent = '--';
+                document.getElementById('gmPayDay').textContent = '--';
+
+                setMarginValue('gmProfitWk', 0, '$');
+                document.getElementById('gmBillWk').textContent = '--';
+                document.getElementById('gmPayWk').textContent = '--';
+
+                setMarginValue('gmProfitMo', 0, '$');
+                document.getElementById('gmBillMo').textContent = '--';
+                document.getElementById('gmPayMo').textContent = '--';
+
+                // OT: rate-only mode — show reg margin after burden
+                setMarginValue('otRegMarginHr', regBillRate - regPayRate - (regPayRate * burdenPct), '$');
+                document.getElementById('otRegHrs').textContent = '--';
+                document.getElementById('otRegBillHr').textContent = '$' + regBillRate.toFixed(2);
+                document.getElementById('otRegPayHr').textContent = '$' + regPayRate.toFixed(2);
+                setMarginValue('otOtMarginHr', 0, '$');
+                document.getElementById('otOtHrs').textContent = '0';
+                document.getElementById('otOtBillHr').textContent = '--';
+                document.getElementById('otOtPayHr').textContent = '--';
+                setMarginValue('otRegProfitWk', 0, '$');
+                setMarginValue('otOtProfitWk', 0, '$');
+                document.getElementById('otRegBurdenHr').textContent = '$' + (regPayRate * burdenPct).toFixed(2);
+                document.getElementById('otOtBurdenHr').textContent = '$0.00';
+                // Hide DT in Mode 1
+                document.querySelectorAll('.ot-dt-tile').forEach(el => el.style.display = 'none');
+                document.querySelectorAll('.ot-dt-detail').forEach(el => el.style.display = 'none');
+                document.getElementById('otTotalProfitWk').textContent = '--';
+                document.getElementById('otPctOfProfit').textContent = '--';
+
+                // Hero: show per-hour rates (no weekly available without hours)
+                document.getElementById('heroWeeklyPay').textContent = '$' + grossPayRate.toFixed(2) + '/hr';
+                document.getElementById('heroWeeklyBill').textContent = '$' + netBillRate.toFixed(2) + '/hr';
+                const heroEl = document.getElementById('heroWeeklyMargin');
+                heroEl.textContent = '$' + nmRate.toFixed(2) + '/hr';
+                heroEl.style.color = nmRate >= 0 ? '#ffd700' : '#ff6b6b';
+
+                return;
+            }
+
+            // ================================================================
+            // MODE 2: FULL BREAKDOWN (hours entered) — per hour/day/week/contract
+            // ================================================================
+            document.getElementById('gmBreakdownLabel').textContent = 'GM Profit Breakdown';
+
+            // Clear expense note from Mode 1
+            const expNote = document.getElementById('expenseNote');
+
+            // Calculate pay/week and bill/week from all rate types
+            const payTypes = ['regular', 'ot', 'dt', 'diff', 'oncall', 'callback', 'charge', 'holiday'];
+            let payWk = 0;
+            payTypes.forEach(type => {
+                const rate = parseFloat(document.querySelector(`.pay-rate[data-type="${type}"]`).value) || 0;
+                payWk += rate * getHoursForType(type);
+            });
+            document.querySelectorAll('.custom-pay-type').forEach(elem => {
+                const rate = parseFloat(elem.querySelector('.custom-pay-rate').value) || 0;
+                const hrs = parseFloat(elem.querySelector('.custom-hours').value) || 0;
+                payWk += rate * hrs;
+            });
+
+            // Include GSA stipends in gross pay (lodging + M&IE weekly)
+            const gsaWkTotal = parseFloat(document.getElementById('gsaTotalWeek').textContent.replace('$', '')) || 0;
+            payWk += gsaWkTotal;
+
+            const billWk = parseFloat(document.getElementById('billTotalWeek').textContent.replace('$', '')) || 0;
+
+            const payHr = payWk / hoursWeek;
+            const billHr = billWk / hoursWeek;
+            const payDay = payWk / daysPerWeek;
+            const billDay = billWk / daysPerWeek;
+
+            // Burdens per week (WC + ER on payroll wages only, excluding GSA stipends)
+            const payrollWk = payWk - gsaWkTotal;
+            const burdensWk = payrollWk * burdenPct;
+
+            // Weekly-based values
+            const netBillWk = billWk * (1 - vmsPercent / 100);
+            const gmProfitWk = billWk - payWk;
+            const gmProfitDay = billDay - payDay;
+            const gmProfitHr = billHr - payHr;
+
+            // Contract totals
+            const grossWages = payWk * weeks;
+            const totalBill = billWk * weeks;
+            const netBill = totalBill * (1 - vmsPercent / 100);
+
+            // --- Gross Margin ---
+            if (weeks > 0) {
+                const grossMarginDollar = totalBill - grossWages;
+                const grossMarginPct = totalBill > 0 ? (grossMarginDollar / totalBill * 100) : 0;
+                setMarginValue('gmTotalDollar', grossMarginDollar, '$');
+                setMarginValue('gmPercent', grossMarginPct, 'pct');
+                document.getElementById('gmBillTotal').textContent = '$' + totalBill.toFixed(2);
+                document.getElementById('gmGrossWages').textContent = '$' + grossWages.toFixed(2);
+            } else {
+                const gmPct = billWk > 0 ? (gmProfitWk / billWk * 100) : 0;
+                setMarginValue('gmTotalDollar', gmProfitWk, '$');
+                setMarginValue('gmPercent', gmPct, 'pct');
+                document.getElementById('gmBillTotal').textContent = '$' + billWk.toFixed(2) + '/wk';
+                document.getElementById('gmGrossWages').textContent = '$' + payWk.toFixed(2) + '/wk';
+            }
+
+            // --- Net Margin ---
+            if (weeks > 0) {
+                // CONTRACT TOTALS: expenses are one-time flat costs
+                const totalCost = parseFloat(document.getElementById('totalCost').textContent.replace('$', '')) || 0;
+                const netMarginDollar = netBill - totalCost;
+                const netMarginPct = netBill > 0 ? (netMarginDollar / netBill * 100) : 0;
+                const totalHours = hoursWeek * weeks;
+                const netMarginPerHr = totalHours > 0 ? netMarginDollar / totalHours : 0;
+
+                setMarginValue('nmTotalDollar', netMarginDollar, '$');
+                setMarginValue('nmPercent', netMarginPct, 'pct');
+                setMarginValue('nmPerHour', netMarginPerHr, '$');
+                document.getElementById('nmNetBill').textContent = '$' + netBill.toFixed(2);
+                document.getElementById('nmTotalCost').textContent = '$' + totalCost.toFixed(2);
+
+                // Show amortized expense info
+                if (flatExpenses > 0) {
+                    const amortizedPerHr = flatExpenses / totalHours;
+                    expNote.style.display = 'block';
+                    expNote.textContent = 'Expenses: $' + flatExpenses.toFixed(2) + ' one-time = $' + amortizedPerHr.toFixed(2) + '/hr over ' + totalHours + ' contract hrs';
+                    expNote.style.color = '#4ecdc4';
+                } else {
+                    expNote.style.display = 'none';
+                }
+            } else {
+                // WEEKLY SNAPSHOT: use burden rate (hrs/flat) for per-hour margin
+                const expBurdenRate = flatExpenses > 0 ? hoursWeek / flatExpenses : 0;
+                const expCostWk = expBurdenRate * hoursWeek;
+                const costWk = payWk + burdensWk + expCostWk;
+                const netMarginWk = netBillWk - costWk;
+                const netMarginWkPct = netBillWk > 0 ? (netMarginWk / netBillWk * 100) : 0;
+                const netMarginHr = netMarginWk / hoursWeek;
+
+                setMarginValue('nmTotalDollar', netMarginWk, '$');
+                setMarginValue('nmPercent', netMarginWkPct, 'pct');
+                setMarginValue('nmPerHour', netMarginHr, '$');
+                document.getElementById('nmNetBill').textContent = '$' + netBillWk.toFixed(2) + '/wk';
+                document.getElementById('nmTotalCost').textContent = '$' + costWk.toFixed(2) + '/wk';
+
+                // Show expense context note
+                if (flatExpenses > 0) {
+                    expNote.style.display = 'block';
+                    expNote.textContent = 'Burden rate: ' + hoursWeek + ' hrs \u00F7 $' + flatExpenses.toFixed(2) + ' = $' + expBurdenRate.toFixed(2) + '/hr \u2014 enter weeks for contract total';
+                    expNote.style.color = '#ffa500';
+                } else {
+                    expNote.style.display = 'none';
+                }
+            }
+
+            // --- GM Profit by Hour, Day, Week, Month ---
+            const gmProfitMo = gmProfitWk * 4.33;
+            const billMo = billWk * 4.33;
+            const payMo = payWk * 4.33;
+
+            setMarginValue('gmProfitHr', gmProfitHr, '$');
+            document.getElementById('gmBillHr').textContent = '$' + billHr.toFixed(2);
+            document.getElementById('gmPayHr').textContent = '$' + payHr.toFixed(2);
+
+            setMarginValue('gmProfitDay', gmProfitDay, '$');
+            document.getElementById('gmBillDay').textContent = '$' + billDay.toFixed(2);
+            document.getElementById('gmPayDay').textContent = '$' + payDay.toFixed(2);
+
+            setMarginValue('gmProfitWk', gmProfitWk, '$');
+            document.getElementById('gmBillWk').textContent = '$' + billWk.toFixed(2);
+            document.getElementById('gmPayWk').textContent = '$' + payWk.toFixed(2);
+
+            setMarginValue('gmProfitMo', gmProfitMo, '$');
+            document.getElementById('gmBillMo').textContent = '$' + billMo.toFixed(2);
+            document.getElementById('gmPayMo').textContent = '$' + payMo.toFixed(2);
+
+            // --- OT/DT Margin Breakdown (burdens apply to all taxable wages) ---
+            const otPayRate = parseFloat(document.querySelector('.pay-rate[data-type="ot"]').value) || 0;
+            const otBillRate = parseFloat(document.querySelector('.bill-rate[data-type="ot"]').value) || 0;
+            const dtPayRate = parseFloat(document.querySelector('.pay-rate[data-type="dt"]').value) || 0;
+            const dtBillRate = parseFloat(document.querySelector('.bill-rate[data-type="dt"]').value) || 0;
+
+            // Use state OT breakdown
+            const otBreakdown = calculateOTBreakdown(hoursDay, hoursWeek, stateCode);
+            const regHrs = otBreakdown.regHrs;
+            const otHrs = otBreakdown.otHrs;
+            const dtHrs = otBreakdown.dtHrs;
+
+            // Burden per hour on each wage type (WC+ER are taxable on all wages)
+            const regBurdenHr = regPayRate * burdenPct;
+            const otBurdenHr = otPayRate * burdenPct;
+            const dtBurdenHr = dtPayRate * burdenPct;
+
+            // Margin per hour = bill - pay - burden
+            const regMarginHr = regBillRate - regPayRate - regBurdenHr;
+            const otMarginHr = otHrs > 0 ? otBillRate - otPayRate - otBurdenHr : 0;
+            const dtMarginHr = dtHrs > 0 ? dtBillRate - dtPayRate - dtBurdenHr : 0;
+
+            // Weekly profit = margin/hr × hours
+            const regProfitWk = regMarginHr * regHrs;
+            const otProfitWk = otMarginHr * otHrs;
+            const dtProfitWk = dtMarginHr * dtHrs;
+            const totalProfitWk = regProfitWk + otProfitWk + dtProfitWk;
+
+            setMarginValue('otRegMarginHr', regMarginHr, '$');
+            document.getElementById('otRegHrs').textContent = regHrs.toFixed(1);
+            document.getElementById('otRegBillHr').textContent = '$' + regBillRate.toFixed(2);
+            document.getElementById('otRegPayHr').textContent = '$' + regPayRate.toFixed(2);
+
+            setMarginValue('otOtMarginHr', otMarginHr, '$');
+            document.getElementById('otOtHrs').textContent = otHrs.toFixed(1);
+            document.getElementById('otOtBillHr').textContent = '$' + otBillRate.toFixed(2);
+            document.getElementById('otOtPayHr').textContent = '$' + otPayRate.toFixed(2);
+
+            setMarginValue('otRegProfitWk', regProfitWk, '$');
+            setMarginValue('otOtProfitWk', otProfitWk, '$');
+
+            document.getElementById('otRegBurdenHr').textContent = '$' + regBurdenHr.toFixed(2);
+            document.getElementById('otOtBurdenHr').textContent = otHrs > 0 ? '$' + otBurdenHr.toFixed(2) : '$0.00';
+
+            // DT tiles and details (show/hide based on state rules)
+            const dtTiles = document.querySelectorAll('.ot-dt-tile');
+            const dtDetailRows = document.querySelectorAll('.ot-dt-detail');
+            const hasDT = stateRules.dailyDT && dtHrs > 0;
+            dtTiles.forEach(el => el.style.display = hasDT ? '' : 'none');
+            dtDetailRows.forEach(el => el.style.display = hasDT ? '' : 'none');
+
+            if (hasDT) {
+                setMarginValue('otDtMarginHr', dtMarginHr, '$');
+                document.getElementById('otDtHrs').textContent = dtHrs.toFixed(1);
+                document.getElementById('otDtBillHr').textContent = '$' + dtBillRate.toFixed(2);
+                document.getElementById('otDtPayHr').textContent = '$' + dtPayRate.toFixed(2);
+                setMarginValue('otDtProfitWk', dtProfitWk, '$');
+                document.getElementById('otDtBurdenHr').textContent = '$' + dtBurdenHr.toFixed(2);
+            }
+
+            document.getElementById('otTotalProfitWk').textContent = '$' + totalProfitWk.toFixed(2);
+            document.getElementById('otPctOfProfit').textContent = totalProfitWk !== 0 ? ((otProfitWk + dtProfitWk) / totalProfitWk * 100).toFixed(1) + '%' : '0.0%';
+
+            // --- Net Markup = Net Bill / (Gross Wages + Total Burden) ---
+            const netBillHr = billHr * (1 - vmsPercent / 100);
+            // Burden per hour: WC+ER on payroll only (exclude GSA)
+            const burdenHrForMarkup = (payHr - (gsaWkTotal / hoursWeek)) * burdenPct;
+            // Expense burden per hour (hrs/wk ÷ flat expense)
+            let expBurdenHrForMarkup = 0;
+            ['drugScreening', 'backgroundCheck', 'occupationalScreening'].forEach(id => {
+                const flat = parseFloat(document.getElementById(id).value) || 0;
+                if (flat > 0) expBurdenHrForMarkup += hoursWeek / flat;
+            });
+            document.querySelectorAll('.custom-expense-row').forEach(elem => {
+                const amt = parseFloat(elem.querySelector('.custom-expense-amount').value) || 0;
+                if (amt > 0) expBurdenHrForMarkup += hoursWeek / amt;
+            });
+            const totalCostHrForMarkup = payHr + burdenHrForMarkup + expBurdenHrForMarkup;
+            const markup = totalCostHrForMarkup > 0 ? netBillHr / totalCostHrForMarkup : 0;
+            const markupEl = document.getElementById('netMarkupMultiplier');
+            markupEl.textContent = markup > 0 ? markup.toFixed(2) + 'x' : '0.00x';
+            markupEl.classList.toggle('negative-value', markup < 1 && payHr > 0);
+
+            // --- Hero: Weekly Pay, Weekly Bill Amount & Weekly Margin ---
+            document.getElementById('heroWeeklyPay').textContent = '$' + payWk.toFixed(2);
+            document.getElementById('heroWeeklyBill').textContent = '$' + netBillWk.toFixed(2);
+            if (weeks > 0) {
+                const totalCostForHero = parseFloat(document.getElementById('totalCost').textContent.replace('$', '')) || 0;
+                const netMarginContract = (billWk * weeks * (1 - vmsPercent / 100)) - totalCostForHero;
+                const weeklyMarginHero = netMarginContract / weeks;
+                const heroEl = document.getElementById('heroWeeklyMargin');
+                heroEl.textContent = '$' + weeklyMarginHero.toFixed(2);
+                heroEl.style.color = weeklyMarginHero >= 0 ? '#ffd700' : '#ff6b6b';
+            } else {
+                const costWkHero = payWk + burdensWk + (flatExpenses > 0 ? (hoursWeek / flatExpenses) * hoursWeek : 0);
+                const weeklyMarginHero = netBillWk - costWkHero;
+                const heroEl = document.getElementById('heroWeeklyMargin');
+                heroEl.textContent = '$' + weeklyMarginHero.toFixed(2);
+                heroEl.style.color = weeklyMarginHero >= 0 ? '#ffd700' : '#ff6b6b';
+            }
+        }
+
+        // ============================================================
+        // AUTO-SAVE & RESTORE — persists all form data across refreshes
+        // ============================================================
+        const STORAGE_KEY = 'dealSheet_autoSave';
+
+        // Collect all form data into a serializable object
+        function collectFormData() {
+            const data = {};
+
+            // Static inputs by ID
+            const inputIds = [
+                'assignmentId', 'dealStatus', 'positionTitle', 'facilityName', 'facilityCity',
+                'candidateName', 'candidateEmail', 'candidatePhone', 'licenseNumber', 'licenseExpiry',
+                'startDate', 'contractWeeks', 'hoursPerDay', 'hoursPerWeek', 'otStateSelect',
+                'gsaZipCode', 'gsaLodgingHr', 'gsaLodgingWeek', 'gsaMealHr', 'gsaMealWeek',
+                'gsaLodgingDayVal', 'gsaMealDayVal',
+                'vmsPercent',
+                'drugScreening', 'backgroundCheck', 'occupationalScreening',
+                'workersComp', 'erCost',
+                'specialRequirements'
+            ];
+            inputIds.forEach(id => {
+                const el = document.getElementById(id);
+                if (el) data[id] = el.value;
+            });
+
+            // Pay rates by data-type
+            data.payRates = {};
+            document.querySelectorAll('.pay-rate').forEach(input => {
+                data.payRates[input.dataset.type] = input.value;
+            });
+
+            // Bill rates by data-type
+            data.billRates = {};
+            document.querySelectorAll('.bill-rate').forEach(input => {
+                data.billRates[input.dataset.type] = input.value;
+            });
+
+            // Active rate type (local/perdiem/travel)
+            const activeBtn = document.querySelector('.rate-type-btn.active');
+            data.rateType = activeBtn ? activeBtn.dataset.rtype : 'local';
+
+            // GSA location display info
+            const gsaLocName = document.getElementById('gsaLocationName');
+            const gsaLocInfo = document.getElementById('gsaLocationInfo');
+            data.gsaLocationName = gsaLocName ? gsaLocName.textContent : '';
+            data.gsaLocationVisible = gsaLocInfo ? gsaLocInfo.style.display !== 'none' : false;
+            const gsaMaxLodging = document.getElementById('gsaMaxLodging');
+            const gsaMaxMeal = document.getElementById('gsaMaxMeal');
+            data.gsaMaxLodging = gsaMaxLodging ? gsaMaxLodging.textContent : '';
+            data.gsaMaxMeal = gsaMaxMeal ? gsaMaxMeal.textContent : '';
+
+            // Custom pay types
+            data.customPayTypes = [];
+            document.querySelectorAll('.custom-pay-type').forEach(elem => {
+                data.customPayTypes.push({
+                    name: elem.querySelector('.custom-name').value,
+                    payRate: elem.querySelector('.custom-pay-rate').value,
+                    hours: elem.querySelector('.custom-hours').value,
+                    billRate: elem.querySelector('.custom-bill-rate').value
+                });
+            });
+
+            // Custom expense categories
+            data.customExpenses = [];
+            document.querySelectorAll('.custom-expense-row').forEach(elem => {
+                data.customExpenses.push({
+                    name: elem.querySelector('.custom-expense-name').value,
+                    amount: elem.querySelector('.custom-expense-amount').value
+                });
+            });
+
+            data._timestamp = Date.now();
+            return data;
+        }
+
+        // Save form data to localStorage (debounced)
+        let saveTimer = null;
+        function autoSave() {
+            clearTimeout(saveTimer);
+            saveTimer = setTimeout(() => {
+                try {
+                    localStorage.setItem(STORAGE_KEY, JSON.stringify(collectFormData()));
+                    // Flash save indicators
+                    ['autoSaveIndicator', 'autoSaveStatus'].forEach(elId => {
+                        const ind = document.getElementById(elId);
+                        if (ind) {
+                            ind.textContent = '✓ Saved';
+                            ind.style.opacity = '1';
+                            setTimeout(() => {
+                                ind.textContent = 'Auto-save active';
+                                ind.style.opacity = elId === 'autoSaveStatus' ? '0.5' : '0.4';
+                            }, 1200);
+                        }
+                    });
+                } catch (e) {
+                    console.error('Auto-save failed:', e);
+                }
+            }, 300);
+        }
+
+        // Restore form data from localStorage
+        function restoreFormData(data) {
+            // Static inputs by ID
+            const inputIds = [
+                'assignmentId', 'dealStatus', 'positionTitle', 'facilityName', 'facilityCity',
+                'candidateName', 'candidateEmail', 'candidatePhone', 'licenseNumber', 'licenseExpiry',
+                'startDate', 'contractWeeks', 'hoursPerDay', 'hoursPerWeek', 'otStateSelect',
+                'gsaZipCode', 'gsaLodgingHr', 'gsaLodgingWeek', 'gsaMealHr', 'gsaMealWeek',
+                'gsaLodgingDayVal', 'gsaMealDayVal',
+                'vmsPercent',
+                'drugScreening', 'backgroundCheck', 'occupationalScreening',
+                'workersComp', 'erCost',
+                'specialRequirements'
+            ];
+            inputIds.forEach(id => {
+                const el = document.getElementById(id);
+                if (el && data[id] !== undefined && data[id] !== '') {
+                    el.value = data[id];
+                }
+            });
+
+            // Pay rates
+            if (data.payRates) {
+                Object.entries(data.payRates).forEach(([type, val]) => {
+                    const el = document.querySelector(`.pay-rate[data-type="${type}"]`);
+                    if (el && val) el.value = val;
+                });
+            }
+
+            // Bill rates
+            if (data.billRates) {
+                Object.entries(data.billRates).forEach(([type, val]) => {
+                    const el = document.querySelector(`.bill-rate[data-type="${type}"]`);
+                    if (el && val) el.value = val;
+                });
+            }
+
+            // Rate type (local/perdiem/travel)
+            if (data.rateType) {
+                setRateType(data.rateType);
+            }
+
+            // GSA location display
+            if (data.gsaLocationName && data.gsaLocationVisible) {
+                const gsaLocName = document.getElementById('gsaLocationName');
+                const gsaLocInfo = document.getElementById('gsaLocationInfo');
+                const gsaMaxLodging = document.getElementById('gsaMaxLodging');
+                const gsaMaxMeal = document.getElementById('gsaMaxMeal');
+                if (gsaLocName) gsaLocName.textContent = data.gsaLocationName;
+                if (gsaLocInfo) gsaLocInfo.style.display = 'block';
+                if (gsaMaxLodging && data.gsaMaxLodging) gsaMaxLodging.textContent = data.gsaMaxLodging;
+                if (gsaMaxMeal && data.gsaMaxMeal) gsaMaxMeal.textContent = data.gsaMaxMeal;
+
+                // Restore GSA $/Day display
+                const lodgingDay = parseFloat(data.gsaLodgingDayVal) || 0;
+                const mealDay = parseFloat(data.gsaMealDayVal) || 0;
+                document.getElementById('gsaLodgingDay').textContent = '$' + lodgingDay.toFixed(2);
+                document.getElementById('gsaMealDay').textContent = '$' + mealDay.toFixed(2);
+            }
+
+            // Recreate custom pay types
+            if (data.customPayTypes && data.customPayTypes.length > 0) {
+                data.customPayTypes.forEach(cp => {
+                    addCustomPayType();
+                    const allCustom = document.querySelectorAll('.custom-pay-type');
+                    const last = allCustom[allCustom.length - 1];
+                    if (last) {
+                        last.querySelector('.custom-name').value = cp.name || '';
+                        last.querySelector('.custom-pay-rate').value = cp.payRate || '';
+                        last.querySelector('.custom-hours').value = cp.hours || '';
+                        last.querySelector('.custom-bill-rate').value = cp.billRate || '';
+                    }
+                });
+            }
+
+            // Recreate custom expense categories
+            if (data.customExpenses && data.customExpenses.length > 0) {
+                data.customExpenses.forEach(ce => {
+                    addExpenseCategory();
+                    const allCustom = document.querySelectorAll('.custom-expense-row');
+                    const last = allCustom[allCustom.length - 1];
+                    if (last) {
+                        last.querySelector('.custom-expense-name').value = ce.name || '';
+                        last.querySelector('.custom-expense-amount').value = ce.amount || '';
+                    }
+                });
+            }
+
+            // Recalculate everything
+            updateOTState();
+            updateGSAMaxDisplay();
+            updateGSATotals();
+            calculateEndDate();
+            calculateAllRows();
+        }
+
+        // Clear saved data and reset form
+        function clearSavedData() {
+            localStorage.removeItem(STORAGE_KEY);
+            location.reload();
+        }
+
+        // --- Attach auto-save to ALL input changes using event delegation ---
+        document.getElementById('dealForm').addEventListener('input', autoSave);
+        document.getElementById('dealForm').addEventListener('change', autoSave);
+
+        // Also save when GSA inputs change (they're inside the form but good to be explicit)
+        document.querySelectorAll('.gsa-hr-input, .gsa-wk-input').forEach(el => {
+            el.addEventListener('input', autoSave);
+        });
+
+        // --- Check for saved data on page load ---
+        (function initAutoRestore() {
+            const saved = localStorage.getItem(STORAGE_KEY);
+            if (!saved) return;
+
+            try {
+                const data = JSON.parse(saved);
+                if (!data._timestamp) return;
+
+                const age = Date.now() - data._timestamp;
+                const ageLabel = age < 60000 ? 'just now'
+                    : age < 3600000 ? Math.floor(age / 60000) + ' min ago'
+                    : age < 86400000 ? Math.floor(age / 3600000) + ' hr ago'
+                    : Math.floor(age / 86400000) + ' day(s) ago';
+
+                // Show restore banner
+                const banner = document.getElementById('restoreBanner');
+                const bannerTime = document.getElementById('restoreBannerTime');
+                if (banner && bannerTime) {
+                    bannerTime.textContent = ageLabel;
+                    banner.style.display = 'flex';
+                }
+
+            } catch (e) {
+                console.error('Auto-restore parse error:', e);
+            }
+        })();
+
+        function restoreSavedSession() {
+            const saved = localStorage.getItem(STORAGE_KEY);
+            if (saved) {
+                try {
+                    restoreFormData(JSON.parse(saved));
+                } catch (e) {
+                    console.error('Restore failed:', e);
+                }
+            }
+            document.getElementById('restoreBanner').style.display = 'none';
+        }
+
+        function dismissRestore() {
+            document.getElementById('restoreBanner').style.display = 'none';
+            localStorage.removeItem(STORAGE_KEY);
+        }
+    </script>
+</body>
+</html>
