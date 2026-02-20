@@ -765,40 +765,15 @@
 
         /* ====== TABLET: main content on top, sidebars side-by-side below ====== */
         @media (max-width: 1200px) {
-            .page-layout {
-                grid-template-columns: 1fr 1fr;
-                grid-template-rows: auto auto;
-            }
-            .container {
-                grid-column: 1 / -1;
-                grid-row: 1;
-                order: 1;
-            }
-            .comp-sidebar {
-                grid-column: 1;
-                grid-row: 2;
-                order: 2;
-                position: relative;
-                height: auto;
-            }
-            .margin-sidebar {
-                grid-column: 2;
-                grid-row: 2;
-                order: 3;
-                position: relative;
-                height: auto;
-            }
-        }
-
-        /* ====== PHONE: compact sidebars side-by-side, form stacked ====== */
-        @media (max-width: 768px) {
             body {
+                background: #0d1b2a;
                 padding: 0;
             }
             .page-layout {
                 grid-template-columns: 1fr 1fr;
-                grid-template-rows: auto auto;
+                grid-template-rows: auto 1fr;
                 gap: 0;
+                min-height: 100vh;
             }
             .container {
                 grid-column: 1 / -1;
@@ -812,7 +787,7 @@
                 order: 2;
                 position: relative;
                 height: auto;
-                padding: 12px 8px;
+                min-height: 100vh;
             }
             .margin-sidebar {
                 grid-column: 2;
@@ -820,84 +795,133 @@
                 order: 3;
                 position: relative;
                 height: auto;
-                padding: 12px 8px;
+                min-height: 100vh;
+            }
+        }
+
+        /* ====== PHONE: sidebars side-by-side, readable, full-bleed ====== */
+        @media (max-width: 768px) {
+            body {
+                background: #0d1b2a;
+                padding: 0;
+                margin: 0;
+            }
+            .page-layout {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                grid-template-rows: auto 1fr;
+                gap: 0;
+                min-height: 100vh;
+            }
+            .container {
+                grid-column: 1 / -1;
+                grid-row: 1;
+                order: 1;
+                border-radius: 0;
+                box-shadow: none;
+            }
+            .comp-sidebar {
+                grid-column: 1;
+                grid-row: 2;
+                order: 2;
+                position: relative;
+                height: auto;
+                min-height: 100vh;
+                padding: 16px 10px;
+            }
+            .margin-sidebar {
+                grid-column: 2;
+                grid-row: 2;
+                order: 3;
+                position: relative;
+                height: auto;
+                min-height: 100vh;
+                padding: 16px 10px;
             }
 
-            /* Compact sidebar typography */
+            /* Sidebar headers */
             .comp-sidebar h3,
             .margin-sidebar h3 {
-                font-size: 11px;
-                margin-bottom: 10px;
-                padding-bottom: 6px;
+                font-size: 12px;
+                margin-bottom: 12px;
+                padding-bottom: 8px;
             }
+
+            /* Section labels */
             .comp-period-header,
             .margin-section-label {
-                font-size: 10px;
-                letter-spacing: 0.8px;
-                margin-bottom: 5px;
-            }
-            .comp-detail-row,
-            .margin-detail-row {
                 font-size: 11px;
-                padding: 3px 0;
-            }
-            .metric-tile {
-                padding: 6px;
-                border-left-width: 2px;
-            }
-            .metric-tile-label {
-                font-size: 8px;
-                letter-spacing: 0.6px;
-            }
-            .metric-tile-value {
-                font-size: 13px !important;
-                line-height: 1.1;
-            }
-            .metric-tile-sub {
-                font-size: 7px;
-            }
-            .metrics-grid {
-                gap: 4px;
+                letter-spacing: 1px;
                 margin-bottom: 6px;
             }
+
+            /* Detail rows — readable */
+            .comp-detail-row,
+            .margin-detail-row {
+                font-size: 12px;
+                padding: 4px 0;
+            }
+
+            /* Metric tiles — bigger on mobile */
+            .metric-tile {
+                padding: 8px 6px;
+                border-left-width: 3px;
+            }
+            .metric-tile-label {
+                font-size: 9px;
+                letter-spacing: 0.8px;
+            }
+            .metric-tile-value {
+                font-size: 15px !important;
+                line-height: 1.2;
+            }
+            .metric-tile-sub {
+                font-size: 8px;
+            }
+            .metrics-grid {
+                gap: 5px;
+                margin-bottom: 8px;
+            }
+
+            /* Dividers */
             .comp-divider,
             .margin-divider {
-                margin: 8px 0;
+                margin: 10px 0;
             }
 
-            /* Sidebar hero compact */
+            /* Sidebar hero — bigger */
             .sidebar-hero {
-                gap: 4px;
-                margin-bottom: 8px;
+                gap: 5px;
+                margin-bottom: 10px;
             }
             .sidebar-hero-item {
-                padding: 6px 4px;
+                padding: 8px 5px;
             }
             .sidebar-hero-label {
-                font-size: 8px;
+                font-size: 9px;
             }
             .sidebar-hero-value {
-                font-size: 15px;
+                font-size: 17px;
             }
             .sidebar-hero-sub {
-                font-size: 7px;
-            }
-
-            /* Markup badge compact */
-            .markup-badge {
-                padding: 8px;
-                margin-bottom: 8px;
-            }
-            .markup-badge-label {
                 font-size: 8px;
             }
+
+            /* Markup badge */
+            .markup-badge {
+                padding: 10px;
+                margin-bottom: 10px;
+            }
+            .markup-badge-label {
+                font-size: 9px;
+            }
             .markup-badge-value {
-                font-size: 22px;
+                font-size: 26px;
             }
 
-            /* Metric details compact */
+            /* Metric details */
             .metric-details-header {
-                font-size: 9px;
+                font-size: 10px;
             }
 
             /* Form compact */
@@ -951,31 +975,31 @@
             }
         }
 
-        /* ====== VERY SMALL PHONES (< 480px): tighten further ====== */
+        /* ====== SMALL PHONES (< 480px): slightly tighter but still readable ====== */
         @media (max-width: 480px) {
             .comp-sidebar,
             .margin-sidebar {
-                padding: 8px 5px;
+                padding: 14px 7px;
             }
             .metric-tile-value {
-                font-size: 11px !important;
+                font-size: 13px !important;
             }
             .metric-tile-label {
-                font-size: 7px;
+                font-size: 8px;
             }
             .metric-tile-sub {
-                font-size: 6px;
+                font-size: 7px;
             }
             .comp-detail-row,
             .margin-detail-row {
-                font-size: 10px;
+                font-size: 11px;
             }
             .sidebar-hero-value {
-                font-size: 13px;
+                font-size: 15px;
             }
             .comp-sidebar h3,
             .margin-sidebar h3 {
-                font-size: 10px;
+                font-size: 11px;
             }
         }
 
