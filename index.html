@@ -3538,15 +3538,8 @@
 
             // Calculate total cost per hour/week (burdens + expenses)
             const burdenPerHrTotal = (payWk - gsaWkTotal) / hoursWeek * burdenPct;
-            let expBurdenPerHrNP = 0;
-            ['drugScreening', 'backgroundCheck', 'occupationalScreening'].forEach(id => {
-                const flat = parseFloat(document.getElementById(id).value) || 0;
-                if (flat > 0) expBurdenPerHrNP += hoursWeek / flat;
-            });
-            document.querySelectorAll('.custom-expense-row').forEach(elem => {
-                const amt = parseFloat(elem.querySelector('.custom-expense-amount').value) || 0;
-                if (amt > 0) expBurdenPerHrNP += hoursWeek / amt;
-            });
+            // Reuse the correctly calculated expenseBurdenPerHr from above
+            const expBurdenPerHrNP = expenseBurdenPerHr;
 
             const netBillHrNP = billHr * (1 - vmsPercent / 100);
             const totalCostHrNP = payHr + burdenPerHrTotal + expBurdenPerHrNP;
