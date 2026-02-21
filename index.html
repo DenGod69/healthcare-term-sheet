@@ -2039,6 +2039,35 @@
             </div>
         </div>
 
+        <!-- PROFITABLE TERM SHEET CALCULATOR -->
+        <div class="margin-section-label" style="display:flex; align-items:center; justify-content:space-between;">
+            <span>Profitable Term Sheet</span>
+            <div style="display:flex; align-items:center; gap:4px;">
+                <span style="font-size:9px; color:rgba(255,255,255,0.4); text-transform:none; letter-spacing:0;">Target NM%</span>
+                <input type="number" id="targetNmPct" class="target-nm-input" step="0.5" min="0" max="50" placeholder="15">
+                <span style="font-size:10px; color:rgba(255,255,255,0.4);">%</span>
+            </div>
+        </div>
+
+        <!-- Pay & Stipend Baseline -->
+        <div class="profit-calc-section" id="profitCalcSection">
+            <div style="font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:1px; color:rgba(255,255,255,0.5); margin-bottom:6px;">Suggested Starting Rates</div>
+            <div id="profitCalcMissing" style="font-size:10px; color:rgba(255,255,255,0.35); padding:4px 0;">Enter zip, bill rate, hours & burden to calculate</div>
+            <div id="profitCalcResults" style="display:none;">
+                <div class="profit-calc-row"><span>Regular Pay Rate</span><span id="sugRegPay">--</span></div>
+                <div class="profit-calc-row"><span>OT Pay Rate (1.5×)</span><span id="sugOtPay">--</span></div>
+                <div class="profit-calc-row divider"><span>Lodging Stipend/Wk</span><span id="sugLodging">--</span></div>
+                <div class="profit-calc-row"><span>M&IE Stipend/Wk</span><span id="sugMeals">--</span></div>
+                <div class="profit-calc-row divider"><span>Total Weekly Pay</span><span id="sugTotalPay" style="color:#2ecc71;">--</span></div>
+                <div class="profit-calc-row"><span>Total Weekly Bill</span><span id="sugTotalBill">--</span></div>
+                <div class="profit-calc-row"><span>Projected NM%</span><span id="sugNmPct" style="color:#2ecc71;">--</span></div>
+                <div class="profit-calc-row"><span>Projected NM$/Wk</span><span id="sugNmWk" style="color:#2ecc71;">--</span></div>
+                <div class="profit-calc-row" style="margin-top:4px; font-size:9px; color:rgba(255,255,255,0.3);"><span>Min Wage Floor</span><span id="sugMinWage">--</span></div>
+            </div>
+        </div>
+
+        <hr class="margin-divider" style="margin:8px 0;">
+
         <!-- BREAK-EVEN OT/DT ANALYSIS -->
         <div class="margin-section-label">Break-Even Analysis</div>
         <div class="breakeven-section" id="breakevenOtSection">
