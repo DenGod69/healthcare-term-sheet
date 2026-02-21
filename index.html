@@ -3213,6 +3213,53 @@
             el.classList.toggle('negative-value', value < 0);
         }
 
+        // --- Break-Even OT/DT Analysis Helper ---
+        function updateBreakevenAnalysis(prefix, billRate, payRate, burdenPct, marginHr) {
+            // prefix = 'Ot' or 'Dt'
+            const statusEl = document.getElementById(prefix.toLowerCase() + 'BreakevenStatus');
+            const currentMarginEl = document.getElementById('be' + prefix + 'CurrentMargin');
+            const maxPayEl = document.getElementById('be' + prefix + 'MaxPay');
+            const minBillEl = document.getElementById('be' + prefix + 'MinBill');
+            const sugPayEl = document.getElementById('be' + prefix + 'SuggestedPay');
+            const sugBillEl = document.getElementById('be' + prefix + 'SuggestedBill');
+
+            if (billRate <= 0 && payRate <= 0) {
+                statusEl.className = 'breakeven-status neutral';
+                statusEl.textContent = 'Enter ' + (prefix === 'Ot' ? 'OT' : 'DT') + ' rates to analyze';
+                currentMarginEl.textContent = '--';
+                maxPayEl.textContent = '--';
+                minBillEl.textContent = '--';
+                sugPayEl.textContent = '--';
+                sugBillEl.textContent = '--';
+                return;
+            }
+
+            // Break-even: Bill = Pay × (1 + burden)  →  Max Pay = Bill / (1 + burden)
+            const burdenMult = 1 + burdenPct;
+            const maxPay = billRate / burdenMult;         // Max pay that breaks even
+            const minBill = payRate * burdenMult;         // Min bill that breaks even
+            const sugPay = billRate / burdenMult * 0.95;  // 5% margin target (pay 95% of max)
+            const sugBill = payRate * burdenMult * 1.05;  // 5% margin target (bill 105% of min)
+
+            currentMarginEl.textContent = '$' + marginHr.toFixed(2);
+            currentMarginEl.style.color = marginHr >= 0 ? '#2ecc71' : '#e74c3c';
+            maxPayEl.textContent = '$' + maxPay.toFixed(2) + '/hr';
+            minBillEl.textContent = '$' + minBill.toFixed(2) + '/hr';
+            sugPayEl.textContent = '$' + sugPay.toFixed(2) + '/hr';
+            sugBillEl.textContent = '$' + sugBill.toFixed(2) + '/hr';
+
+            if (marginHr > 0) {
+                statusEl.className = 'breakeven-status profitable';
+                statusEl.textContent = '✓ Profitable — earning $' + marginHr.toFixed(2) + '/hr';
+            } else if (marginHr === 0) {
+                statusEl.className = 'breakeven-status neutral';
+                statusEl.textContent = '— Break-even — $0.00/hr margin';
+            } else {
+                statusEl.className = 'breakeven-status losing';
+                statusEl.textContent = '✗ Losing $' + Math.abs(marginHr).toFixed(2) + '/hr';
+            }
+        }
+
         function updateMarginSidebar() {
             const hoursWeek = parseFloat(document.getElementById('hoursPerWeek').value) || 0;
             const hoursDay = parseFloat(document.getElementById('hoursPerDay').value) || 0;
