@@ -1212,6 +1212,19 @@
             }
         }
 
+        /* ====== PORTRAIT MOBILE: rearrange Assignment Duration fields ====== */
+        @media (max-width: 768px) and (orientation: portrait) {
+            .duration-row {
+                grid-template-columns: 1fr 1fr !important;
+                gap: 8px;
+            }
+            .dur-start { order: 1; }
+            .dur-end   { order: 2; }
+            .dur-weeks { order: 3; }
+            .dur-hpw   { order: 4; }
+            .dur-hpd   { order: 5; }
+        }
+
         @media print {
             body {
                 background-color: white;
@@ -1393,24 +1406,24 @@
                 <!-- ASSIGNMENT DATES & HOURS -->
                 <div class="section-title">📅 Assignment Duration & Hours</div>
                 
-                <div class="form-row" style="grid-template-columns: repeat(5, 1fr);">
-                    <div class="form-group">
+                <div class="form-row duration-row" id="durationRow" style="grid-template-columns: repeat(5, 1fr);">
+                    <div class="form-group dur-start">
                         <label for="startDate">Start Date <span class="required">*</span></label>
                         <input type="date" id="startDate" name="startDate" required tabindex="1">
                     </div>
-                    <div class="form-group">
+                    <div class="form-group dur-weeks">
                         <label for="contractWeeks">Contract Weeks <span class="required">*</span></label>
                         <input type="number" id="contractWeeks" name="contractWeeks" placeholder="e.g., 13" min="1" required tabindex="2">
                     </div>
-                    <div class="form-group">
+                    <div class="form-group dur-end">
                         <label for="endDate">End Date (Auto)</label>
                         <input type="date" id="endDate" name="endDate" readonly style="background-color:#f5f5f5;" tabindex="-1">
                     </div>
-                    <div class="form-group" id="hoursPerDayGroup" style="display:none;">
+                    <div class="form-group dur-hpd" id="hoursPerDayGroup" style="display:none;">
                         <label for="hoursPerDay">Shift Hours/Day (OT)</label>
                         <input type="number" id="hoursPerDay" name="hoursPerDay" placeholder="12" step="0.5" min="1" max="24" tabindex="3">
                     </div>
-                    <div class="form-group">
+                    <div class="form-group dur-hpw">
                         <label for="hoursPerWeek">Hours Per Week <span class="required">*</span></label>
                         <input type="number" id="hoursPerWeek" name="hoursPerWeek" placeholder="36" required tabindex="4">
                     </div>
