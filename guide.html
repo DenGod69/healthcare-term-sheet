@@ -1,0 +1,1276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Healthcare Travel Staffing Term Sheet — User Guide</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        @page {
+            size: letter;
+            margin: 0.6in 0.7in;
+        }
+
+        body {
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, 'Helvetica Neue', Arial, sans-serif;
+            color: #1a1a2e;
+            background: #fff;
+            line-height: 1.6;
+            font-size: 11pt;
+        }
+
+        /* ---- COVER PAGE ---- */
+        .cover {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 60px 40px;
+            page-break-after: always;
+        }
+        .cover-icon { font-size: 72px; margin-bottom: 20px; }
+        .cover h1 { font-size: 36px; font-weight: 800; margin-bottom: 10px; letter-spacing: -0.5px; }
+        .cover h2 { font-size: 20px; font-weight: 400; opacity: 0.9; margin-bottom: 40px; }
+        .cover .url-box {
+            background: rgba(255,255,255,0.15);
+            border: 2px solid rgba(255,255,255,0.3);
+            border-radius: 12px;
+            padding: 16px 32px;
+            font-size: 16px;
+            font-family: 'Monaco', 'Menlo', monospace;
+            letter-spacing: 0.5px;
+            margin-bottom: 40px;
+        }
+        .cover .version { font-size: 13px; opacity: 0.6; }
+
+        /* ---- TABLE OF CONTENTS ---- */
+        .toc {
+            page-break-after: always;
+            padding: 40px 0;
+        }
+        .toc h2 {
+            font-size: 24px;
+            color: #667eea;
+            margin-bottom: 24px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #667eea;
+        }
+        .toc-list { list-style: none; }
+        .toc-list li {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            padding: 10px 0;
+            border-bottom: 1px dotted #ccc;
+            font-size: 13px;
+        }
+        .toc-list li .toc-num {
+            font-weight: 700;
+            color: #667eea;
+            margin-right: 10px;
+            min-width: 28px;
+        }
+        .toc-list li .toc-title { font-weight: 600; flex: 1; }
+        .toc-list li .toc-page { color: #999; font-size: 12px; }
+
+        /* ---- PAGE LAYOUT ---- */
+        .page {
+            page-break-before: always;
+            padding-top: 10px;
+        }
+        .page:first-of-type { page-break-before: avoid; }
+
+        /* ---- SECTION HEADERS ---- */
+        .section-num {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            font-size: 13px;
+            font-weight: 800;
+            width: 32px;
+            height: 32px;
+            line-height: 32px;
+            text-align: center;
+            border-radius: 8px;
+            margin-right: 10px;
+            vertical-align: middle;
+        }
+        h2.section-title {
+            font-size: 22px;
+            color: #1a1a2e;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+        }
+        .section-subtitle {
+            color: #666;
+            font-size: 12px;
+            margin-bottom: 20px;
+            margin-left: 42px;
+            font-style: italic;
+        }
+
+        h3 {
+            font-size: 15px;
+            color: #333;
+            margin: 20px 0 8px;
+            padding-bottom: 4px;
+            border-bottom: 2px solid #eee;
+        }
+
+        h4 {
+            font-size: 13px;
+            color: #555;
+            margin: 14px 0 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        p { margin-bottom: 10px; font-size: 11pt; }
+
+        /* ---- CALLOUT BOXES ---- */
+        .callout {
+            border-radius: 10px;
+            padding: 14px 16px;
+            margin: 14px 0;
+            font-size: 11px;
+            line-height: 1.5;
+        }
+        .callout-blue {
+            background: #eef3ff;
+            border-left: 4px solid #667eea;
+        }
+        .callout-green {
+            background: #e8f8ef;
+            border-left: 4px solid #43e97b;
+        }
+        .callout-orange {
+            background: #fff5e6;
+            border-left: 4px solid #ff9f43;
+        }
+        .callout-red {
+            background: #ffeaea;
+            border-left: 4px solid #ff4444;
+        }
+        .callout-purple {
+            background: #f3eeff;
+            border-left: 4px solid #764ba2;
+        }
+        .callout-label {
+            font-weight: 800;
+            text-transform: uppercase;
+            font-size: 10px;
+            letter-spacing: 1px;
+            margin-bottom: 4px;
+            display: block;
+        }
+
+        /* ---- TABLES ---- */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 12px 0;
+            font-size: 10.5px;
+        }
+        table th {
+            background: #1a1a2e;
+            color: white;
+            padding: 8px 10px;
+            text-align: left;
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        table td {
+            padding: 7px 10px;
+            border-bottom: 1px solid #e8e8e8;
+        }
+        table tr:nth-child(even) { background: #f8f9fb; }
+        table .num { text-align: right; font-family: 'Monaco','Menlo',monospace; font-size: 10.5px; }
+        table .total-row { background: #eef3ff !important; font-weight: 700; }
+        table .highlight { color: #667eea; font-weight: 700; }
+        table .green { color: #27ae60; }
+        table .red { color: #e74c3c; }
+        table .orange { color: #e67e22; }
+
+        /* ---- STEP BLOCKS ---- */
+        .step {
+            display: flex;
+            gap: 14px;
+            margin: 14px 0;
+            align-items: flex-start;
+        }
+        .step-num {
+            flex-shrink: 0;
+            background: #667eea;
+            color: white;
+            font-size: 14px;
+            font-weight: 800;
+            width: 30px;
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
+            border-radius: 50%;
+        }
+        .step-content { flex: 1; }
+        .step-content strong { color: #1a1a2e; }
+
+        /* ---- FIELD REFERENCE ROWS ---- */
+        .field-row {
+            display: grid;
+            grid-template-columns: 180px 1fr;
+            gap: 4px 14px;
+            padding: 6px 0;
+            border-bottom: 1px solid #f0f0f0;
+            font-size: 11px;
+        }
+        .field-name {
+            font-weight: 700;
+            color: #333;
+        }
+        .field-desc { color: #555; }
+
+        /* ---- FORMULA BOXES ---- */
+        .formula {
+            background: #1a1a2e;
+            color: #43e97b;
+            font-family: 'Monaco','Menlo',monospace;
+            padding: 14px 18px;
+            border-radius: 8px;
+            margin: 12px 0;
+            font-size: 12px;
+            line-height: 1.8;
+        }
+        .formula .label { color: #4facfe; font-weight: 700; }
+        .formula .equals { color: #ffd700; }
+        .formula .result { color: #43e97b; font-weight: 700; font-size: 14px; }
+
+        /* ---- METRIC CARDS (mimicking the sidebar) ---- */
+        .metric-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            margin: 12px 0;
+        }
+        .metric-card {
+            background: #1a1a2e;
+            color: white;
+            padding: 12px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        .metric-card .mc-label {
+            font-size: 9px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: rgba(255,255,255,0.5);
+            margin-bottom: 4px;
+        }
+        .metric-card .mc-value {
+            font-size: 22px;
+            font-weight: 900;
+            font-family: 'Monaco','Menlo',monospace;
+        }
+        .metric-card .mc-sub {
+            font-size: 9px;
+            color: rgba(255,255,255,0.4);
+            margin-top: 2px;
+        }
+        .mc-green .mc-value { color: #43e97b; }
+        .mc-blue .mc-value { color: #4facfe; }
+        .mc-gold .mc-value { color: #ffd700; }
+        .mc-orange .mc-value { color: #ff9f43; }
+        .mc-purple .mc-value { color: #c084fc; }
+        .mc-red .mc-value { color: #ff6b6b; }
+
+        /* ---- FLOW DIAGRAM ---- */
+        .flow {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            margin: 16px 0;
+            flex-wrap: wrap;
+        }
+        .flow-box {
+            background: #eef3ff;
+            border: 2px solid #667eea;
+            border-radius: 8px;
+            padding: 8px 14px;
+            font-size: 11px;
+            font-weight: 600;
+            text-align: center;
+            color: #333;
+        }
+        .flow-arrow {
+            font-size: 18px;
+            color: #667eea;
+            font-weight: 700;
+        }
+        .flow-result {
+            background: #667eea;
+            color: white;
+            border: 2px solid #667eea;
+        }
+
+        /* ---- SCREENSHOT MOCKUPS ---- */
+        .mockup {
+            background: #f4f4f8;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            padding: 16px;
+            margin: 12px 0;
+        }
+        .mockup-header {
+            font-size: 10px;
+            font-weight: 700;
+            color: #999;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        /* ---- LISTS ---- */
+        ul, ol { margin: 8px 0 12px 20px; }
+        li { margin-bottom: 4px; font-size: 11pt; }
+
+        /* ---- DIVIDERS ---- */
+        hr {
+            border: none;
+            border-top: 2px solid #eee;
+            margin: 24px 0;
+        }
+
+        /* ---- PRINT STYLES ---- */
+        @media print {
+            body { font-size: 10pt; }
+            .cover { min-height: auto; padding: 100px 40px; }
+            .no-print { display: none; }
+        }
+
+        /* two-col layout helper */
+        .two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin: 12px 0;
+        }
+    </style>
+</head>
+<body>
+
+<!-- ============================================================ -->
+<!-- COVER PAGE -->
+<!-- ============================================================ -->
+<div class="cover">
+    <div class="cover-icon">🏥</div>
+    <h1>Healthcare Travel Staffing<br>Term Sheet</h1>
+    <h2>Complete User Guide</h2>
+    <div class="url-box">dengod69.github.io/healthcare-term-sheet</div>
+    <p style="max-width:500px; opacity:0.8; font-size:14px;">
+        A step-by-step guide to using the online deal sheet tool for healthcare staffing assignments.
+        Covers every field, formula, and feature with real-world examples.
+    </p>
+    <br><br>
+    <div class="version">Version 1.0 &nbsp;|&nbsp; February 2026</div>
+</div>
+
+<!-- ============================================================ -->
+<!-- TABLE OF CONTENTS -->
+<!-- ============================================================ -->
+<div class="toc">
+    <h2>Table of Contents</h2>
+    <ol class="toc-list">
+        <li><span class="toc-num">1</span><span class="toc-title">What Is This Tool?</span></li>
+        <li><span class="toc-num">2</span><span class="toc-title">Getting Started — Opening the Tool</span></li>
+        <li><span class="toc-num">3</span><span class="toc-title">Section-by-Section Walkthrough</span></li>
+        <li style="padding-left:38px; font-size:11px; border-bottom:none;">3A. Assignment & Candidate Details</li>
+        <li style="padding-left:38px; font-size:11px; border-bottom:none;">3B. Assignment Duration & Hours</li>
+        <li style="padding-left:38px; font-size:11px; border-bottom:none;">3C. Rate Details (Pay Rates & GSA Stipends)</li>
+        <li style="padding-left:38px; font-size:11px; border-bottom:none;">3D. Bill Rate Details & VMS Fees</li>
+        <li style="padding-left:38px; font-size:11px; border-bottom:none;">3E. Cost & Expenses</li>
+        <li style="padding-left:38px; font-size:11px;">3F. Burdens, Taxes & Fees</li>
+        <li><span class="toc-num">4</span><span class="toc-title">Understanding the Sidebars — Where the Magic Happens</span></li>
+        <li><span class="toc-num">5</span><span class="toc-title">Full Example: Walking Through a Real Deal</span></li>
+        <li><span class="toc-num">6</span><span class="toc-title">How Every Number Is Calculated (Formulas)</span></li>
+        <li><span class="toc-num">7</span><span class="toc-title">Frequently Asked Questions</span></li>
+        <li><span class="toc-num">8</span><span class="toc-title">Glossary of Terms</span></li>
+    </ol>
+</div>
+
+<!-- ============================================================ -->
+<!-- SECTION 1: WHAT IS THIS TOOL? -->
+<!-- ============================================================ -->
+<div class="page">
+    <h2 class="section-title"><span class="section-num">1</span> What Is This Tool?</h2>
+    <p class="section-subtitle">The big picture — what it does and why it matters</p>
+
+    <p>The <strong>Healthcare Travel Staffing Term Sheet</strong> is an online calculator that helps staffing companies figure out the financial details of a travel healthcare assignment <em>before</em> they commit to it.</p>
+
+    <h3>Think of It Like This</h3>
+    <p>Imagine you're a staffing company. A hospital in Rochester, NY needs a travel nurse for 13 weeks. You need to answer:</p>
+
+    <ul>
+        <li><strong>What do I pay the nurse?</strong> (hourly rate + housing stipend + meals)</li>
+        <li><strong>What do I charge the hospital?</strong> (the bill rate)</li>
+        <li><strong>What are my costs?</strong> (background checks, drug screens, workers comp, taxes)</li>
+        <li><strong>Am I making money on this deal?</strong> (profit margins)</li>
+        <li><strong>How long until my upfront costs are covered?</strong> (weeks to break even)</li>
+    </ul>
+
+    <p>This tool answers all of those questions <strong>in real time</strong> as you type. Change one number and everything recalculates instantly.</p>
+
+    <div class="callout callout-blue">
+        <span class="callout-label">Key Benefit</span>
+        You can model different scenarios in seconds. "What if I pay $22/hr instead of $20?" — just change the number and immediately see how it affects your margin, markup, and profitability.
+    </div>
+
+    <h3>Who Is This For?</h3>
+    <table>
+        <tr><th>Role</th><th>How They Use It</th></tr>
+        <tr><td><strong>Account Managers</strong></td><td>Price new assignments and negotiate bill rates with hospitals</td></tr>
+        <tr><td><strong>Recruiters</strong></td><td>Determine competitive pay packages for travel nurses</td></tr>
+        <tr><td><strong>Operations / Finance</strong></td><td>Verify margins and ensure deals are profitable before approval</td></tr>
+        <tr><td><strong>Business Owners</strong></td><td>Get a snapshot of deal health across their portfolio</td></tr>
+    </table>
+
+    <h3>What Happens to My Data?</h3>
+    <ul>
+        <li>Your data is saved <strong>only in your browser</strong> (on your device). Nothing is sent to a server.</li>
+        <li>If you close the browser and come back, your last session is waiting for you.</li>
+        <li>Use <strong>Print/PDF</strong> to save a permanent copy.</li>
+    </ul>
+</div>
+
+<!-- ============================================================ -->
+<!-- SECTION 2: GETTING STARTED -->
+<!-- ============================================================ -->
+<div class="page">
+    <h2 class="section-title"><span class="section-num">2</span> Getting Started</h2>
+    <p class="section-subtitle">How to open the tool and what you'll see</p>
+
+    <h3>Step 1: Open the Tool</h3>
+    <p>Go to this address in any web browser (Chrome, Safari, Edge, Firefox — desktop or mobile):</p>
+    <div class="formula" style="text-align:center; font-size:14px; color:#4facfe;">
+        https://dengod69.github.io/healthcare-term-sheet/
+    </div>
+
+    <h3>Step 2: Choose to Restore or Start Fresh</h3>
+    <p>If you've used the tool before, you'll see a banner at the top:</p>
+
+    <div class="mockup">
+        <div style="background:#fff3cd; padding:10px 16px; border-radius:8px; display:flex; justify-content:space-between; align-items:center; font-size:12px;">
+            <span>Previous session found (11 min ago). Restore your data?</span>
+            <span>
+                <span style="background:#667eea; color:white; padding:4px 12px; border-radius:4px; font-weight:600;">Restore Session</span>
+                &nbsp;
+                <span style="background:#666; color:white; padding:4px 12px; border-radius:4px;">Start Fresh</span>
+            </span>
+        </div>
+    </div>
+
+    <ul>
+        <li><strong>Restore Session</strong> — Brings back everything you entered last time</li>
+        <li><strong>Start Fresh</strong> — Clears the form for a brand new deal</li>
+    </ul>
+
+    <h3>Step 3: Understand the Layout</h3>
+    <p>The screen is divided into <strong>three areas</strong>:</p>
+
+    <div class="two-col">
+        <div>
+            <div class="mockup" style="text-align:center;">
+                <div style="display:grid; grid-template-columns: 80px 1fr 100px; gap:4px; font-size:10px;">
+                    <div style="background:#1a1a2e; color:white; padding:20px 6px; border-radius:6px;">
+                        <strong>LEFT</strong><br>Candidate<br>Compensation<br><br><em style="opacity:0.6;">(What the nurse earns)</em>
+                    </div>
+                    <div style="background:white; border:2px solid #ddd; padding:20px 6px; border-radius:6px;">
+                        <strong>CENTER</strong><br>Main Form<br><br><em style="opacity:0.6;">(Where you enter data)</em>
+                    </div>
+                    <div style="background:#0d1b2a; color:white; padding:20px 6px; border-radius:6px;">
+                        <strong>RIGHT</strong><br>Margins &<br>Profit<br><br><em style="opacity:0.6;">(Your business metrics)</em>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div>
+            <p><strong>Left Sidebar</strong> — Shows the candidate's total compensation: hourly, daily, weekly, monthly breakdowns.</p>
+            <p><strong>Center</strong> — The main form where you enter all the deal details.</p>
+            <p><strong>Right Sidebar</strong> — The financial analysis: margins, markup, profit breakdowns, and expense recovery. This is where you determine if the deal makes money.</p>
+        </div>
+    </div>
+
+    <div class="callout callout-green">
+        <span class="callout-label">Auto-Save</span>
+        Everything you type is automatically saved to your browser. Look for "Auto-save active" in the top-right corner. You don't need to click Save — but you can if you want to.
+    </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- SECTION 3A: ASSIGNMENT DETAILS -->
+<!-- ============================================================ -->
+<div class="page">
+    <h2 class="section-title"><span class="section-num">3</span> Section-by-Section Walkthrough</h2>
+    <p class="section-subtitle">Every field explained in plain English</p>
+
+    <h3>3A. Assignment & Candidate Details</h3>
+    <p>This is the top section of the form. It captures <em>who, what, and where</em> for the assignment.</p>
+
+    <table>
+        <tr><th style="width:160px;">Field</th><th>What to Enter</th><th style="width:160px;">Example</th></tr>
+        <tr><td><strong>Assignment ID</strong></td><td>Your internal tracking number for this deal</td><td class="num">ASG-2026-0142</td></tr>
+        <tr><td><strong>Status</strong></td><td>Where the deal stands in your pipeline</td><td>Negotiating</td></tr>
+        <tr><td><strong>Position Title</strong></td><td>The job title and unit/specialty</td><td>RN - ICU</td></tr>
+        <tr><td><strong>Facility Name</strong></td><td>The hospital or clinic name</td><td>Strong Memorial Hospital</td></tr>
+        <tr><td><strong>City, State</strong></td><td>Location of the facility</td><td>Rochester, NY</td></tr>
+        <tr><td><strong>Facility Zip</strong></td><td>5-digit zip code (auto-detects state OT rules)</td><td class="num">14601</td></tr>
+        <tr><td><strong>Candidate Name</strong></td><td>The traveler's full name</td><td>Sarah Johnson, RN</td></tr>
+        <tr><td><strong>Email</strong></td><td>Candidate's email address</td><td>sarah.j@email.com</td></tr>
+        <tr><td><strong>Phone</strong></td><td>Candidate's phone number</td><td class="num">(555) 867-5309</td></tr>
+        <tr><td><strong>License Number</strong></td><td>Professional nursing license #</td><td class="num">RN-2024-78432</td></tr>
+        <tr><td><strong>License Expiry</strong></td><td>When the license expires</td><td class="num">12/31/2026</td></tr>
+    </table>
+
+    <div class="callout callout-orange">
+        <span class="callout-label">Tip</span>
+        Fields marked with an asterisk (*) in the tool are required. But don't worry — the calculations work even if you skip some fields. The financial engine only needs the numbers (rates, hours, weeks).
+    </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- SECTION 3B: DURATION & HOURS -->
+<!-- ============================================================ -->
+<div class="page">
+    <h3>3B. Assignment Duration & Hours</h3>
+    <p>This section is <strong>critical</strong> — these numbers drive every financial calculation on the page.</p>
+
+    <table>
+        <tr><th style="width:180px;">Field</th><th>What to Enter</th><th style="width:100px;">Example</th></tr>
+        <tr><td><strong>Start Date</strong></td><td>First day of the assignment</td><td class="num">03/01/2026</td></tr>
+        <tr><td><strong>Contract Weeks</strong></td><td>How many weeks the assignment lasts (typically 13 or 26)</td><td class="num">13</td></tr>
+        <tr><td><strong>End Date</strong></td><td>Auto-calculates from Start Date + Weeks</td><td class="num">05/30/2026</td></tr>
+        <tr><td><strong>Hours Per Week</strong></td><td>Total scheduled hours per week (e.g., 36 for three 12-hr shifts)</td><td class="num">36</td></tr>
+        <tr><td><strong>Shift Hours/Day (OT)</strong></td><td>Hours per shift — only appears for states with daily OT rules</td><td class="num">12</td></tr>
+    </table>
+
+    <div class="callout callout-purple">
+        <span class="callout-label">Why This Matters</span>
+        <strong>Total Contract Hours</strong> = Hours/Week &times; Contract Weeks. For our example: 36 hrs &times; 13 weeks = <strong>468 total hours</strong>. This number is used to convert flat-dollar expenses into a per-hour cost.
+    </div>
+
+    <h4>Overtime Rules by State</h4>
+    <p>The <strong>OT Rules (State)</strong> dropdown controls how overtime is calculated. Different states have different laws:</p>
+
+    <table>
+        <tr><th>State</th><th>Daily OT Kicks In</th><th>Weekly OT Kicks In</th><th>Double Time?</th></tr>
+        <tr><td><strong>Federal (Default)</strong></td><td>None</td><td>After 40 hrs/week</td><td>No</td></tr>
+        <tr><td><strong>California</strong></td><td>After 8 hrs/day</td><td>After 40 hrs/week</td><td class="highlight">Yes — after 12 hrs/day</td></tr>
+        <tr><td><strong>Alaska</strong></td><td>After 8 hrs/day</td><td>After 40 hrs/week</td><td>No</td></tr>
+        <tr><td><strong>Nevada</strong></td><td>After 8 hrs/day</td><td>After 40 hrs/week</td><td>No</td></tr>
+        <tr><td><strong>Colorado</strong></td><td>After 12 hrs/day</td><td>After 40 hrs/week</td><td>No</td></tr>
+        <tr><td><strong>Oregon</strong></td><td>After 10 hrs/day</td><td>After 40 hrs/week</td><td>No</td></tr>
+        <tr><td><strong>Florida</strong></td><td>After 10 hrs/day</td><td>After 40 hrs/week</td><td>No</td></tr>
+    </table>
+
+    <div class="callout callout-blue">
+        <span class="callout-label">How It Works</span>
+        If the nurse is working in California doing 12-hour shifts, 3 days a week (36 hrs total), the tool automatically calculates: <strong>24 regular hours</strong> (8 hrs &times; 3 days) + <strong>12 OT hours</strong> (4 hrs &times; 3 days beyond 8-hr threshold). You'll see this breakdown in the OT Rule banner.
+    </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- SECTION 3C: RATE DETAILS -->
+<!-- ============================================================ -->
+<div class="page">
+    <h3>3C. Rate Details — Pay Rates & GSA Stipends</h3>
+    <p>This section has <strong>two parts</strong>: what you pay the traveler, and (for travel assignments) what you provide in tax-free stipends.</p>
+
+    <h4>Choosing the Assignment Type (Tabs)</h4>
+    <p>At the top of this section, you'll see three tabs:</p>
+
+    <table>
+        <tr><th>Tab</th><th>When to Use</th><th>What It Shows</th></tr>
+        <tr><td><strong>Local</strong></td><td>The nurse lives near the facility — no travel involved</td><td>Pay rates only (no stipend panel)</td></tr>
+        <tr><td><strong>Per Diem</strong></td><td>Nurse receives a daily per diem allowance</td><td>Pay rates + GSA stipend panel</td></tr>
+        <tr><td><strong>Travel</strong></td><td>Full travel assignment with housing and meal stipends</td><td>Pay rates + GSA stipend panel with zip code lookup</td></tr>
+    </table>
+
+    <h4>Candidate Pay Rates (Left Table)</h4>
+    <p>Enter the <strong>hourly pay rate</strong> for each type. The tool calculates weekly and total amounts automatically.</p>
+
+    <div class="mockup">
+        <div class="mockup-header">Example: Pay Rate Table</div>
+        <table>
+            <tr><th>Type</th><th class="num">$/Hr</th><th class="num">$/Wk</th><th class="num">Total (13 wks)</th><th class="num">Bill %</th></tr>
+            <tr><td>Regular (36.0 hrs)</td><td class="num">$20.00</td><td class="num">$720.00</td><td class="num">$9,360.00</td><td class="num">26.67%</td></tr>
+            <tr><td>OT (0.0 hrs)</td><td class="num">$30.00</td><td class="num">$0.00</td><td class="num">$0.00</td><td class="num">0.00%</td></tr>
+            <tr><td>Differential</td><td class="num">—</td><td class="num">$0.00</td><td class="num">$0.00</td><td class="num">0.00%</td></tr>
+            <tr class="total-row"><td><strong>Contract Gross Pay</strong></td><td></td><td class="num">$720.00</td><td class="num">$9,360.00</td><td class="num">26.67%</td></tr>
+        </table>
+    </div>
+
+    <h4>GSA Stipend Rates (Right Table — Travel & Per Diem Only)</h4>
+    <p>For travel assignments, nurses receive <strong>tax-free stipends</strong> for housing and meals, based on GSA (Government Services Administration) per diem rates for the work location.</p>
+
+    <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-content">
+            <strong>Enter the facility zip code</strong> in the GSA Rate Lookup box (e.g., <code>14601</code> for Rochester, NY)
+        </div>
+    </div>
+    <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-content">
+            <strong>Click "Lookup"</strong> — The system fetches official GSA rates and shows the maximum allowable amounts per day for lodging and meals
+        </div>
+    </div>
+    <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-content">
+            <strong>Enter the stipend amounts</strong> you're providing. You can enter either $/Hr or $/Wk — the other calculates automatically. A "max" row shows the GSA limit so you don't exceed it.
+        </div>
+    </div>
+
+    <div class="mockup">
+        <div class="mockup-header">Example: GSA Stipend Table (Zip: 14601 — Rochester, NY)</div>
+        <table>
+            <tr><th>Stipend</th><th class="num">$/Day</th><th class="num">$/Hr</th><th class="num">$/Wk</th><th class="num">Total (13 wks)</th><th class="num">Bill %</th></tr>
+            <tr><td>Lodging</td><td class="num">$107.00</td><td class="num">$20.81</td><td class="num">$749.00</td><td class="num">$9,737.00</td><td class="num">27.14%</td></tr>
+            <tr><td>M&I (Meals)</td><td class="num">$68.00</td><td class="num">$13.22</td><td class="num">$476.00</td><td class="num">$6,188.00</td><td class="num">17.63%</td></tr>
+            <tr class="total-row"><td><strong>GSA Total</strong></td><td class="num">$175.00</td><td class="num">$34.03</td><td class="num">$1,225.00</td><td class="num">$15,925.00</td><td class="num">45.37%</td></tr>
+        </table>
+    </div>
+
+    <div class="callout callout-green">
+        <span class="callout-label">Why GSA Matters</span>
+        GSA stipends are <strong>not taxed</strong>. This means the staffing company doesn't pay Workers' Comp or employer taxes on this money. The tool automatically separates taxable wages from non-taxable stipends when calculating burdens.
+    </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- SECTION 3D: BILL RATES -->
+<!-- ============================================================ -->
+<div class="page">
+    <h3>3D. Bill Rate Details & VMS Fees</h3>
+    <p>This section captures what you <strong>charge the hospital</strong> — your revenue side of the equation.</p>
+
+    <h4>Entering Bill Rates</h4>
+    <p>Enter the <strong>bill rate per hour</strong> for each rate type. These are what the hospital pays you.</p>
+
+    <div class="mockup">
+        <div class="mockup-header">Example: Bill Rate Table</div>
+        <table>
+            <tr><th>Billing Type</th><th class="num">$/Hr</th><th class="num">$/Wk</th><th class="num">Total (13 wks)</th><th class="num">Bill %</th></tr>
+            <tr><td>Bill Rate — Regular (36.0 hrs)</td><td class="num highlight">$75.00</td><td class="num">$2,700.00</td><td class="num">$35,100.00</td><td class="num">100%</td></tr>
+            <tr><td>OT Bill Rate (0.0 hrs)</td><td class="num">$112.50</td><td class="num">$0.00</td><td class="num">$0.00</td><td class="num">0.00%</td></tr>
+            <tr class="total-row"><td><strong>Total Bill</strong></td><td class="num">$75.00</td><td class="num">$2,700.00</td><td class="num">$35,100.00</td><td class="num">100%</td></tr>
+        </table>
+    </div>
+
+    <h4>VMS Fee (Vendor Management System)</h4>
+    <p>Many hospitals use a VMS (like ShiftWise, Medefis, or SAP Fieldglass) that takes a percentage of your bill rate as a fee. This reduces your actual revenue.</p>
+
+    <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-content">
+            Enter the <strong>VMS Fee %</strong> (e.g., <code>4.00</code> for a 4% fee)
+        </div>
+    </div>
+    <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-content">
+            A new <strong>"Net Bill Rate"</strong> row appears showing your bill rate after the VMS cut
+        </div>
+    </div>
+
+    <div class="formula">
+        <span class="label">Net Bill Rate</span> = Bill Rate &times; (1 - VMS%)<br>
+        <span class="label">Net Bill Rate</span> = $75.00 &times; (1 - 0.04) <span class="equals">=</span> <span class="result">$72.00/hr</span>
+    </div>
+
+    <div class="callout callout-orange">
+        <span class="callout-label">Important</span>
+        All margin and profit calculations use the <strong>net bill rate</strong> (after VMS), not the gross bill rate. A 4% VMS fee on a $75/hr bill rate costs you $3.00/hr — that's $108/week or $1,404 over a 13-week contract.
+    </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- SECTION 3E: EXPENSES -->
+<!-- ============================================================ -->
+<div class="page">
+    <h3>3E. Cost & Expenses</h3>
+    <p>These are <strong>one-time, flat-dollar costs</strong> that you pay upfront to place the traveler. They reduce your profit.</p>
+
+    <div class="mockup">
+        <div class="mockup-header">Example: Expense Table</div>
+        <table>
+            <tr><th>Expense</th><th class="num">Flat $</th><th class="num">$/Hr Burden</th><th class="num">Total</th></tr>
+            <tr><td>Drug Screening</td><td class="num">$85.00</td><td class="num">$0.18</td><td class="num">$85.00</td></tr>
+            <tr><td>Background Check</td><td class="num">$135.00</td><td class="num">$0.29</td><td class="num">$135.00</td></tr>
+            <tr><td>Occupational Screening</td><td class="num">$350.00</td><td class="num">$0.75</td><td class="num">$350.00</td></tr>
+            <tr class="total-row"><td><strong>Total Expenses</strong></td><td class="num">$570.00</td><td class="num highlight">$1.22</td><td class="num">$570.00</td></tr>
+        </table>
+        <div style="font-size:10px; color:#667eea; text-align:right; margin-top:4px;">
+            $570.00 &divide; 468 contract hrs (36 hrs/wk &times; 13 wks) = $1.22/hr
+        </div>
+    </div>
+
+    <h4>How Expense Amortization Works</h4>
+    <p>You spend $570 once, but you need to know how it affects your per-hour profit. The tool spreads this cost across all contract hours:</p>
+
+    <div class="formula">
+        <span class="label">Expense Burden Per Hour</span> = Total Expenses &divide; Total Contract Hours<br>
+        <span class="label">Expense Burden Per Hour</span> = $570.00 &divide; (36 hrs &times; 13 wks)<br>
+        <span class="label">Expense Burden Per Hour</span> = $570.00 &divide; 468 <span class="equals">=</span> <span class="result">$1.22/hr</span>
+    </div>
+
+    <p>This <strong>$1.22/hr</strong> gets added to your cost side in every margin calculation.</p>
+
+    <h4>Adding Custom Expense Categories</h4>
+    <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-content">Click the <strong>"+ Add Category"</strong> button</div>
+    </div>
+    <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-content">Type a name (e.g., "Skills Testing" or "Compliance Training")</div>
+    </div>
+    <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-content">Enter the dollar amount</div>
+    </div>
+    <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-content">Click the <strong>green checkmark</strong> to confirm</div>
+    </div>
+
+    <h3>3F. Burdens, Taxes & Fees</h3>
+    <p>These are <strong>percentage-based costs</strong> that you pay on every dollar of taxable wages. They're ongoing, not one-time.</p>
+
+    <table>
+        <tr><th style="width:200px;">Field</th><th>What It Covers</th><th style="width:80px;">Example</th></tr>
+        <tr><td><strong>WC — Workers Comp (%)</strong></td><td>Insurance premium covering workplace injuries. Varies by state and job classification.</td><td class="num">5.50%</td></tr>
+        <tr><td><strong>ER Cost — Employer Cost (%)</strong></td><td>Employer's share of payroll taxes: Social Security (6.2%), Medicare (1.45%), FUTA, SUTA, plus any benefits.</td><td class="num">18.50%</td></tr>
+    </table>
+
+    <div class="formula">
+        <span class="label">Total Burden Rate</span> = WC% + ER% = 5.50% + 18.50% <span class="equals">=</span> <span class="result">24.00%</span><br>
+        <span class="label">Burden Per Hour</span> = Taxable Pay Rate &times; Burden Rate<br>
+        <span class="label">Burden Per Hour</span> = $20.00 &times; 0.24 <span class="equals">=</span> <span class="result">$4.80/hr</span>
+    </div>
+
+    <div class="callout callout-green">
+        <span class="callout-label">GSA Stipends Are Excluded</span>
+        Burdens only apply to <strong>taxable wages</strong> ($20.00/hr in our example). The $34.03/hr in GSA stipends is tax-free, so you don't pay WC or ER on it. This is a significant cost savings on travel assignments.
+    </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- SECTION 4: SIDEBARS -->
+<!-- ============================================================ -->
+<div class="page">
+    <h2 class="section-title"><span class="section-num">4</span> Understanding the Sidebars</h2>
+    <p class="section-subtitle">Where the magic happens — reading your financial metrics</p>
+
+    <h3>Left Sidebar: Candidate Compensation</h3>
+    <p>This shows everything the traveler earns, broken down by time period:</p>
+
+    <div class="metric-grid">
+        <div class="metric-card mc-blue">
+            <div class="mc-label">Hourly Rate</div>
+            <div class="mc-value">$54.03</div>
+            <div class="mc-sub">Blended rate (pay + GSA)</div>
+        </div>
+        <div class="metric-card mc-green">
+            <div class="mc-label">Daily Pay</div>
+            <div class="mc-value">$648.33</div>
+            <div class="mc-sub">Per scheduled day</div>
+        </div>
+        <div class="metric-card mc-gold">
+            <div class="mc-label">Weekly Pay</div>
+            <div class="mc-value">$1,945.00</div>
+            <div class="mc-sub">Gross weekly</div>
+        </div>
+        <div class="metric-card mc-purple">
+            <div class="mc-label">Monthly Pay</div>
+            <div class="mc-value">$8,421.85</div>
+            <div class="mc-sub">&times;4.33 weeks</div>
+        </div>
+    </div>
+
+    <p>Below these tiles, you'll see itemized breakdowns — every pay component listed with its hourly and weekly contribution (Regular, OT, GSA Stipend, etc.).</p>
+
+    <hr>
+
+    <h3>Right Sidebar: Margin & Markup</h3>
+    <p>This is <strong>your</strong> financial dashboard — the business health of the deal.</p>
+
+    <h4>Hero Section (Top of Sidebar)</h4>
+    <div class="metric-grid">
+        <div class="metric-card mc-blue">
+            <div class="mc-label">Weekly Bill Amount</div>
+            <div class="mc-value">$2,592.00</div>
+            <div class="mc-sub">Net bill per week (after VMS)</div>
+        </div>
+        <div class="metric-card mc-green">
+            <div class="mc-label">Weekly Gross</div>
+            <div class="mc-value">$1,945.00</div>
+            <div class="mc-sub">Total gross pay/wk</div>
+        </div>
+    </div>
+    <div class="metric-grid" style="grid-template-columns:1fr;">
+        <div class="metric-card mc-gold">
+            <div class="mc-label">Weekly Margin</div>
+            <div class="mc-value">$430.35</div>
+            <div class="mc-sub">Net margin per week (bill - all costs)</div>
+        </div>
+    </div>
+
+    <h4>Key Metrics Grid (6 tiles)</h4>
+    <table>
+        <tr><th style="width:140px;">Metric</th><th>What It Means</th><th style="width:100px;">Example</th><th style="width:60px;">Good?</th></tr>
+        <tr>
+            <td><strong>Net Markup</strong></td>
+            <td>How many times your cost is the net bill rate. Like a multiplier on what you spend.<br><em>Formula: Net Bill/Hr &divide; Total Cost/Hr</em></td>
+            <td class="num highlight">1.20x</td>
+            <td class="green">Yes</td>
+        </tr>
+        <tr>
+            <td><strong>Burden % of GM</strong></td>
+            <td>How much of your gross margin is eaten by burdens (expenses + taxes).<br><em>Lower is better.</em></td>
+            <td class="num">28.69%</td>
+            <td class="orange">OK</td>
+        </tr>
+        <tr>
+            <td><strong>Gross Margin $</strong></td>
+            <td>Bill - Pay (before any expenses or taxes). The raw spread.<br><em>Formula: Total Bill - Gross Wages</em></td>
+            <td class="num">$9,815.00</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td><strong>GM %</strong></td>
+            <td>Gross margin as a percentage of total bill.<br><em>Formula: Gross Margin &divide; Total Bill &times; 100</em></td>
+            <td class="num">27.96%</td>
+            <td class="green">Yes</td>
+        </tr>
+        <tr>
+            <td><strong>Net Margin $</strong></td>
+            <td>What's left after VMS, burdens, and expenses. This is your <strong>actual profit</strong>.<br><em>Formula: Net Bill - Total Cost</em></td>
+            <td class="num">$5,594.60</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td><strong>Net Margin %</strong></td>
+            <td>Net margin as a percentage of net bill. The "true" profitability of the deal.<br><em>Formula: Net Margin &divide; Net Bill &times; 100</em></td>
+            <td class="num">16.59%</td>
+            <td class="green">Yes</td>
+        </tr>
+    </table>
+
+    <h4>What's a "Good" Deal?</h4>
+    <table>
+        <tr><th>Metric</th><th class="green">Healthy</th><th class="orange">Watch Out</th><th class="red">Danger</th></tr>
+        <tr><td><strong>Net Markup</strong></td><td class="green">1.15x — 1.35x</td><td class="orange">1.05x — 1.15x</td><td class="red">Below 1.0x (losing money)</td></tr>
+        <tr><td><strong>GM %</strong></td><td class="green">25% — 40%</td><td class="orange">15% — 25%</td><td class="red">Below 15%</td></tr>
+        <tr><td><strong>Net Margin %</strong></td><td class="green">15% — 25%</td><td class="orange">8% — 15%</td><td class="red">Below 8%</td></tr>
+        <tr><td><strong>Burden % of GM</strong></td><td class="green">Below 30%</td><td class="orange">30% — 50%</td><td class="red">Above 50%</td></tr>
+    </table>
+</div>
+
+<!-- ============================================================ -->
+<!-- SECTION 4 (continued): PROFIT BREAKDOWNS -->
+<!-- ============================================================ -->
+<div class="page">
+    <h3>Profit Breakdowns (Below the Margin Section)</h3>
+    <p>Scroll down on the right sidebar (or see the 3rd column on mobile) for detailed profit analysis.</p>
+
+    <h4>GM Profit Breakdown</h4>
+    <p><strong>Gross Margin profit</strong> per time period — Bill minus Pay, before expenses and taxes.</p>
+
+    <div class="metric-grid">
+        <div class="metric-card mc-green">
+            <div class="mc-label">Per Hour</div>
+            <div class="mc-value">$20.97</div>
+            <div class="mc-sub">$75 bill / $54.03 pay</div>
+        </div>
+        <div class="metric-card mc-green">
+            <div class="mc-label">Per Day</div>
+            <div class="mc-value">$251.67</div>
+            <div class="mc-sub">$900 bill / $648.33 pay</div>
+        </div>
+        <div class="metric-card mc-green">
+            <div class="mc-label">Per Week</div>
+            <div class="mc-value">$755.00</div>
+            <div class="mc-sub">$2,700 bill / $1,945 pay</div>
+        </div>
+        <div class="metric-card mc-green">
+            <div class="mc-label">Per Month</div>
+            <div class="mc-value">$3,269.15</div>
+            <div class="mc-sub">$11,691 bill / $8,422 pay</div>
+        </div>
+    </div>
+
+    <h4>Net Profit Breakdown</h4>
+    <p><strong>True profit</strong> per time period — after VMS fee, employer taxes, workers comp, and expenses.</p>
+
+    <div class="metric-grid">
+        <div class="metric-card mc-gold">
+            <div class="mc-label">Per Hour</div>
+            <div class="mc-value">$11.95</div>
+            <div class="mc-sub">$72 net bill / $60.05 cost</div>
+        </div>
+        <div class="metric-card mc-gold">
+            <div class="mc-label">Per Day</div>
+            <div class="mc-value">$143.40</div>
+            <div class="mc-sub">$864 net bill / $720.60 cost</div>
+        </div>
+        <div class="metric-card mc-gold">
+            <div class="mc-label">Per Week</div>
+            <div class="mc-value">$430.35</div>
+            <div class="mc-sub">$2,592 net bill / $2,161.65 cost</div>
+        </div>
+        <div class="metric-card mc-gold">
+            <div class="mc-label">Per Month</div>
+            <div class="mc-value">$1,863.42</div>
+            <div class="mc-sub">$11,223 net bill / $9,359.95 cost</div>
+        </div>
+    </div>
+
+    <h4>Weeks to Cover Expenses</h4>
+    <p>This answers a crucial question: <em>"How many weeks of profit does it take to pay back the upfront costs?"</em></p>
+
+    <div class="mockup">
+        <div style="background:#1a1a2e; color:white; padding:16px; border-radius:8px;">
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+                <div>
+                    <div style="font-size:10px; text-transform:uppercase; letter-spacing:1px; color:rgba(255,255,255,0.5);">Weeks to Cover Expenses</div>
+                    <div style="font-size:9px; color:rgba(255,255,255,0.35);">$570.00 expenses / $430.35 net profit/wk</div>
+                </div>
+                <div style="font-size:28px; font-weight:900; font-family:monospace; color:#43e97b;">1.3 wks</div>
+            </div>
+            <div style="background:rgba(255,255,255,0.1); border-radius:4px; height:8px; margin-top:8px;">
+                <div style="width:10%; height:100%; background:linear-gradient(90deg,#43e97b,#38f9d7); border-radius:4px;"></div>
+            </div>
+            <div style="font-size:9px; color:rgba(255,255,255,0.35); text-align:right; margin-top:4px;">10.0% of 13-week contract</div>
+        </div>
+    </div>
+
+    <table>
+        <tr><th>Color</th><th>Meaning</th><th>Weeks</th></tr>
+        <tr><td style="color:#43e97b; font-weight:700;">Green</td><td>Expenses recovered quickly — healthy deal</td><td>2 weeks or less</td></tr>
+        <tr><td style="color:#ff9f43; font-weight:700;">Orange</td><td>Moderate — expenses take a while to recover</td><td>2 to 4 weeks</td></tr>
+        <tr><td style="color:#ff4444; font-weight:700;">Red</td><td>Slow recovery — consider renegotiating the bill rate</td><td>More than 4 weeks</td></tr>
+    </table>
+
+    <h4>OT/DT Margin Breakdown</h4>
+    <p>Shows profit by rate type (Regular, OT, Double Time) — useful for seeing if overtime hours are profitable.</p>
+
+    <div class="callout callout-blue">
+        <span class="callout-label">Reading the OT Breakdown</span>
+        Each rate type shows its own margin/hr and weekly profit after subtracting pay and burden. For example: Reg Margin/Hr = $75 bill - $20 pay - $4.80 burden = <strong>$50.20/hr</strong>. Compare this to your OT margin to see if OT hours help or hurt.
+    </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- SECTION 5: FULL EXAMPLE -->
+<!-- ============================================================ -->
+<div class="page">
+    <h2 class="section-title"><span class="section-num">5</span> Full Example: Walking Through a Real Deal</h2>
+    <p class="section-subtitle">Let's build a complete term sheet from scratch using sample data</p>
+
+    <div class="callout callout-purple">
+        <span class="callout-label">Scenario</span>
+        Strong Memorial Hospital in Rochester, NY needs a <strong>Travel ICU Nurse</strong> for <strong>13 weeks</strong>.
+        They'll work <strong>36 hours/week</strong> (three 12-hour shifts). The hospital pays you a <strong>$75/hr bill rate</strong> through their VMS (4% fee). You need to figure out: what to pay the nurse, what your costs are, and whether this deal is profitable.
+    </div>
+
+    <h3>Step 1: Enter Assignment Info</h3>
+    <table>
+        <tr><td style="width:160px;"><strong>Assignment ID</strong></td><td>ASG-2026-0142</td></tr>
+        <tr><td><strong>Status</strong></td><td>Negotiating</td></tr>
+        <tr><td><strong>Position Title</strong></td><td>RN - ICU</td></tr>
+        <tr><td><strong>Facility</strong></td><td>Strong Memorial Hospital</td></tr>
+        <tr><td><strong>City, State</strong></td><td>Rochester, NY</td></tr>
+        <tr><td><strong>Facility Zip</strong></td><td>14601</td></tr>
+        <tr><td><strong>Candidate</strong></td><td>Sarah Johnson, RN</td></tr>
+    </table>
+
+    <h3>Step 2: Set Duration & Hours</h3>
+    <table>
+        <tr><td style="width:160px;"><strong>Start Date</strong></td><td>03/01/2026</td></tr>
+        <tr><td><strong>Contract Weeks</strong></td><td>13</td></tr>
+        <tr><td><strong>Hours Per Week</strong></td><td>36</td></tr>
+        <tr><td><strong>OT Rules</strong></td><td>Federal (auto-detected from NY zip) — OT after 40 hrs/week</td></tr>
+    </table>
+
+    <h3>Step 3: Click "Travel" Tab &amp; Look Up GSA Rates</h3>
+    <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-content">Click the <strong>Travel</strong> tab</div>
+    </div>
+    <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-content">Enter zip code <strong>14601</strong> and click <strong>Lookup</strong></div>
+    </div>
+    <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-content">GSA returns: Lodging $107.00/day, M&I $68.00/day</div>
+    </div>
+    <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-content">Enter stipends: Lodging <strong>$749.00/wk</strong>, M&I <strong>$476.00/wk</strong></div>
+    </div>
+
+    <h3>Step 4: Enter Pay &amp; Bill Rates</h3>
+    <table>
+        <tr><th>Field</th><th class="num">Amount</th></tr>
+        <tr><td>Regular Pay Rate</td><td class="num highlight">$20.00/hr</td></tr>
+        <tr><td>OT Pay Rate</td><td class="num">$30.00/hr</td></tr>
+        <tr><td>Regular Bill Rate</td><td class="num highlight">$75.00/hr</td></tr>
+        <tr><td>OT Bill Rate</td><td class="num">$112.50/hr</td></tr>
+        <tr><td>VMS Fee</td><td class="num">4.00%</td></tr>
+    </table>
+
+    <h3>Step 5: Enter Expenses</h3>
+    <table>
+        <tr><th>Expense</th><th class="num">Amount</th></tr>
+        <tr><td>Drug Screening</td><td class="num">$85.00</td></tr>
+        <tr><td>Background Check</td><td class="num">$135.00</td></tr>
+        <tr><td>Occupational Screening</td><td class="num">$350.00</td></tr>
+        <tr class="total-row"><td><strong>Total</strong></td><td class="num">$570.00</td></tr>
+    </table>
+
+    <h3>Step 6: Enter Burden Rates</h3>
+    <table>
+        <tr><td style="width:200px;">Workers Comp (WC)</td><td class="num">5.50%</td></tr>
+        <tr><td>Employer Cost (ER)</td><td class="num">18.50%</td></tr>
+        <tr class="total-row"><td><strong>Total Burden %</strong></td><td class="num">24.00%</td></tr>
+    </table>
+</div>
+
+<!-- ============================================================ -->
+<!-- SECTION 5 (continued): RESULTS -->
+<!-- ============================================================ -->
+<div class="page">
+    <h3>Step 7: Read Your Results</h3>
+    <p>With all the data entered, here's what the tool calculates:</p>
+
+    <h4>The Complete Financial Picture</h4>
+    <table>
+        <tr><th colspan="2" style="background:#667eea;">Revenue (What the Hospital Pays You)</th></tr>
+        <tr><td>Gross Bill Rate</td><td class="num">$75.00/hr</td></tr>
+        <tr><td>VMS Fee (4%)</td><td class="num red">-$3.00/hr</td></tr>
+        <tr><td><strong>Net Bill Rate</strong></td><td class="num highlight">$72.00/hr</td></tr>
+        <tr><td>Net Bill Per Week (36 hrs)</td><td class="num">$2,592.00</td></tr>
+        <tr><td>Net Bill Total (13 wks)</td><td class="num">$33,696.00</td></tr>
+
+        <tr><th colspan="2" style="background:#e74c3c;">Costs (What You Pay Out)</th></tr>
+        <tr><td>Taxable Pay Rate</td><td class="num">$20.00/hr</td></tr>
+        <tr><td>GSA Stipends</td><td class="num">$34.03/hr ($1,225/wk)</td></tr>
+        <tr><td><strong>Total Candidate Comp</strong></td><td class="num">$54.03/hr ($1,945/wk)</td></tr>
+        <tr><td>Burden — WC + ER (24% of $20.00)</td><td class="num">$4.80/hr</td></tr>
+        <tr><td>Expense Burden ($570 &divide; 468 hrs)</td><td class="num">$1.22/hr</td></tr>
+        <tr><td><strong>Total Cost Per Hour</strong></td><td class="num highlight">$60.05/hr</td></tr>
+        <tr><td>Total Cost Per Week</td><td class="num">$2,161.65</td></tr>
+        <tr><td>Total Cost for Contract</td><td class="num">$28,101.40</td></tr>
+
+        <tr><th colspan="2" style="background:#27ae60; color:white;">Profit (What You Keep)</th></tr>
+        <tr><td><strong>Net Profit Per Hour</strong></td><td class="num green">$11.95/hr</td></tr>
+        <tr><td><strong>Net Profit Per Week</strong></td><td class="num green">$430.35/wk</td></tr>
+        <tr><td><strong>Net Profit Total (13 wks)</strong></td><td class="num green" style="font-weight:700; font-size:13px;">$5,594.60</td></tr>
+        <tr><td>Net Markup</td><td class="num highlight">1.20x</td></tr>
+        <tr><td>Gross Margin %</td><td class="num">27.96%</td></tr>
+        <tr><td>Net Margin %</td><td class="num">16.59%</td></tr>
+        <tr><td>Weeks to Cover Expenses</td><td class="num green">1.3 weeks</td></tr>
+    </table>
+
+    <h4>Visualizing the Money Flow</h4>
+    <div class="flow">
+        <div class="flow-box">Hospital Pays<br><strong>$75.00/hr</strong></div>
+        <div class="flow-arrow">&rarr;</div>
+        <div class="flow-box">VMS Takes<br><strong style="color:#e74c3c;">-$3.00/hr</strong></div>
+        <div class="flow-arrow">&rarr;</div>
+        <div class="flow-box">You Receive<br><strong>$72.00/hr</strong></div>
+    </div>
+    <div class="flow">
+        <div class="flow-box">Pay Nurse<br><strong style="color:#e74c3c;">-$54.03/hr</strong></div>
+        <div class="flow-arrow">&rarr;</div>
+        <div class="flow-box">Taxes/WC<br><strong style="color:#e74c3c;">-$4.80/hr</strong></div>
+        <div class="flow-arrow">&rarr;</div>
+        <div class="flow-box">Expenses<br><strong style="color:#e74c3c;">-$1.22/hr</strong></div>
+        <div class="flow-arrow">&rarr;</div>
+        <div class="flow-box flow-result">Your Profit<br><strong>$11.95/hr</strong></div>
+    </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- SECTION 6: FORMULAS -->
+<!-- ============================================================ -->
+<div class="page">
+    <h2 class="section-title"><span class="section-num">6</span> How Every Number Is Calculated</h2>
+    <p class="section-subtitle">The formulas behind every metric, in plain English</p>
+
+    <table>
+        <tr>
+            <th style="width:180px;">Metric</th>
+            <th>Formula</th>
+            <th style="width:120px;">Example Result</th>
+        </tr>
+        <tr>
+            <td><strong>Total Contract Hours</strong></td>
+            <td>Hours/Week &times; Contract Weeks</td>
+            <td class="num">36 &times; 13 = 468</td>
+        </tr>
+        <tr>
+            <td><strong>Blended Pay Rate</strong></td>
+            <td>(Taxable Pay + GSA Stipend) per hour</td>
+            <td class="num">$20 + $34.03 = $54.03</td>
+        </tr>
+        <tr>
+            <td><strong>Net Bill Rate</strong></td>
+            <td>Bill Rate &times; (1 - VMS%)</td>
+            <td class="num">$75 &times; 0.96 = $72.00</td>
+        </tr>
+        <tr>
+            <td><strong>Burden Per Hour</strong></td>
+            <td>Taxable Pay &times; (WC% + ER%)</td>
+            <td class="num">$20 &times; 24% = $4.80</td>
+        </tr>
+        <tr>
+            <td><strong>Expense Burden/Hr</strong></td>
+            <td>Total Flat Expenses &divide; Total Contract Hours</td>
+            <td class="num">$570 &divide; 468 = $1.22</td>
+        </tr>
+        <tr>
+            <td><strong>Total Cost Per Hour</strong></td>
+            <td>Blended Pay + Burden/Hr + Expense/Hr</td>
+            <td class="num">$54.03 + $4.80 + $1.22 = $60.05</td>
+        </tr>
+        <tr>
+            <td><strong>Net Markup</strong></td>
+            <td>Net Bill/Hr &divide; Total Cost/Hr</td>
+            <td class="num">$72 &divide; $60.05 = 1.20x</td>
+        </tr>
+        <tr>
+            <td><strong>Gross Margin</strong></td>
+            <td>Total Bill - Gross Wages</td>
+            <td class="num">$35,100 - $25,285 = $9,815</td>
+        </tr>
+        <tr>
+            <td><strong>GM %</strong></td>
+            <td>(Gross Margin &divide; Total Bill) &times; 100</td>
+            <td class="num">($9,815 &divide; $35,100) = 27.96%</td>
+        </tr>
+        <tr>
+            <td><strong>Net Margin</strong></td>
+            <td>Net Bill Total - Total Cost</td>
+            <td class="num">$33,696 - $28,101.40 = $5,594.60</td>
+        </tr>
+        <tr>
+            <td><strong>Net Margin %</strong></td>
+            <td>(Net Margin &divide; Net Bill) &times; 100</td>
+            <td class="num">($5,594.60 &divide; $33,696) = 16.59%</td>
+        </tr>
+        <tr>
+            <td><strong>Burden % of GM</strong></td>
+            <td>(Total Burden/Hr &divide; Gross Margin/Hr) &times; 100</td>
+            <td class="num">($6.02 &divide; $20.97) = 28.69%</td>
+        </tr>
+        <tr>
+            <td><strong>Weeks to Cover Expenses</strong></td>
+            <td>Total Flat Expenses &divide; Net Profit/Week</td>
+            <td class="num">$570 &divide; $430.35 = 1.3 wks</td>
+        </tr>
+    </table>
+</div>
+
+<!-- ============================================================ -->
+<!-- SECTION 7: FAQ -->
+<!-- ============================================================ -->
+<div class="page">
+    <h2 class="section-title"><span class="section-num">7</span> Frequently Asked Questions</h2>
+    <p class="section-subtitle">Answers to common questions</p>
+
+    <h4>Q: Do I need to fill in every field?</h4>
+    <p>No. The financial engine needs these minimum fields to work: <strong>Hours/Week</strong>, <strong>Contract Weeks</strong>, <strong>Pay Rate</strong>, and <strong>Bill Rate</strong>. Everything else adds accuracy but isn't required.</p>
+
+    <h4>Q: What's the difference between Gross Margin and Net Margin?</h4>
+    <p><strong>Gross Margin</strong> = Bill - Pay. It's the simple spread before any costs.<br>
+    <strong>Net Margin</strong> = Net Bill - Total Cost (pay + taxes + WC + expenses). It's your <em>actual</em> profit.</p>
+
+    <h4>Q: Why does my Net Markup show 0.00x?</h4>
+    <p>This usually means you haven't entered a bill rate yet, or the bill rate is $0. Enter a bill rate and it will calculate instantly.</p>
+
+    <h4>Q: What happens if I don't enter Contract Weeks?</h4>
+    <p>The tool switches to a "weekly snapshot" mode. Expenses are estimated per-week instead of amortized over the full contract. For the most accurate expense burden, always enter weeks.</p>
+
+    <h4>Q: Can I use this on my phone?</h4>
+    <p>Yes! The layout automatically adapts for mobile. The form is full-width at top, with three columns below showing Candidate Compensation, Margins, and Profit Breakdowns side by side.</p>
+
+    <h4>Q: Is my data secure?</h4>
+    <p>Your data stays in <strong>your browser only</strong> (localStorage). It's never sent to any server. If you clear your browser data, it's gone. Use Print/PDF to keep a permanent copy.</p>
+
+    <h4>Q: How do I compare two scenarios (e.g., different pay rates)?</h4>
+    <p>Open the tool in two browser tabs. Set up the same base deal in both, then change the variable you want to compare (e.g., $20/hr vs $22/hr). View them side-by-side.</p>
+
+    <h4>Q: Why are GSA stipends separate from pay?</h4>
+    <p>GSA stipends (housing and meals) are <strong>tax-free</strong> for the traveler and <strong>burden-free</strong> for the company. You don't pay Workers Comp or employer taxes on stipends, which saves significant money. The tool keeps them separate to calculate burdens correctly.</p>
+
+    <h4>Q: What does "Burden % of GM" tell me?</h4>
+    <p>It tells you what percentage of your gross margin goes to overhead costs (expenses + employer taxes + workers comp). If it's over 50%, more than half your spread is going to costs — not profit.</p>
+
+    <h4>Q: How do I save a PDF?</h4>
+    <p>Click the <strong>"Print/PDF"</strong> button at the bottom of the form. In the print dialog, select "Save as PDF" as the destination. The sidebars are hidden in print mode so you get a clean document.</p>
+</div>
+
+<!-- ============================================================ -->
+<!-- SECTION 8: GLOSSARY -->
+<!-- ============================================================ -->
+<div class="page">
+    <h2 class="section-title"><span class="section-num">8</span> Glossary of Terms</h2>
+    <p class="section-subtitle">Industry terms defined in plain language</p>
+
+    <table>
+        <tr><th style="width:160px;">Term</th><th>Definition</th></tr>
+        <tr><td><strong>Bill Rate</strong></td><td>The hourly rate you charge the hospital. This is your revenue.</td></tr>
+        <tr><td><strong>Pay Rate</strong></td><td>The hourly rate you pay the traveler. This is your largest cost.</td></tr>
+        <tr><td><strong>Blended Rate</strong></td><td>The combined hourly value of pay + stipends. What the traveler "earns" per hour in total value.</td></tr>
+        <tr><td><strong>Burden</strong></td><td>Costs you pay on top of wages — employer taxes, workers comp, insurance, and amortized expenses.</td></tr>
+        <tr><td><strong>Burden Rate</strong></td><td>The dollar amount per hour that burden costs you (e.g., $4.80/hr).</td></tr>
+        <tr><td><strong>GSA Per Diem</strong></td><td>Government-set maximum daily rates for housing and meals in a specific city. Used as the basis for tax-free travel stipends.</td></tr>
+        <tr><td><strong>Gross Margin</strong></td><td>Bill minus Pay — the raw spread before any costs are deducted.</td></tr>
+        <tr><td><strong>Net Margin</strong></td><td>What's left after ALL costs (VMS, pay, taxes, WC, expenses). Your true profit.</td></tr>
+        <tr><td><strong>Markup</strong></td><td>A multiplier showing how much more you bill than your costs. 1.20x = you bill 20% more than your costs.</td></tr>
+        <tr><td><strong>VMS</strong></td><td>Vendor Management System — a technology platform hospitals use to manage staffing vendors. They charge a % fee.</td></tr>
+        <tr><td><strong>WC (Workers Comp)</strong></td><td>Insurance covering workplace injuries. You pay a premium as a % of taxable wages.</td></tr>
+        <tr><td><strong>ER Cost</strong></td><td>Employer-side payroll taxes — Social Security (6.2%), Medicare (1.45%), federal and state unemployment taxes, and any benefits.</td></tr>
+        <tr><td><strong>Amortize</strong></td><td>To spread a one-time cost across multiple hours. Example: $570 in expenses spread over 468 hours = $1.22/hr.</td></tr>
+        <tr><td><strong>OT (Overtime)</strong></td><td>Hours worked beyond the threshold (usually 40/week or 8/day depending on state). Paid at 1.5x the regular rate.</td></tr>
+        <tr><td><strong>DT (Double Time)</strong></td><td>Hours worked beyond an extended threshold (e.g., 12 hrs/day in California). Paid at 2x the regular rate.</td></tr>
+        <tr><td><strong>M&I</strong></td><td>Meals & Incidental Expenses — part of the GSA per diem rate covering food and small expenses.</td></tr>
+        <tr><td><strong>Stipend</strong></td><td>A fixed allowance paid to the traveler for housing or meals. Tax-free when based on GSA rates.</td></tr>
+        <tr><td><strong>Contract Hours</strong></td><td>Total hours in the assignment = Hours/Week &times; Weeks. Used to amortize flat expenses.</td></tr>
+    </table>
+
+    <br>
+    <hr>
+    <br>
+
+    <div style="text-align:center; color:#999; font-size:11px;">
+        <p><strong>Healthcare Travel Staffing Term Sheet — User Guide</strong></p>
+        <p>Version 1.0 &nbsp;|&nbsp; February 2026</p>
+        <p style="margin-top:8px;">
+            <span style="font-family:monospace; background:#f0f0f0; padding:3px 10px; border-radius:4px;">
+                https://dengod69.github.io/healthcare-term-sheet/
+            </span>
+        </p>
+    </div>
+</div>
+
+</body>
+</html>
