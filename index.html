@@ -3296,8 +3296,9 @@
                 }
             }
         });
-        // Auto-fill OT/DT rates when regular pay rate changes
+        // Auto-fill OT/DT rates when regular pay rate changes + minimum wage check
         document.querySelector('.pay-rate[data-type="regular"]').addEventListener('change', function() {
+            validateMinWage();
             autoFillOTRates();
         });
         document.querySelector('.bill-rate[data-type="regular"]').addEventListener('change', function() {
