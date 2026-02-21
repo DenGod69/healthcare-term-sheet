@@ -3179,6 +3179,10 @@
             input.addEventListener('change', calculateAllRows);
         });
 
+        // Bill rate multiplier listeners
+        document.getElementById('otBillMultiplier').addEventListener('input', calculateAllRows);
+        document.getElementById('dtBillMultiplier').addEventListener('input', calculateAllRows);
+
         // GSA $/Hr listeners — editing $/Hr recalculates $/Wk
         document.getElementById('gsaLodgingHr').addEventListener('input', function() {
             gsaHrChanged('lodging');
