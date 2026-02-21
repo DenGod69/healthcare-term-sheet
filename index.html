@@ -2625,6 +2625,47 @@
         }
 
         // Calculate VMS % and Net Bill Rates with full breakdown
+        // --- Bill Rate Multiplier: auto-fill OT/DT bill rates from regular bill rate ---
+        function applyBillMultipliers() {
+            const regBillRate = parseFloat(document.querySelector('.bill-rate[data-type="regular"]').value) || 0;
+            const otMult = parseFloat(document.getElementById('otBillMultiplier').value) || 0;
+            const dtMult = parseFloat(document.getElementById('dtBillMultiplier').value) || 0;
+            const otMultRow = document.getElementById('otMultiplierRow');
+            const dtMultRow = document.getElementById('dtMultiplierRow');
+
+            // Show OT multiplier row when regular bill rate > 0
+            otMultRow.style.display = regBillRate > 0 ? '' : 'none';
+
+            // Show DT multiplier row when DT bill row is visible and regular bill rate > 0
+            const dtBillRow = document.getElementById('dtBillRow');
+            const dtVisible = dtBillRow.style.display !== 'none';
+            dtMultRow.style.display = (dtVisible && regBillRate > 0) ? '' : 'none';
+
+            // Auto-fill OT bill rate
+            if (otMult > 0 && regBillRate > 0) {
+                const otBill = regBillRate * otMult;
+                const otInput = document.querySelector('.bill-rate[data-type="ot"]');
+                otInput.value = otBill.toFixed(2);
+                document.getElementById('otMultCalc').textContent = '$' + regBillRate.toFixed(2) + ' × ' + otMult;
+                document.getElementById('otMultResult').textContent = 'OT Bill = $' + otBill.toFixed(2) + '/hr';
+            } else {
+                document.getElementById('otMultCalc').textContent = '';
+                document.getElementById('otMultResult').textContent = regBillRate > 0 ? 'Enter multiplier to auto-fill OT bill rate' : '';
+            }
+
+            // Auto-fill DT bill rate
+            if (dtMult > 0 && regBillRate > 0) {
+                const dtBill = regBillRate * dtMult;
+                const dtInput = document.querySelector('.bill-rate[data-type="dt"]');
+                dtInput.value = dtBill.toFixed(2);
+                document.getElementById('dtMultCalc').textContent = '$' + regBillRate.toFixed(2) + ' × ' + dtMult;
+                document.getElementById('dtMultResult').textContent = 'DT Bill = $' + dtBill.toFixed(2) + '/hr';
+            } else {
+                document.getElementById('dtMultCalc').textContent = '';
+                document.getElementById('dtMultResult').textContent = (dtVisible && regBillRate > 0) ? 'Enter multiplier to auto-fill DT bill rate' : '';
+            }
+        }
+
         function calculateVMS() {
             const vmsPercent = parseFloat(document.getElementById('vmsPercent').value) || 0;
             const regBillRate = parseFloat(document.querySelector('.bill-rate[data-type="regular"]').value) || 0;
