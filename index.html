@@ -2043,6 +2043,47 @@
             'FL': { name: 'Florida', dailyOT: 10, dailyDT: null, weeklyOT: 40, seventhDay: false, desc: 'Manual laborers: legal day = 10hrs, OT (1.5x) beyond' }
         };
 
+        // STATE MINIMUM WAGE RATES (2025)
+        const STATE_MIN_WAGE = {
+            'AL': 7.25, 'AK': 11.73, 'AZ': 14.35, 'AR': 11.00, 'CA': 16.50,
+            'CO': 14.81, 'CT': 16.35, 'DE': 13.25, 'DC': 17.50, 'FL': 13.00,
+            'GA': 7.25, 'HI': 14.00, 'ID': 7.25, 'IL': 14.00, 'IN': 7.25,
+            'IA': 7.25, 'KS': 7.25, 'KY': 7.25, 'LA': 7.25, 'ME': 14.65,
+            'MD': 15.00, 'MA': 15.00, 'MI': 10.56, 'MN': 11.13, 'MS': 7.25,
+            'MO': 13.75, 'MT': 10.55, 'NE': 13.50, 'NV': 12.00, 'NH': 7.25,
+            'NJ': 15.49, 'NM': 12.00, 'NY': 16.50, 'NC': 7.25, 'ND': 7.25,
+            'OH': 10.65, 'OK': 7.25, 'OR': 15.95, 'PA': 7.25, 'RI': 15.00,
+            'SC': 7.25, 'SD': 11.50, 'TN': 7.25, 'TX': 7.25, 'UT': 7.25,
+            'VT': 14.01, 'VA': 12.41, 'WA': 16.66, 'WV': 8.75, 'WI': 7.25, 'WY': 7.25
+        };
+        // Notable city minimum wages (override state when applicable)
+        const CITY_MIN_WAGE = {
+            'NYC': { state: 'NY', min: 16.50, zips: [100,101,102,103,104,110,111,112,113,114,116] },
+            'Seattle': { state: 'WA', min: 20.76, zips: [981] },
+            'San Francisco': { state: 'CA', min: 18.67, zips: [941] },
+            'Los Angeles': { state: 'CA', min: 17.28, zips: [900,901,902,903,904,905,906,907,908,910,911,912,913,914,915,916,917,918] },
+            'Denver': { state: 'CO', min: 18.29, zips: [800,801,802] },
+            'Minneapolis': { state: 'MN', min: 15.57, zips: [554,555] },
+            'Chicago': { state: 'IL', min: 16.20, zips: [606] }
+        };
+
+        function getMinWageForZip(zip) {
+            if (!zip || zip.length < 3) return { rate: 7.25, label: 'Federal', source: 'federal' };
+            const prefix = parseInt(zip.substring(0, 3));
+            // Check city overrides first
+            for (const [city, info] of Object.entries(CITY_MIN_WAGE)) {
+                if (info.zips.includes(prefix)) {
+                    return { rate: info.min, label: city + ', ' + info.state, source: 'city' };
+                }
+            }
+            // Fall back to state
+            const state = zipToState(zip);
+            if (state && STATE_MIN_WAGE[state]) {
+                return { rate: STATE_MIN_WAGE[state], label: state, source: 'state' };
+            }
+            return { rate: 7.25, label: 'Federal', source: 'federal' };
+        }
+
         // Calculate OT/DT hour breakdown based on state rules
         // Returns: { regHrs, otHrs, dtHrs, totalHours, daysPerWeek }
         function calculateOTBreakdown(hoursPerDay, hoursPerWeek, stateCode) {
