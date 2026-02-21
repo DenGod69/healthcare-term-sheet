@@ -3440,10 +3440,7 @@
                 // --- Weeks to cover expenses (rate-only: hidden) ---
                 document.getElementById('weeksToCoverSection').style.display = 'none';
 
-                // --- Break-Even Analysis (rate-only: show basic OT analysis if OT rates exist) ---
-                const otPayRateM1 = parseFloat(document.querySelector('.pay-rate[data-type="ot"]').value) || 0;
-                const otBillRateM1 = parseFloat(document.querySelector('.bill-rate[data-type="ot"]').value) || 0;
-                const otMarginM1 = otBillRateM1 - otPayRateM1 - (otPayRateM1 * burdenPct);
+                // --- Break-Even Analysis (rate-only: reuses otPayRateM1/otBillRateM1/otMarginM1 from above) ---
                 updateBreakevenAnalysis('Ot', otBillRateM1, otPayRateM1, burdenPct, otMarginM1);
                 // Hide DT break-even in Mode 1
                 document.getElementById('breakevenDtSection').style.display = 'none';
