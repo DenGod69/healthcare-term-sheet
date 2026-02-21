@@ -3623,6 +3623,17 @@
             document.getElementById('otTotalProfitWk').textContent = '$' + totalProfitWk.toFixed(2);
             document.getElementById('otPctOfProfit').textContent = totalProfitWk !== 0 ? ((otProfitWk + dtProfitWk) / totalProfitWk * 100).toFixed(1) + '%' : '0.0%';
 
+            // --- Break-Even OT/DT Analysis ---
+            updateBreakevenAnalysis('Ot', otBillRate, otPayRate, burdenPct, otMarginHr);
+            // DT break-even (show/hide with DT tiles)
+            const dtBreakevenEl = document.getElementById('breakevenDtSection');
+            if (hasDT) {
+                dtBreakevenEl.style.display = '';
+                updateBreakevenAnalysis('Dt', dtBillRate, dtPayRate, burdenPct, dtMarginHr);
+            } else {
+                dtBreakevenEl.style.display = 'none';
+            }
+
             // --- Net Markup = Net Bill / (Gross Wages + Total Burden) ---
             const netBillHr = billHr * (1 - vmsPercent / 100);
             // Burden per hour: WC+ER on payroll only (exclude GSA)
