@@ -1559,6 +1559,19 @@
                                 <td class="calc-cell" id="netRegWeek">$0.00</td>
                                 <td class="calc-cell" id="netRegTotal">$0.00</td>
                                 <td class="calc-cell" id="netRegBillPct">0.00%</td></tr>
+                            <!-- OT Bill Rate Multiplier -->
+                            <tr id="otMultiplierRow" style="display:none; background:#fff8f0;">
+                                <td><span style="font-size:10px; font-weight:700; color:#e67e22;">OT Bill Multiplier</span>
+                                    <span id="otMultCalc" style="font-size:9px; color:#888;"></span></td>
+                                <td style="text-align:right;">
+                                    <div style="display:flex; align-items:center; justify-content:flex-end; gap:2px;">
+                                        <input type="number" id="otBillMultiplier" step="0.01" min="0" placeholder="1.50"
+                                            style="width:60px; padding:4px 5px; border:2px solid #e67e22; border-radius:4px; font-size:11px; font-family:'Monaco','Menlo',monospace; text-align:right;">
+                                        <span style="font-size:10px; color:#e67e22; font-weight:700;">×</span>
+                                    </div>
+                                </td>
+                                <td class="calc-cell" colspan="3" style="font-size:10px; color:#e67e22;" id="otMultResult">Enter multiplier to auto-fill OT bill rate</td>
+                            </tr>
                             <!-- OT Bill Rate -->
                             <tr><td><strong>OT Bill Rate</strong> <span id="billOTHrsLabel" style="font-size:9px; color:#e67e22; font-weight:600;"></span></td>
                                 <td style="text-align:right;"><input type="number" class="bill-rate" data-type="ot" step="0.01" min="0" style="width:90px;"></td>
