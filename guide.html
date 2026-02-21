@@ -377,7 +377,7 @@
         Covers every field, formula, and feature with real-world examples.
     </p>
     <br><br>
-    <div class="version">Version 1.0 &nbsp;|&nbsp; February 2026</div>
+    <div class="version">Version 2.0 &nbsp;|&nbsp; February 2026</div>
 </div>
 
 <!-- ============================================================ -->
@@ -396,10 +396,16 @@
         <li style="padding-left:38px; font-size:11px; border-bottom:none;">3E. Cost & Expenses</li>
         <li style="padding-left:38px; font-size:11px;">3F. Burdens, Taxes & Fees</li>
         <li><span class="toc-num">4</span><span class="toc-title">Understanding the Sidebars — Where the Magic Happens</span></li>
-        <li><span class="toc-num">5</span><span class="toc-title">Full Example: Walking Through a Real Deal</span></li>
-        <li><span class="toc-num">6</span><span class="toc-title">How Every Number Is Calculated (Formulas)</span></li>
-        <li><span class="toc-num">7</span><span class="toc-title">Frequently Asked Questions</span></li>
-        <li><span class="toc-num">8</span><span class="toc-title">Glossary of Terms</span></li>
+        <li><span class="toc-num">5</span><span class="toc-title">New Features: Smart Tools & Safeguards</span></li>
+        <li style="padding-left:38px; font-size:11px; border-bottom:none;">5A. Bill Rate Multiplier (Auto OT/DT Billing)</li>
+        <li style="padding-left:38px; font-size:11px; border-bottom:none;">5B. OT/DT Profit Breakdown & OT Gross Margin</li>
+        <li style="padding-left:38px; font-size:11px; border-bottom:none;">5C. Break-Even Analysis</li>
+        <li style="padding-left:38px; font-size:11px; border-bottom:none;">5D. Profitable Term Sheet Calculator</li>
+        <li style="padding-left:38px; font-size:11px;">5E. Minimum Wage Failsafe</li>
+        <li><span class="toc-num">6</span><span class="toc-title">Full Example: Walking Through a Real Deal</span></li>
+        <li><span class="toc-num">7</span><span class="toc-title">How Every Number Is Calculated (Formulas)</span></li>
+        <li><span class="toc-num">8</span><span class="toc-title">Frequently Asked Questions</span></li>
+        <li><span class="toc-num">9</span><span class="toc-title">Glossary of Terms</span></li>
     </ol>
 </div>
 
@@ -967,20 +973,187 @@
         <tr><td style="color:#ff4444; font-weight:700;">Red</td><td>Slow recovery — consider renegotiating the bill rate</td><td>More than 4 weeks</td></tr>
     </table>
 
-    <h4>OT/DT Margin Breakdown</h4>
-    <p>Shows profit by rate type (Regular, OT, Double Time) — useful for seeing if overtime hours are profitable.</p>
+    <h4>OT/DT Profit Breakdown</h4>
+    <p>Shows overtime profit in the same Per Hour / Day / Week / Month format as the GM and Net Profit sections — making it easy to see exactly how OT impacts your deal.</p>
+
+    <div class="metric-grid">
+        <div class="metric-card" style="border-left-color:#e67e22;">
+            <div class="mc-label">Per Hour</div>
+            <div class="mc-value" style="color:#e67e22;">-$1.00</div>
+            <div class="mc-sub">$76.80 bill / $81.00 cost</div>
+        </div>
+        <div class="metric-card" style="border-left-color:#e67e22;">
+            <div class="mc-label">Per Week</div>
+            <div class="mc-value" style="color:#e67e22;">-$4.00</div>
+            <div class="mc-sub">4.0 OT hrs × margin</div>
+        </div>
+    </div>
+
+    <div class="callout callout-orange">
+        <span class="callout-label">OT Gross Margin in Main Sidebar</span>
+        When OT hours exist, two new tiles appear in the main Margin & Markup section — <strong>OT Gross Margin</strong> (weekly dollar amount) and <strong>OT GM %</strong> — so you can see the OT impact right alongside your regular margin metrics. All OT analysis uses the <strong>net bill rate</strong> (after VMS fee).
+    </div>
+
+    <p>For states with daily double-time rules (e.g., California), a separate <strong>DT Profit Breakdown</strong> section appears with the same 4-tile format.</p>
+</div>
+
+<!-- ============================================================ -->
+<!-- SECTION 5: NEW FEATURES: SMART TOOLS & SAFEGUARDS -->
+<!-- ============================================================ -->
+<div class="page">
+    <h2 class="section-title"><span class="section-num">5</span> New Features: Smart Tools & Safeguards</h2>
+    <p class="section-subtitle">Automated calculations, break-even analysis, and compliance safeguards</p>
+
+    <h3>5A. Bill Rate Multiplier (Auto OT/DT Billing)</h3>
+    <p>Instead of manually calculating OT and DT bill rates, the tool can do it for you automatically.</p>
+
+    <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-content">
+            Enter a <strong>Regular Bill Rate</strong> (e.g., $75.00/hr)
+        </div>
+    </div>
+    <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-content">
+            An <strong>OT Bill Multiplier</strong> row appears. Enter a multiplier (e.g., <code>1.5</code>)
+        </div>
+    </div>
+    <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-content">
+            The <strong>OT Bill Rate auto-fills</strong>: $75.00 × 1.5 = $112.50/hr
+        </div>
+    </div>
+
+    <div class="formula">
+        <span class="label">OT Bill Rate</span> = Regular Bill Rate &times; OT Multiplier<br>
+        <span class="label">DT Bill Rate</span> = Regular Bill Rate &times; DT Multiplier (for CA, etc.)
+    </div>
 
     <div class="callout callout-blue">
-        <span class="callout-label">Reading the OT Breakdown</span>
-        Each rate type shows its own margin/hr and weekly profit after subtracting pay and burden. For example: Reg Margin/Hr = $75 bill - $20 pay - $4.80 burden = <strong>$50.20/hr</strong>. Compare this to your OT margin to see if OT hours help or hurt.
+        <span class="callout-label">Tip</span>
+        The multiplier auto-updates whenever the regular bill rate changes. If a VMS fee is entered, the Net OT Bill Rate is calculated on top: $112.50 × (1 - 4%) = <strong>$108.00/hr</strong>.
+    </div>
+
+    <h3>5B. OT/DT Profit Breakdown & OT Gross Margin</h3>
+    <p>The OT/DT section now shows profit in the same <strong>Per Hour / Day / Week / Month</strong> format as the GM and Net Profit Breakdowns, making comparison easy.</p>
+
+    <p>When OT hours are entered, two new metric tiles appear in the main <strong>Margin & Markup</strong> sidebar:</p>
+    <div class="metric-grid">
+        <div class="metric-card" style="border-left-color:#e67e22;">
+            <div class="mc-label">OT Gross Margin</div>
+            <div class="mc-value" style="color:#e67e22;">$67.20</div>
+            <div class="mc-sub">4.0 hrs @ $16.80/hr (net)</div>
+        </div>
+        <div class="metric-card" style="border-left-color:#e67e22;">
+            <div class="mc-label">OT GM %</div>
+            <div class="mc-value" style="color:#e67e22;">21.88%</div>
+            <div class="mc-sub">OT Gross Margin Rate</div>
+        </div>
+    </div>
+
+    <h3>5C. Break-Even Analysis</h3>
+    <p>Below the OT Profit Breakdown, the <strong>Break-Even Analysis</strong> section shows whether your OT hours are profitable and what rates you'd need to break even.</p>
+
+    <div class="mockup">
+        <div class="mockup-header">Break-Even Analysis Example</div>
+        <div style="background:#1a1a2e; color:white; padding:14px; border-radius:8px; font-size:11px;">
+            <div style="font-weight:700; font-size:10px; text-transform:uppercase; letter-spacing:1px; color:rgba(255,255,255,0.5); margin-bottom:6px;">Overtime (OT)</div>
+            <div style="background:rgba(231,76,60,0.15); color:#e74c3c; border:1px solid rgba(231,76,60,0.3); padding:4px 8px; border-radius:4px; font-size:11px; font-weight:600; margin-bottom:8px;">✗ Losing $1.00/hr</div>
+            <div style="display:flex; justify-content:space-between; padding:3px 0; color:rgba(255,255,255,0.7);"><span>Current OT Margin/Hr</span><span style="color:#e74c3c; font-weight:600;">$-1.00</span></div>
+            <div style="display:flex; justify-content:space-between; padding:3px 0; color:rgba(255,255,255,0.7);"><span>Max OT Pay (break-even)</span><span style="font-weight:600;">$56.89/hr</span></div>
+            <div style="display:flex; justify-content:space-between; padding:3px 0; color:rgba(255,255,255,0.7);"><span>Min OT Bill (break-even)</span><span style="font-weight:600;">$81.00/hr</span></div>
+            <div style="display:flex; justify-content:space-between; padding:3px 0; color:#f39c12; border-top:1px dashed rgba(255,255,255,0.1); margin-top:4px; padding-top:6px;"><span>Suggested OT Pay (5% margin)</span><span style="font-weight:600;">$54.04/hr</span></div>
+            <div style="display:flex; justify-content:space-between; padding:3px 0; color:#f39c12;"><span>Suggested OT Bill (5% margin)</span><span style="font-weight:600;">$85.05/hr</span></div>
+        </div>
+    </div>
+
+    <table>
+        <tr><th>Metric</th><th>What It Means</th></tr>
+        <tr><td><strong>Max OT Pay (break-even)</strong></td><td>The highest OT pay rate where you don't lose money. Formula: OT Net Bill ÷ (1 + Burden%)</td></tr>
+        <tr><td><strong>Min OT Bill (break-even)</strong></td><td>The lowest OT bill rate that covers costs. Formula: OT Pay × (1 + Burden%)</td></tr>
+        <tr><td><strong>Suggested (5% margin)</strong></td><td>Rates that would give you a 5% profit cushion beyond break-even</td></tr>
+    </table>
+</div>
+
+<div class="page">
+    <h3>5D. Profitable Term Sheet Calculator</h3>
+    <p>This is the most powerful planning tool in the term sheet. Enter a <strong>Target Net Margin %</strong> and the system <strong>reverse-calculates</strong> what pay rates you should offer to hit that margin target.</p>
+
+    <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-content">
+            Enter your <strong>bill rate</strong>, <strong>hours/week</strong>, <strong>burden rates</strong>, and <strong>VMS fee</strong>
+        </div>
+    </div>
+    <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-content">
+            In the Profit Breakdowns sidebar, find <strong>"Profitable Term Sheet"</strong> and enter a Target NM% (e.g., <code>15</code>)
+        </div>
+    </div>
+    <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-content">
+            The calculator instantly shows <strong>suggested starting rates</strong> — regular pay, OT pay, stipends, and projected financials
+        </div>
+    </div>
+
+    <div class="mockup">
+        <div class="mockup-header">Profitable Term Sheet — 15% Target NM Example</div>
+        <table>
+            <tr><th>Metric</th><th class="num">Suggested Value</th></tr>
+            <tr><td>Regular Pay Rate</td><td class="num highlight">$38.42/hr</td></tr>
+            <tr><td>OT Pay Rate (1.5×)</td><td class="num">$57.63/hr</td></tr>
+            <tr><td>Lodging Stipend/Wk</td><td class="num">$749.00</td></tr>
+            <tr><td>M&IE Stipend/Wk</td><td class="num">$476.00</td></tr>
+            <tr class="total-row"><td><strong>Total Weekly Pay</strong></td><td class="num green">$2,608.12</td></tr>
+            <tr class="total-row"><td><strong>Total Weekly Bill (net)</strong></td><td class="num">$3,456.00</td></tr>
+            <tr class="total-row"><td><strong>Projected NM%</strong></td><td class="num green">15.00%</td></tr>
+            <tr class="total-row"><td><strong>Projected NM$/Wk</strong></td><td class="num green">$518.40</td></tr>
+            <tr><td>Min Wage Floor</td><td class="num" style="color:#888;">$16.50/hr (NY)</td></tr>
+        </table>
+    </div>
+
+    <div class="formula">
+        <span class="label">Suggested Pay Rate</span> = [Net Bill/Wk × (1 - Target NM%) - GSA Stipends - Expense Burden] ÷ [Weighted Hours × (1 + Burden%)]
+    </div>
+
+    <div class="callout callout-green">
+        <span class="callout-label">How to use this</span>
+        Use the calculator as a <strong>starting point for negotiations</strong>. Enter the bill rate the client offered, set your target margin, and instantly see what pay rate you can offer the traveler while maintaining profitability.
+    </div>
+
+    <h3>5E. Minimum Wage Failsafe</h3>
+    <p>The tool includes a built-in <strong>minimum wage protection system</strong> that prevents you from entering a pay rate below the applicable state or city minimum wage.</p>
+
+    <div class="callout callout-red">
+        <span class="callout-label">How It Works</span>
+        <strong>1.</strong> When you enter a facility zip code, the tool identifies the state and city.<br>
+        <strong>2.</strong> If you enter a regular pay rate below the minimum wage, a <strong>warning banner</strong> appears.<br>
+        <strong>3.</strong> The pay rate is <strong>automatically corrected</strong> to the applicable minimum wage.<br>
+        <strong>4.</strong> The Profitable Term Sheet Calculator also uses this as a floor — it will never suggest a rate below minimum wage.
+    </div>
+
+    <h4>Minimum Wage Coverage</h4>
+    <table>
+        <tr><th>Coverage</th><th>Examples</th></tr>
+        <tr><td><strong>All 50 states + DC</strong></td><td>NY: $16.50, CA: $16.50, WA: $16.66, FL: $13.00, TX: $7.25</td></tr>
+        <tr><td><strong>Major city overrides</strong></td><td>Seattle: $20.76, San Francisco: $18.67, Denver: $18.29, LA: $17.28, Chicago: $16.20</td></tr>
+    </table>
+
+    <div class="callout callout-blue">
+        <span class="callout-label">Note</span>
+        Healthcare travel nurses typically earn well above minimum wage ($20-50+/hr), so this safeguard is primarily a <strong>data entry protection</strong> — catching typos and mistakes before they cascade through all calculations.
     </div>
 </div>
 
 <!-- ============================================================ -->
-<!-- SECTION 5: FULL EXAMPLE -->
+<!-- SECTION 6: FULL EXAMPLE -->
 <!-- ============================================================ -->
 <div class="page">
-    <h2 class="section-title"><span class="section-num">5</span> Full Example: Walking Through a Real Deal</h2>
+    <h2 class="section-title"><span class="section-num">6</span> Full Example: Walking Through a Real Deal</h2>
     <p class="section-subtitle">Let's build a complete term sheet from scratch using sample data</p>
 
     <div class="callout callout-purple">
@@ -1112,7 +1285,7 @@
 <!-- SECTION 6: FORMULAS -->
 <!-- ============================================================ -->
 <div class="page">
-    <h2 class="section-title"><span class="section-num">6</span> How Every Number Is Calculated</h2>
+    <h2 class="section-title"><span class="section-num">7</span> How Every Number Is Calculated</h2>
     <p class="section-subtitle">The formulas behind every metric, in plain English</p>
 
     <table>
@@ -1186,6 +1359,31 @@
             <td>Total Flat Expenses &divide; Net Profit/Week</td>
             <td class="num">$570 &divide; $430.35 = 1.3 wks</td>
         </tr>
+        <tr>
+            <td><strong>OT Bill (Multiplier)</strong></td>
+            <td>Regular Bill Rate &times; OT Multiplier</td>
+            <td class="num">$75 &times; 1.5 = $112.50</td>
+        </tr>
+        <tr>
+            <td><strong>OT Net Bill Rate</strong></td>
+            <td>OT Bill Rate &times; (1 - VMS%)</td>
+            <td class="num">$112.50 &times; 0.96 = $108.00</td>
+        </tr>
+        <tr>
+            <td><strong>OT Margin/Hr</strong></td>
+            <td>OT Net Bill - OT Pay - OT Burden</td>
+            <td class="num">$108 - $90 - $21.60 = -$3.60</td>
+        </tr>
+        <tr>
+            <td><strong>Break-Even Max Pay</strong></td>
+            <td>OT Net Bill &divide; (1 + Burden%)</td>
+            <td class="num">$108 &divide; 1.24 = $87.10</td>
+        </tr>
+        <tr>
+            <td><strong>Suggested Pay (Target NM%)</strong></td>
+            <td>[NetBill/Wk &times; (1 - NM%) - Stipends - ExpBurden] &divide; [Weighted Hrs &times; (1 + Burden%)]</td>
+            <td class="num">Varies by inputs</td>
+        </tr>
     </table>
 </div>
 
@@ -1193,7 +1391,7 @@
 <!-- SECTION 7: FAQ -->
 <!-- ============================================================ -->
 <div class="page">
-    <h2 class="section-title"><span class="section-num">7</span> Frequently Asked Questions</h2>
+    <h2 class="section-title"><span class="section-num">8</span> Frequently Asked Questions</h2>
     <p class="section-subtitle">Answers to common questions</p>
 
     <h4>Q: Do I need to fill in every field?</h4>
@@ -1226,13 +1424,25 @@
 
     <h4>Q: How do I save a PDF?</h4>
     <p>Click the <strong>"Print/PDF"</strong> button at the bottom of the form. In the print dialog, select "Save as PDF" as the destination. The sidebars are hidden in print mode so you get a clean document.</p>
+
+    <h4>Q: How does the Bill Rate Multiplier work?</h4>
+    <p>When you enter a regular bill rate, an <strong>OT Multiplier</strong> row appears. Enter a number (e.g., 1.5) and the OT bill rate auto-fills as Regular × Multiplier. It updates in real-time whenever the regular bill rate changes. The multiplier also works for DT rates in states like California.</p>
+
+    <h4>Q: What does "Break-Even" mean in the OT analysis?</h4>
+    <p>Break-even is the point where your OT revenue exactly covers your OT costs (pay + burden). The "Max OT Pay" tells you the highest pay rate where you don't lose money. If your current OT pay is above that number, every OT hour costs you money.</p>
+
+    <h4>Q: How does the Profitable Term Sheet Calculator work?</h4>
+    <p>Enter a <strong>Target Net Margin %</strong> and the tool reverse-calculates the maximum regular pay rate that achieves that margin, factoring in your bill rate, burden, VMS fee, stipends, and expenses. It also respects minimum wage laws — it will never suggest a rate below the applicable state or city minimum.</p>
+
+    <h4>Q: Will the tool stop me from entering below minimum wage?</h4>
+    <p>Yes. If you enter a regular pay rate below the applicable minimum wage (based on the facility zip code), the tool shows a warning and auto-corrects the rate to the minimum. This works with all 50 states plus major city overrides like Seattle, San Francisco, and Denver.</p>
 </div>
 
 <!-- ============================================================ -->
 <!-- SECTION 8: GLOSSARY -->
 <!-- ============================================================ -->
 <div class="page">
-    <h2 class="section-title"><span class="section-num">8</span> Glossary of Terms</h2>
+    <h2 class="section-title"><span class="section-num">9</span> Glossary of Terms</h2>
     <p class="section-subtitle">Industry terms defined in plain language</p>
 
     <table>
@@ -1255,6 +1465,11 @@
         <tr><td><strong>M&I</strong></td><td>Meals & Incidental Expenses — part of the GSA per diem rate covering food and small expenses.</td></tr>
         <tr><td><strong>Stipend</strong></td><td>A fixed allowance paid to the traveler for housing or meals. Tax-free when based on GSA rates.</td></tr>
         <tr><td><strong>Contract Hours</strong></td><td>Total hours in the assignment = Hours/Week &times; Weeks. Used to amortize flat expenses.</td></tr>
+        <tr><td><strong>Bill Rate Multiplier</strong></td><td>A factor applied to the regular bill rate to auto-calculate OT/DT bill rates (e.g., 1.5x for OT, 2.0x for DT).</td></tr>
+        <tr><td><strong>Break-Even Rate</strong></td><td>The pay or bill rate at which profit is exactly $0 — no gain, no loss. Used to evaluate OT profitability.</td></tr>
+        <tr><td><strong>Target NM%</strong></td><td>Your desired Net Margin percentage. Used by the Profitable Term Sheet Calculator to reverse-engineer suggested pay rates.</td></tr>
+        <tr><td><strong>Minimum Wage</strong></td><td>The legally mandated lowest hourly pay rate, set by federal, state, or city law. The tool enforces the highest applicable rate.</td></tr>
+        <tr><td><strong>OT Gross Margin</strong></td><td>The raw spread on overtime hours: (Net OT Bill - OT Pay) × OT Hours per week.</td></tr>
     </table>
 
     <br>
@@ -1263,7 +1478,7 @@
 
     <div style="text-align:center; color:#999; font-size:11px;">
         <p><strong>Healthcare Travel Staffing Term Sheet — User Guide</strong></p>
-        <p>Version 1.0 &nbsp;|&nbsp; February 2026</p>
+        <p>Version 2.0 &nbsp;|&nbsp; February 2026</p>
         <p style="margin-top:8px;">
             <span style="font-family:monospace; background:#f0f0f0; padding:3px 10px; border-radius:4px;">
                 https://dengod69.github.io/healthcare-term-sheet/
