@@ -2338,6 +2338,39 @@
             }
         }
 
+        // --- Minimum Wage Validation ---
+        function validateMinWage() {
+            const regPayInput = document.querySelector('.pay-rate[data-type="regular"]');
+            const regPay = parseFloat(regPayInput.value) || 0;
+            const warningEl = document.getElementById('minWageWarning');
+            const textEl = document.getElementById('minWageText');
+
+            if (regPay <= 0) {
+                warningEl.classList.remove('active');
+                return;
+            }
+
+            // Get applicable minimum wage from facility zip, GSA zip, or state dropdown
+            const facilityZip = document.getElementById('facilityZip').value || '';
+            const gsaZip = document.getElementById('gsaZipCode').value || '';
+            const zip = facilityZip.length >= 5 ? facilityZip : (gsaZip.length >= 5 ? gsaZip : '');
+            const minWage = getMinWageForZip(zip);
+
+            if (regPay < minWage.rate) {
+                warningEl.classList.add('active');
+                textEl.innerHTML = '<strong>$' + regPay.toFixed(2) + '/hr is below ' + minWage.label +
+                    ' minimum wage ($' + minWage.rate.toFixed(2) + '/hr).</strong> Auto-corrected to $' +
+                    minWage.rate.toFixed(2) + '/hr.';
+                regPayInput.value = minWage.rate.toFixed(2);
+                // Re-trigger calculations with corrected value
+                regPayInput.dispatchEvent(new Event('input', { bubbles: true }));
+                // Fade warning after 5 seconds
+                setTimeout(() => { warningEl.classList.remove('active'); }, 8000);
+            } else {
+                warningEl.classList.remove('active');
+            }
+        }
+
         // GSA Per Diem API - Live Lookup by Zip Code
         const GSA_API_BASE = 'https://api.gsa.gov/travel/perdiem/v2/rates';
         const GSA_API_KEY = 'DEMO_KEY';
