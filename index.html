@@ -3661,17 +3661,17 @@
                 setMarginValue('dtProfitMo', dtProfitMo, '$');
             }
 
-            // --- OT Gross Margin & OT GM% in main sidebar ---
+            // --- OT Gross Margin & OT GM% in main sidebar (uses net bill after VMS) ---
             const otGmTiles = document.querySelectorAll('.ot-gm-tile');
             if (otHrs > 0) {
-                const otGrossMarginWk = (otBillRate - otPayRate) * otHrs; // OT gross margin per week
+                const otGrossMarginWk = (otBillRate - otPayRate) * otHrs; // Net OT bill - OT pay × hours
                 const otGmPct = otBillRate > 0 ? ((otBillRate - otPayRate) / otBillRate * 100) : 0;
 
                 otGmTiles.forEach(el => el.style.display = '');
                 const otGmEl = document.getElementById('otGmDollar');
                 otGmEl.textContent = '$' + otGrossMarginWk.toFixed(2);
                 otGmEl.classList.toggle('negative-value', otGrossMarginWk < 0);
-                document.getElementById('otGmSub').textContent = otHrs.toFixed(1) + ' hrs @ $' + (otBillRate - otPayRate).toFixed(2) + '/hr';
+                document.getElementById('otGmSub').textContent = otHrs.toFixed(1) + ' hrs @ $' + (otBillRate - otPayRate).toFixed(2) + '/hr (net)';
 
                 const otGmPctEl = document.getElementById('otGmPctNumber');
                 otGmPctEl.textContent = otGmPct.toFixed(2) + '%';
