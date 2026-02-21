@@ -3294,6 +3294,8 @@
                 if (gsaZip && !gsaZip.value) {
                     gsaZip.value = zip;
                 }
+                // Re-check minimum wage with new zip
+                validateMinWage();
             }
         });
         // Auto-fill OT/DT rates when regular pay rate changes + minimum wage check
