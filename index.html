@@ -824,6 +824,74 @@
             color: #f39c12;
         }
 
+        /* Minimum Wage Warning */
+        .min-wage-warning {
+            display: none;
+            background: linear-gradient(135deg, #fff3cd, #ffeeba);
+            border: 1px solid #ffc107;
+            border-left: 4px solid #e67e22;
+            border-radius: 6px;
+            padding: 8px 12px;
+            margin: 6px 0;
+            font-size: 11px;
+            color: #856404;
+            align-items: center;
+            gap: 6px;
+        }
+        .min-wage-warning.active { display: flex; }
+        .min-wage-warning strong { color: #d35400; }
+
+        /* Profitable Term Sheet Section */
+        .profit-calc-section {
+            background: rgba(102,126,234,0.08);
+            border: 1px solid rgba(102,126,234,0.2);
+            border-radius: 8px;
+            padding: 10px;
+            margin-top: 8px;
+        }
+        .profit-calc-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+        .profit-calc-header label {
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: rgba(255,255,255,0.55);
+            margin-bottom: 0;
+        }
+        .target-nm-input {
+            width: 55px;
+            padding: 4px 5px;
+            border: 2px solid #667eea;
+            border-radius: 4px;
+            font-size: 11px;
+            font-family: 'Monaco','Menlo',monospace;
+            text-align: right;
+            background: rgba(255,255,255,0.08);
+            color: #fff;
+        }
+        .profit-calc-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 11px;
+            padding: 3px 0;
+            color: rgba(255,255,255,0.7);
+        }
+        .profit-calc-row span:last-child {
+            font-weight: 600;
+            color: #667eea;
+        }
+        .profit-calc-row.divider {
+            border-top: 1px dashed rgba(255,255,255,0.1);
+            margin-top: 4px;
+            padding-top: 6px;
+        }
+
         .gsa-over-max {
             border: 2px solid #ff4444 !important;
             background-color: #fff0f0 !important;
