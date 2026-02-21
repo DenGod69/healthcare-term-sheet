@@ -3609,44 +3609,73 @@
             const dtProfitWk = dtMarginHr * dtHrs;
             const totalProfitWk = regProfitWk + otProfitWk + dtProfitWk;
 
-            setMarginValue('otRegMarginHr', regMarginHr, '$');
-            document.getElementById('otRegHrs').textContent = regHrs.toFixed(1);
-            document.getElementById('otRegBillHr').textContent = '$' + regBillRate.toFixed(2);
-            document.getElementById('otRegPayHr').textContent = '$' + regPayRate.toFixed(2);
+            // --- OT Profit Breakdown (Per Hour / Day / Week / Month) ---
+            const otTotalCostHr = otPayRate + otBurdenHr; // pay + burden
+            const otProfitDay = daysPerWeek > 0 ? otProfitWk / daysPerWeek : 0;
+            const otHrsDay = daysPerWeek > 0 ? otHrs / daysPerWeek : 0;
+            const otProfitMo = otProfitWk * 4.33;
 
-            setMarginValue('otOtMarginHr', otMarginHr, '$');
-            document.getElementById('otOtHrs').textContent = otHrs.toFixed(1);
-            document.getElementById('otOtBillHr').textContent = '$' + otBillRate.toFixed(2);
-            document.getElementById('otOtPayHr').textContent = '$' + otPayRate.toFixed(2);
+            setMarginValue('otProfitHr', otMarginHr, '$');
+            document.getElementById('otBillHrSub').textContent = '$' + otBillRate.toFixed(2);
+            document.getElementById('otCostHrSub').textContent = '$' + otTotalCostHr.toFixed(2);
 
-            setMarginValue('otRegProfitWk', regProfitWk, '$');
-            setMarginValue('otOtProfitWk', otProfitWk, '$');
+            setMarginValue('otProfitDay', otProfitDay, '$');
+            document.getElementById('otHrsPerDay').textContent = otHrsDay.toFixed(1);
 
-            document.getElementById('otRegBurdenHr').textContent = '$' + regBurdenHr.toFixed(2);
-            document.getElementById('otOtBurdenHr').textContent = otHrs > 0 ? '$' + otBurdenHr.toFixed(2) : '$0.00';
+            setMarginValue('otProfitWk', otProfitWk, '$');
+            document.getElementById('otHrsPerWk').textContent = otHrs.toFixed(1);
 
-            // DT tiles and details (show/hide based on state rules)
-            const dtTiles = document.querySelectorAll('.ot-dt-tile');
-            const dtDetailRows = document.querySelectorAll('.ot-dt-detail');
+            setMarginValue('otProfitMo', otProfitMo, '$');
+
+            // Show/hide OT grid when no OT hours
+            document.getElementById('otProfitGrid').style.opacity = otHrs > 0 ? '1' : '0.4';
+            document.getElementById('otBreakdownLabel').textContent = otHrs > 0 ? 'OT Profit Breakdown' : 'OT Profit Breakdown (no OT hrs)';
+
+            // --- DT Profit Breakdown (show/hide based on state rules) ---
             const hasDT = stateRules.dailyDT && dtHrs > 0;
-            dtTiles.forEach(el => el.style.display = hasDT ? '' : 'none');
-            dtDetailRows.forEach(el => el.style.display = hasDT ? '' : 'none');
+            const dtProfitSection = document.getElementById('dtProfitSection');
+            dtProfitSection.style.display = hasDT ? '' : 'none';
 
             if (hasDT) {
-                setMarginValue('otDtMarginHr', dtMarginHr, '$');
-                document.getElementById('otDtHrs').textContent = dtHrs.toFixed(1);
-                document.getElementById('otDtBillHr').textContent = '$' + dtBillRate.toFixed(2);
-                document.getElementById('otDtPayHr').textContent = '$' + dtPayRate.toFixed(2);
-                setMarginValue('otDtProfitWk', dtProfitWk, '$');
-                document.getElementById('otDtBurdenHr').textContent = '$' + dtBurdenHr.toFixed(2);
+                const dtTotalCostHr = dtPayRate + dtBurdenHr;
+                const dtProfitDay = daysPerWeek > 0 ? dtProfitWk / daysPerWeek : 0;
+                const dtHrsDay = daysPerWeek > 0 ? dtHrs / daysPerWeek : 0;
+                const dtProfitMo = dtProfitWk * 4.33;
+
+                setMarginValue('dtProfitHr', dtMarginHr, '$');
+                document.getElementById('dtBillHrSub').textContent = '$' + dtBillRate.toFixed(2);
+                document.getElementById('dtCostHrSub').textContent = '$' + dtTotalCostHr.toFixed(2);
+
+                setMarginValue('dtProfitDay', dtProfitDay, '$');
+                document.getElementById('dtHrsPerDay').textContent = dtHrsDay.toFixed(1);
+
+                setMarginValue('dtProfitWk', dtProfitWk, '$');
+                document.getElementById('dtHrsPerWk').textContent = dtHrs.toFixed(1);
+
+                setMarginValue('dtProfitMo', dtProfitMo, '$');
             }
 
-            document.getElementById('otTotalProfitWk').textContent = '$' + totalProfitWk.toFixed(2);
-            document.getElementById('otPctOfProfit').textContent = totalProfitWk !== 0 ? ((otProfitWk + dtProfitWk) / totalProfitWk * 100).toFixed(1) + '%' : '0.0%';
+            // --- OT Gross Margin & OT GM% in main sidebar ---
+            const otGmTiles = document.querySelectorAll('.ot-gm-tile');
+            if (otHrs > 0) {
+                const otGrossMarginWk = (otBillRate - otPayRate) * otHrs; // OT gross margin per week
+                const otGmPct = otBillRate > 0 ? ((otBillRate - otPayRate) / otBillRate * 100) : 0;
+
+                otGmTiles.forEach(el => el.style.display = '');
+                const otGmEl = document.getElementById('otGmDollar');
+                otGmEl.textContent = '$' + otGrossMarginWk.toFixed(2);
+                otGmEl.classList.toggle('negative-value', otGrossMarginWk < 0);
+                document.getElementById('otGmSub').textContent = otHrs.toFixed(1) + ' hrs @ $' + (otBillRate - otPayRate).toFixed(2) + '/hr';
+
+                const otGmPctEl = document.getElementById('otGmPctNumber');
+                otGmPctEl.textContent = otGmPct.toFixed(2) + '%';
+                otGmPctEl.classList.toggle('negative-value', otGmPct < 0);
+            } else {
+                otGmTiles.forEach(el => el.style.display = 'none');
+            }
 
             // --- Break-Even OT/DT Analysis ---
             updateBreakevenAnalysis('Ot', otBillRate, otPayRate, burdenPct, otMarginHr);
-            // DT break-even (show/hide with DT tiles)
             const dtBreakevenEl = document.getElementById('breakevenDtSection');
             if (hasDT) {
                 dtBreakevenEl.style.display = '';
