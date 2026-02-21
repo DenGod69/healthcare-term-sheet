@@ -759,6 +759,71 @@
             color: #ff4444 !important;
         }
 
+        /* Break-Even Analysis Section */
+        .breakeven-section {
+            margin-top: 8px;
+            padding: 10px;
+            background: rgba(255,255,255,0.04);
+            border-radius: 8px;
+            border: 1px solid rgba(255,255,255,0.08);
+        }
+        .breakeven-header {
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: rgba(255,255,255,0.55);
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .breakeven-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 11px;
+            font-weight: 600;
+            padding: 3px 8px;
+            border-radius: 4px;
+            margin-bottom: 6px;
+        }
+        .breakeven-status.profitable {
+            background: rgba(39, 174, 96, 0.15);
+            color: #2ecc71;
+            border: 1px solid rgba(39, 174, 96, 0.3);
+        }
+        .breakeven-status.losing {
+            background: rgba(231, 76, 60, 0.15);
+            color: #e74c3c;
+            border: 1px solid rgba(231, 76, 60, 0.3);
+        }
+        .breakeven-status.neutral {
+            background: rgba(255,255,255,0.06);
+            color: rgba(255,255,255,0.5);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .breakeven-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 11px;
+            padding: 3px 0;
+            color: rgba(255,255,255,0.7);
+        }
+        .breakeven-row span:last-child {
+            font-weight: 600;
+            color: rgba(255,255,255,0.9);
+        }
+        .breakeven-row.suggest {
+            border-top: 1px dashed rgba(255,255,255,0.1);
+            margin-top: 4px;
+            padding-top: 6px;
+        }
+        .breakeven-row.suggest span:last-child {
+            color: #f39c12;
+        }
+
         .gsa-over-max {
             border: 2px solid #ff4444 !important;
             background-color: #fff0f0 !important;
