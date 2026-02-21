@@ -1584,6 +1584,19 @@
                                 <td class="calc-cell" id="netOTWeek">$0.00</td>
                                 <td class="calc-cell" id="netOTTotal">$0.00</td>
                                 <td class="calc-cell" id="netOTBillPct">0.00%</td></tr>
+                            <!-- DT Bill Rate Multiplier -->
+                            <tr id="dtMultiplierRow" style="display:none; background:#fdf0f0;">
+                                <td><span style="font-size:10px; font-weight:700; color:#c0392b;">DT Bill Multiplier</span>
+                                    <span id="dtMultCalc" style="font-size:9px; color:#888;"></span></td>
+                                <td style="text-align:right;">
+                                    <div style="display:flex; align-items:center; justify-content:flex-end; gap:2px;">
+                                        <input type="number" id="dtBillMultiplier" step="0.01" min="0" placeholder="2.00"
+                                            style="width:60px; padding:4px 5px; border:2px solid #c0392b; border-radius:4px; font-size:11px; font-family:'Monaco','Menlo',monospace; text-align:right;">
+                                        <span style="font-size:10px; color:#c0392b; font-weight:700;">×</span>
+                                    </div>
+                                </td>
+                                <td class="calc-cell" colspan="3" style="font-size:10px; color:#c0392b;" id="dtMultResult">Enter multiplier to auto-fill DT bill rate</td>
+                            </tr>
                             <!-- DT Bill Rate -->
                             <tr id="dtBillRow" style="display:none;"><td><strong>DT Bill Rate</strong> <span id="billDTHrsLabel" style="font-size:9px; color:#c0392b; font-weight:600;"></span></td>
                                 <td style="text-align:right;"><input type="number" class="bill-rate" data-type="dt" step="0.01" min="0" style="width:90px;"></td>
