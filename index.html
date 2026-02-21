@@ -1755,7 +1755,18 @@
                 <div class="metric-tile-value" id="gmPctNumber" style="font-size:18px;">0.00%</div>
                 <div class="metric-tile-sub">Gross Margin Rate</div>
             </div>
-            <!-- Row 3: Net Margin $$ | Net Margin % -->
+            <!-- Row 3 (conditional): OT Gross Margin | OT GM % — only visible when OT hours exist -->
+            <div class="metric-tile ot-tile ot-gm-tile" style="display:none;">
+                <div class="metric-tile-label">OT Gross Margin</div>
+                <div class="metric-tile-value" id="otGmDollar">$0.00</div>
+                <div class="metric-tile-sub" id="otGmSub">/wk from OT hours</div>
+            </div>
+            <div class="metric-tile ot-tile ot-gm-tile" style="display:none;">
+                <div class="metric-tile-label">OT GM %</div>
+                <div class="metric-tile-value" id="otGmPctNumber" style="font-size:18px;">0.00%</div>
+                <div class="metric-tile-sub">OT Gross Margin Rate</div>
+            </div>
+            <!-- Row 4: Net Margin $$ | Net Margin % -->
             <div class="metric-tile net">
                 <div class="metric-tile-label">Net Margin</div>
                 <div class="metric-tile-value" id="nmTotalDollar">$0.00</div>
