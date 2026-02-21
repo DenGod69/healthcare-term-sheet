@@ -1875,47 +1875,57 @@
 
         <hr class="margin-divider" style="margin:6px 0;">
 
-        <!-- OT/DT MARGIN BREAKDOWN -->
-        <div class="margin-section-label">OT/DT Margin Breakdown</div>
+        <!-- OT PROFIT BREAKDOWN -->
+        <div class="margin-section-label" id="otBreakdownLabel">OT Profit Breakdown</div>
 
-        <div class="metrics-grid">
+        <div class="metrics-grid" id="otProfitGrid">
             <div class="metric-tile ot-tile">
-                <div class="metric-tile-label">Reg Margin/Hr</div>
-                <div class="metric-tile-value" id="otRegMarginHr" style="font-size:15px;">$0.00</div>
-                <div class="metric-tile-sub"><span id="otRegHrs">0</span> hrs @ <span id="otRegBillHr">$0</span>/<span id="otRegPayHr">$0</span></div>
-            </div>
-            <div class="metric-tile ot-tile">
-                <div class="metric-tile-label">OT Margin/Hr</div>
-                <div class="metric-tile-value" id="otOtMarginHr" style="font-size:15px;">$0.00</div>
-                <div class="metric-tile-sub"><span id="otOtHrs">0</span> hrs @ <span id="otOtBillHr">$0</span>/<span id="otOtPayHr">$0</span></div>
-            </div>
-            <div class="metric-tile ot-tile ot-dt-tile" style="display:none; border-left-color:#c0392b;">
-                <div class="metric-tile-label">DT Margin/Hr</div>
-                <div class="metric-tile-value" id="otDtMarginHr" style="font-size:15px; color:#c0392b;">$0.00</div>
-                <div class="metric-tile-sub"><span id="otDtHrs">0</span> hrs @ <span id="otDtBillHr">$0</span>/<span id="otDtPayHr">$0</span></div>
+                <div class="metric-tile-label">Per Hour</div>
+                <div class="metric-tile-value" id="otProfitHr" style="font-size:15px;">$0.00</div>
+                <div class="metric-tile-sub"><span id="otBillHrSub">$0</span> bill / <span id="otCostHrSub">$0</span> cost</div>
             </div>
             <div class="metric-tile ot-tile">
-                <div class="metric-tile-label">Reg Profit/Wk</div>
-                <div class="metric-tile-value" id="otRegProfitWk" style="font-size:15px;">$0.00</div>
-                <div class="metric-tile-sub">After burden (WC+ER)</div>
+                <div class="metric-tile-label">Per Day</div>
+                <div class="metric-tile-value" id="otProfitDay" style="font-size:15px;">$0.00</div>
+                <div class="metric-tile-sub"><span id="otHrsPerDay">0</span> OT hrs/day</div>
             </div>
             <div class="metric-tile ot-tile">
-                <div class="metric-tile-label">OT Profit/Wk</div>
-                <div class="metric-tile-value" id="otOtProfitWk" style="font-size:15px;">$0.00</div>
-                <div class="metric-tile-sub">After burden (WC+ER)</div>
+                <div class="metric-tile-label">Per Week</div>
+                <div class="metric-tile-value" id="otProfitWk" style="font-size:15px;">$0.00</div>
+                <div class="metric-tile-sub"><span id="otHrsPerWk">0</span> OT hrs × margin</div>
             </div>
-            <div class="metric-tile ot-tile ot-dt-tile" style="display:none; border-left-color:#c0392b;">
-                <div class="metric-tile-label">DT Profit/Wk</div>
-                <div class="metric-tile-value" id="otDtProfitWk" style="font-size:15px; color:#c0392b;">$0.00</div>
-                <div class="metric-tile-sub">After burden (WC+ER)</div>
+            <div class="metric-tile ot-tile">
+                <div class="metric-tile-label">Per Month</div>
+                <div class="metric-tile-value" id="otProfitMo" style="font-size:15px;">$0.00</div>
+                <div class="metric-tile-sub">Weekly × 4.33</div>
             </div>
         </div>
-        <div class="metric-details">
-            <div class="margin-detail-row"><span>Reg Burden/Hr (WC+ER)</span><span id="otRegBurdenHr">$0.00</span></div>
-            <div class="margin-detail-row"><span>OT Burden/Hr (WC+ER)</span><span id="otOtBurdenHr">$0.00</span></div>
-            <div class="margin-detail-row ot-dt-detail" style="display:none;"><span>DT Burden/Hr (WC+ER)</span><span id="otDtBurdenHr">$0.00</span></div>
-            <div class="margin-detail-row"><span>Total Weekly Profit</span><span id="otTotalProfitWk">$0.00</span></div>
-            <div class="margin-detail-row"><span>OT/DT % of Total Profit</span><span id="otPctOfProfit">0.00%</span></div>
+
+        <!-- DT PROFIT BREAKDOWN (hidden by default, shown for CA etc) -->
+        <div id="dtProfitSection" style="display:none; margin-top:6px;">
+            <div class="margin-section-label">DT Profit Breakdown</div>
+            <div class="metrics-grid">
+                <div class="metric-tile" style="border-left-color:#c0392b;">
+                    <div class="metric-tile-label">Per Hour</div>
+                    <div class="metric-tile-value" id="dtProfitHr" style="font-size:15px; color:#c0392b;">$0.00</div>
+                    <div class="metric-tile-sub"><span id="dtBillHrSub">$0</span> bill / <span id="dtCostHrSub">$0</span> cost</div>
+                </div>
+                <div class="metric-tile" style="border-left-color:#c0392b;">
+                    <div class="metric-tile-label">Per Day</div>
+                    <div class="metric-tile-value" id="dtProfitDay" style="font-size:15px; color:#c0392b;">$0.00</div>
+                    <div class="metric-tile-sub"><span id="dtHrsPerDay">0</span> DT hrs/day</div>
+                </div>
+                <div class="metric-tile" style="border-left-color:#c0392b;">
+                    <div class="metric-tile-label">Per Week</div>
+                    <div class="metric-tile-value" id="dtProfitWk" style="font-size:15px; color:#c0392b;">$0.00</div>
+                    <div class="metric-tile-sub"><span id="dtHrsPerWk">0</span> DT hrs × margin</div>
+                </div>
+                <div class="metric-tile" style="border-left-color:#c0392b;">
+                    <div class="metric-tile-label">Per Month</div>
+                    <div class="metric-tile-value" id="dtProfitMo" style="font-size:15px; color:#c0392b;">$0.00</div>
+                    <div class="metric-tile-sub">Weekly × 4.33</div>
+                </div>
+            </div>
         </div>
 
         <!-- BREAK-EVEN OT/DT ANALYSIS -->
