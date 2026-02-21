@@ -2789,6 +2789,9 @@
             let totalPay = 0;
             let totalBill = 0;
 
+            // Apply bill rate multipliers (auto-fill OT/DT from regular bill rate)
+            try { applyBillMultipliers(); } catch(e) { console.error('[OT] applyBillMultipliers error:', e); }
+
             // Calculate VMS net bill rates and bill rate table
             try { calculateVMS(); } catch(e) { console.error('[OT] calculateVMS error:', e); }
 
