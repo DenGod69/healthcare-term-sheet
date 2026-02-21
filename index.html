@@ -3583,9 +3583,15 @@
 
             // --- OT/DT Margin Breakdown (burdens apply to all taxable wages) ---
             const otPayRate = parseFloat(document.querySelector('.pay-rate[data-type="ot"]').value) || 0;
-            const otBillRate = parseFloat(document.querySelector('.bill-rate[data-type="ot"]').value) || 0;
+            const otBillRateRaw = parseFloat(document.querySelector('.bill-rate[data-type="ot"]').value) || 0;
             const dtPayRate = parseFloat(document.querySelector('.pay-rate[data-type="dt"]').value) || 0;
-            const dtBillRate = parseFloat(document.querySelector('.bill-rate[data-type="dt"]').value) || 0;
+            const dtBillRateRaw = parseFloat(document.querySelector('.bill-rate[data-type="dt"]').value) || 0;
+
+            // Net bill rates after VMS fee
+            const vmsMult = 1 - vmsPercent / 100;
+            const otBillRate = otBillRateRaw * vmsMult;
+            const dtBillRate = dtBillRateRaw * vmsMult;
+            const netRegBillRate = regBillRate * vmsMult;
 
             // Use state OT breakdown
             const otBreakdown = calculateOTBreakdown(hoursDay, hoursWeek, stateCode);
@@ -3598,8 +3604,8 @@
             const otBurdenHr = otPayRate * burdenPct;
             const dtBurdenHr = dtPayRate * burdenPct;
 
-            // Margin per hour = bill - pay - burden
-            const regMarginHr = regBillRate - regPayRate - regBurdenHr;
+            // Margin per hour = net bill - pay - burden
+            const regMarginHr = netRegBillRate - regPayRate - regBurdenHr;
             const otMarginHr = otHrs > 0 ? otBillRate - otPayRate - otBurdenHr : 0;
             const dtMarginHr = dtHrs > 0 ? dtBillRate - dtPayRate - dtBurdenHr : 0;
 
