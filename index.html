@@ -2371,13 +2371,8 @@
         function validateMinWage() {
             const regPayInput = document.querySelector('.pay-rate[data-type="regular"]');
             const regPay = parseFloat(regPayInput.value) || 0;
-            const warningEl = document.getElementById('minWageWarning');
-            const textEl = document.getElementById('minWageText');
 
-            if (regPay <= 0) {
-                warningEl.classList.remove('active');
-                return;
-            }
+            if (regPay <= 0) return;
 
             // Get applicable minimum wage from facility zip, GSA zip, or state dropdown
             const facilityZip = document.getElementById('facilityZip').value || '';
@@ -2386,17 +2381,8 @@
             const minWage = getMinWageForZip(zip);
 
             if (regPay < minWage.rate) {
-                warningEl.classList.add('active');
-                textEl.innerHTML = '<strong>$' + regPay.toFixed(2) + '/hr is below ' + minWage.label +
-                    ' minimum wage ($' + minWage.rate.toFixed(2) + '/hr).</strong> Auto-corrected to $' +
-                    minWage.rate.toFixed(2) + '/hr.';
                 regPayInput.value = minWage.rate.toFixed(2);
-                // Re-trigger calculations with corrected value
                 regPayInput.dispatchEvent(new Event('input', { bubbles: true }));
-                // Fade warning after 5 seconds
-                setTimeout(() => { warningEl.classList.remove('active'); }, 8000);
-            } else {
-                warningEl.classList.remove('active');
             }
         }
 
