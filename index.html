@@ -3363,6 +3363,11 @@
         document.getElementById('otBillMultiplier').addEventListener('input', calculateAllRows);
         document.getElementById('dtBillMultiplier').addEventListener('input', calculateAllRows);
 
+        // Target NM% listener
+        document.getElementById('targetNmPct').addEventListener('input', function() {
+            try { updateProfitableCalc(); } catch(e) {}
+        });
+
         // GSA $/Hr listeners — editing $/Hr recalculates $/Wk
         document.getElementById('gsaLodgingHr').addEventListener('input', function() {
             gsaHrChanged('lodging');
@@ -4198,6 +4203,9 @@
             } else {
                 weeksToCoverSection.style.display = 'none';
             }
+
+            // --- Update Profitable Term Sheet Calculator ---
+            try { updateProfitableCalc(); } catch(e) { console.error('updateProfitableCalc error:', e); }
         }
 
         // ============================================================
