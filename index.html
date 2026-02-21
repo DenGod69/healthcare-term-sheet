@@ -3386,7 +3386,8 @@
 
                 // OT: rate-only mode — show rate-based OT margin if OT rates entered
                 const otPayRateM1 = parseFloat(document.querySelector('.pay-rate[data-type="ot"]').value) || 0;
-                const otBillRateM1 = parseFloat(document.querySelector('.bill-rate[data-type="ot"]').value) || 0;
+                const otBillRateRawM1 = parseFloat(document.querySelector('.bill-rate[data-type="ot"]').value) || 0;
+                const otBillRateM1 = otBillRateRawM1 * (1 - vmsPercent / 100); // Net OT bill after VMS
                 const otMarginM1 = otBillRateM1 - otPayRateM1 - (otPayRateM1 * burdenPct);
                 const otCostM1 = otPayRateM1 + (otPayRateM1 * burdenPct);
 
