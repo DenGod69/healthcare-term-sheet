@@ -3535,6 +3535,121 @@
             }
         }
 
+        // --- Profitable Term Sheet Calculator ---
+        function updateProfitableCalc() {
+            const targetNm = parseFloat(document.getElementById('targetNmPct').value) || 0;
+            const resultsEl = document.getElementById('profitCalcResults');
+            const missingEl = document.getElementById('profitCalcMissing');
+
+            // Gather inputs
+            const regBillRate = parseFloat(document.querySelector('.bill-rate[data-type="regular"]').value) || 0;
+            const hoursWeek = parseFloat(document.getElementById('hoursPerWeek').value) || 0;
+            const vmsPercent = parseFloat(document.getElementById('vmsPercent').value) || 0;
+            const workersComp = parseFloat(document.getElementById('workersComp').value) || 0;
+            const erCost = parseFloat(document.getElementById('erCost').value) || 0;
+            const burdenPct = (workersComp + erCost) / 100;
+            const weeks = parseFloat(document.getElementById('contractWeeks').value) || 0;
+            const facilityZip = document.getElementById('facilityZip').value || '';
+            const gsaZip = document.getElementById('gsaZipCode').value || '';
+            const zip = facilityZip.length >= 5 ? facilityZip : (gsaZip.length >= 5 ? gsaZip : '');
+
+            // Get flat expenses
+            let flatExpenses = 0;
+            ['drugScreening', 'backgroundCheck', 'occupationalScreening'].forEach(id => {
+                flatExpenses += parseFloat(document.getElementById(id).value) || 0;
+            });
+            document.querySelectorAll('.custom-expense-row').forEach(el => {
+                flatExpenses += parseFloat(el.querySelector('.custom-expense-amount').value) || 0;
+            });
+
+            // Get GSA stipends (use current values if set)
+            const gsaLodgingWk = parseFloat(document.getElementById('gsaLodgingWeek').value) || 0;
+            const gsaMealWk = parseFloat(document.getElementById('gsaMealWeek').value) || 0;
+            const gsaTotalWk = gsaLodgingWk + gsaMealWk;
+
+            // Need: bill rate, hours, and target NM% to calculate
+            if (targetNm <= 0 || regBillRate <= 0 || hoursWeek <= 0) {
+                resultsEl.style.display = 'none';
+                missingEl.style.display = '';
+                const missing = [];
+                if (targetNm <= 0) missing.push('target NM%');
+                if (regBillRate <= 0) missing.push('bill rate');
+                if (hoursWeek <= 0) missing.push('hours/week');
+                missingEl.textContent = 'Enter ' + missing.join(', ') + ' to calculate';
+                return;
+            }
+
+            resultsEl.style.display = '';
+            missingEl.style.display = 'none';
+
+            // OT hour split
+            const hoursDay = parseFloat(document.getElementById('hoursPerDay').value) || 0;
+            const stateCode = document.getElementById('otStateSelect').value;
+            const otBreakdown = calculateOTBreakdown(hoursDay, hoursWeek, stateCode);
+            const regHrs = otBreakdown.regHrs;
+            const otHrs = otBreakdown.otHrs;
+
+            // OT bill multiplier (or default 1.5x)
+            const otMult = parseFloat(document.getElementById('otBillMultiplier').value) || 1.5;
+            const vmsMult = 1 - vmsPercent / 100;
+
+            // Net bill per week
+            const netRegBillHr = regBillRate * vmsMult;
+            const netOtBillHr = regBillRate * otMult * vmsMult;
+            const netBillWk = (netRegBillHr * regHrs) + (netOtBillHr * otHrs);
+
+            // Expense burden per hour
+            const totalHours = hoursWeek * (weeks > 0 ? weeks : 13);
+            const expBurdenHr = flatExpenses > 0 ? flatExpenses / totalHours : 0;
+
+            // Solve for max pay rate that achieves target NM%:
+            // NM% = (NetBillWk - TotalCostWk) / NetBillWk
+            // TotalCostWk = (regPay × regHrs + otPay × otHrs) × (1 + burdenPct) + gsaTotalWk + expBurdenHr × hoursWeek
+            // Assume otPay = regPay × 1.5
+            // Let P = regPay
+            // TotalCostWk = P × (regHrs + 1.5 × otHrs) × (1 + burdenPct) + gsaTotalWk + expBurdenHr × hoursWeek
+            // targetNm/100 = (NetBillWk - TotalCostWk) / NetBillWk
+            // TotalCostWk = NetBillWk × (1 - targetNm/100)
+            // P × (regHrs + 1.5 × otHrs) × (1 + burdenPct) = NetBillWk × (1 - targetNm/100) - gsaTotalWk - expBurdenHr × hoursWeek
+            // P = [NetBillWk × (1 - targetNm/100) - gsaTotalWk - expBurdenHr × hoursWeek] / [(regHrs + 1.5 × otHrs) × (1 + burdenPct)]
+
+            const targetCostWk = netBillWk * (1 - targetNm / 100);
+            const payableWk = targetCostWk - gsaTotalWk - (expBurdenHr * hoursWeek);
+            const weightedHrs = regHrs + (1.5 * otHrs);
+            const sugPay = weightedHrs > 0 ? payableWk / (weightedHrs * (1 + burdenPct)) : 0;
+
+            // Apply minimum wage floor
+            const minWage = getMinWageForZip(zip);
+            const finalPay = Math.max(sugPay, minWage.rate);
+            const otPay = finalPay * 1.5;
+
+            // Recalculate actual NM with floored pay
+            const actualPayWk = (finalPay * regHrs + otPay * otHrs);
+            const actualBurdenWk = actualPayWk * burdenPct;
+            const actualCostWk = actualPayWk + actualBurdenWk + gsaTotalWk + (expBurdenHr * hoursWeek);
+            const actualNmWk = netBillWk - actualCostWk;
+            const actualNmPct = netBillWk > 0 ? (actualNmWk / netBillWk * 100) : 0;
+            const totalPayWk = actualPayWk + gsaTotalWk;
+
+            // Display
+            document.getElementById('sugRegPay').textContent = '$' + finalPay.toFixed(2) + '/hr';
+            document.getElementById('sugOtPay').textContent = '$' + otPay.toFixed(2) + '/hr';
+            document.getElementById('sugLodging').textContent = gsaLodgingWk > 0 ? '$' + gsaLodgingWk.toFixed(2) : 'N/A (no GSA)';
+            document.getElementById('sugMeals').textContent = gsaMealWk > 0 ? '$' + gsaMealWk.toFixed(2) : 'N/A (no GSA)';
+            document.getElementById('sugTotalPay').textContent = '$' + totalPayWk.toFixed(2);
+            document.getElementById('sugTotalBill').textContent = '$' + netBillWk.toFixed(2) + ' (net)';
+            document.getElementById('sugNmPct').textContent = actualNmPct.toFixed(2) + '%';
+            document.getElementById('sugNmPct').style.color = actualNmPct >= targetNm ? '#2ecc71' : '#e74c3c';
+            document.getElementById('sugNmWk').textContent = '$' + actualNmWk.toFixed(2);
+            document.getElementById('sugNmWk').style.color = actualNmWk >= 0 ? '#2ecc71' : '#e74c3c';
+            document.getElementById('sugMinWage').textContent = '$' + minWage.rate.toFixed(2) + '/hr (' + minWage.label + ')';
+
+            // If min wage forced a higher pay, note it
+            if (finalPay > sugPay && sugPay > 0) {
+                document.getElementById('sugRegPay').textContent += ' (min wage floor)';
+            }
+        }
+
         function updateMarginSidebar() {
             const hoursWeek = parseFloat(document.getElementById('hoursPerWeek').value) || 0;
             const hoursDay = parseFloat(document.getElementById('hoursPerDay').value) || 0;
