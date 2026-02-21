@@ -3384,24 +3384,26 @@
                 document.getElementById('gmBillMo').textContent = '--';
                 document.getElementById('gmPayMo').textContent = '--';
 
-                // OT: rate-only mode — show reg margin after burden
-                setMarginValue('otRegMarginHr', regBillRate - regPayRate - (regPayRate * burdenPct), '$');
-                document.getElementById('otRegHrs').textContent = '--';
-                document.getElementById('otRegBillHr').textContent = '$' + regBillRate.toFixed(2);
-                document.getElementById('otRegPayHr').textContent = '$' + regPayRate.toFixed(2);
-                setMarginValue('otOtMarginHr', 0, '$');
-                document.getElementById('otOtHrs').textContent = '0';
-                document.getElementById('otOtBillHr').textContent = '--';
-                document.getElementById('otOtPayHr').textContent = '--';
-                setMarginValue('otRegProfitWk', 0, '$');
-                setMarginValue('otOtProfitWk', 0, '$');
-                document.getElementById('otRegBurdenHr').textContent = '$' + (regPayRate * burdenPct).toFixed(2);
-                document.getElementById('otOtBurdenHr').textContent = '$0.00';
-                // Hide DT in Mode 1
-                document.querySelectorAll('.ot-dt-tile').forEach(el => el.style.display = 'none');
-                document.querySelectorAll('.ot-dt-detail').forEach(el => el.style.display = 'none');
-                document.getElementById('otTotalProfitWk').textContent = '--';
-                document.getElementById('otPctOfProfit').textContent = '--';
+                // OT: rate-only mode — show rate-based OT margin if OT rates entered
+                const otPayRateM1 = parseFloat(document.querySelector('.pay-rate[data-type="ot"]').value) || 0;
+                const otBillRateM1 = parseFloat(document.querySelector('.bill-rate[data-type="ot"]').value) || 0;
+                const otMarginM1 = otBillRateM1 - otPayRateM1 - (otPayRateM1 * burdenPct);
+                const otCostM1 = otPayRateM1 + (otPayRateM1 * burdenPct);
+
+                setMarginValue('otProfitHr', otMarginM1, '$');
+                document.getElementById('otBillHrSub').textContent = '$' + otBillRateM1.toFixed(2);
+                document.getElementById('otCostHrSub').textContent = '$' + otCostM1.toFixed(2);
+                setMarginValue('otProfitDay', 0, '$');
+                document.getElementById('otHrsPerDay').textContent = '--';
+                setMarginValue('otProfitWk', 0, '$');
+                document.getElementById('otHrsPerWk').textContent = '--';
+                setMarginValue('otProfitMo', 0, '$');
+                document.getElementById('otProfitGrid').style.opacity = (otPayRateM1 > 0 || otBillRateM1 > 0) ? '1' : '0.4';
+                document.getElementById('otBreakdownLabel').textContent = 'OT Profit Breakdown (enter hrs for full calc)';
+
+                // Hide DT section and OT GM tiles in Mode 1
+                document.getElementById('dtProfitSection').style.display = 'none';
+                document.querySelectorAll('.ot-gm-tile').forEach(el => el.style.display = 'none');
 
                 // Hero: show per-hour rates (no weekly available without hours)
                 document.getElementById('heroWeeklyPay').textContent = '$' + grossPayRate.toFixed(2) + '/hr';
