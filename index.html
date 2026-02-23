@@ -2451,11 +2451,13 @@
             const months = rateData.months ? rateData.months.month : null;
             if (!months || !months.length) return null;
             const maxLodging = Math.max(...months.map(m => parseFloat(m.value) || 0));
+            const county = rateData.county && rateData.county !== 'None' ? rateData.county : '';
+            const city = rateData.city && rateData.city !== 'Standard Rate' ? rateData.city : '';
             return {
                 lodging: maxLodging,
                 meals: meals,
-                city: rateData.city || 'Unknown',
-                county: rateData.county || 'Unknown',
+                city: city,
+                county: county,
                 state: rateEntry.state || ''
             };
         }
