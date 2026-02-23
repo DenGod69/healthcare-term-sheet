@@ -2785,7 +2785,7 @@
             document.getElementById('gsaMealMaxWk').classList.toggle('exceeded', mealWk > mealMaxWk && mealMaxWk > 0);
         }
 
-        // Clamp GSA value: returns clamped value and flags the input if exceeded
+        // Clamp GSA value: silently caps to max and briefly flashes red
         function clampGSA(inputEl, value, maxVal) {
             if (maxVal > 0 && value > maxVal) {
                 inputEl.classList.add('gsa-over-max');
@@ -2793,7 +2793,6 @@
                 inputEl.value = maxVal.toFixed(2);
                 return maxVal;
             }
-            inputEl.classList.remove('gsa-over-max');
             return value;
         }
 
