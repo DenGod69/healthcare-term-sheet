@@ -2688,8 +2688,8 @@
                 gsaPanel.style.display = 'block';
             }
 
-            // Recalculate GSA from day rates when switching modes
-            calculateGSA();
+            // Recalculate GSA totals when switching modes (preserve user values)
+            updateGSATotals();
         }
 
         // Initialize GSA to max rates — called ONLY on fresh lookup
