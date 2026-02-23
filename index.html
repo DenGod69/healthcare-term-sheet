@@ -2751,7 +2751,7 @@
             updateGSATotals();
         }
 
-        // Update the max rate labels in the GSA table
+        // Update the max rate labels and input max attributes in the GSA table
         function updateGSAMaxDisplay() {
             const lodgingDay = parseFloat(document.getElementById('gsaLodgingDayVal').value) || 0;
             const mealDay = parseFloat(document.getElementById('gsaMealDayVal').value) || 0;
@@ -2762,10 +2762,27 @@
             const lodgingMaxHr = hoursWeek > 0 ? lodgingMaxWk / hoursWeek : 0;
             const mealMaxHr = hoursWeek > 0 ? mealMaxWk / hoursWeek : 0;
 
+            // Update max labels
             document.getElementById('gsaLodgingMaxHr').textContent = lodgingMaxHr > 0 ? '$' + lodgingMaxHr.toFixed(2) : '--';
             document.getElementById('gsaLodgingMaxWk').textContent = lodgingMaxWk > 0 ? '$' + lodgingMaxWk.toFixed(2) : '--';
             document.getElementById('gsaMealMaxHr').textContent = mealMaxHr > 0 ? '$' + mealMaxHr.toFixed(2) : '--';
             document.getElementById('gsaMealMaxWk').textContent = mealMaxWk > 0 ? '$' + mealMaxWk.toFixed(2) : '--';
+
+            // Set max attributes on inputs to enforce caps
+            if (lodgingMaxHr > 0) document.getElementById('gsaLodgingHr').max = lodgingMaxHr.toFixed(2);
+            if (lodgingMaxWk > 0) document.getElementById('gsaLodgingWeek').max = lodgingMaxWk.toFixed(2);
+            if (mealMaxHr > 0) document.getElementById('gsaMealHr').max = mealMaxHr.toFixed(2);
+            if (mealMaxWk > 0) document.getElementById('gsaMealWeek').max = mealMaxWk.toFixed(2);
+
+            // Highlight max labels red if current values exceed
+            const lodgingHr = parseFloat(document.getElementById('gsaLodgingHr').value) || 0;
+            const mealHr = parseFloat(document.getElementById('gsaMealHr').value) || 0;
+            const lodgingWk = parseFloat(document.getElementById('gsaLodgingWeek').value) || 0;
+            const mealWk = parseFloat(document.getElementById('gsaMealWeek').value) || 0;
+            document.getElementById('gsaLodgingMaxHr').classList.toggle('exceeded', lodgingHr > lodgingMaxHr && lodgingMaxHr > 0);
+            document.getElementById('gsaLodgingMaxWk').classList.toggle('exceeded', lodgingWk > lodgingMaxWk && lodgingMaxWk > 0);
+            document.getElementById('gsaMealMaxHr').classList.toggle('exceeded', mealHr > mealMaxHr && mealMaxHr > 0);
+            document.getElementById('gsaMealMaxWk').classList.toggle('exceeded', mealWk > mealMaxWk && mealMaxWk > 0);
         }
 
         // Clamp GSA value: returns clamped value and flags the input if exceeded
