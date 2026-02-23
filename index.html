@@ -2490,9 +2490,25 @@
             initGSAValues();
         }
 
+        // Resolve zip code to city/state via free API
+        async function resolveZipCity(zip) {
+            try {
+                const resp = await fetch(`https://api.zippopotam.us/us/${zip}`);
+                if (!resp.ok) return null;
+                const data = await resp.json();
+                if (data.places && data.places.length) {
+                    return {
+                        city: data.places[0]['place name'],
+                        state: data.places[0]['state abbreviation']
+                    };
+                }
+            } catch (e) { /* ignore */ }
+            return null;
+        }
+
         // Lookup GSA rates with multi-step fallback:
-        // 1. Try zip code lookup
-        // 2. Try state-level lookup (find closest county match)
+        // 1. Try zip code lookup + resolve city name
+        // 2. Try state-level lookup
         // 3. Fall back to standard CONUS rates
         async function lookupGSARate() {
             const zip = document.getElementById('gsaZipCode').value.trim();
@@ -2513,47 +2529,50 @@
             const year = getGSAFiscalYear();
 
             try {
+                // Resolve city name from zip in parallel with GSA lookup
+                const [cityInfo, zipResp] = await Promise.all([
+                    resolveZipCity(zip),
+                    fetch(`${GSA_API_BASE}/zip/${zip}/year/${year}?api_key=${GSA_API_KEY}`)
+                ]);
+
+                const cityName = cityInfo ? cityInfo.city : '';
+                const stateName = cityInfo ? cityInfo.state : (zipToState(zip) || '');
+
                 // STEP 1: Try direct zip code lookup
-                const zipUrl = `${GSA_API_BASE}/zip/${zip}/year/${year}?api_key=${GSA_API_KEY}`;
-                const zipResp = await fetch(zipUrl);
                 const zipData = await zipResp.json();
                 const zipRates = extractGSARates(zipData);
 
                 if (zipRates && zipRates.lodging > 0) {
                     loadingEl.style.display = 'none';
-                    const parts = [];
-                    if (zipRates.city) parts.push(zipRates.city);
-                    if (zipRates.county) parts.push(zipRates.county + ' County');
-                    if (zipRates.state) parts.push(zipRates.state);
-                    const label = parts.length > 0
-                        ? `${parts.join(', ')} - Zip ${zip}`
-                        : `Standard Rate, ${zipToState(zip) || ''} - Zip ${zip}`;
+                    const label = cityName
+                        ? `${cityName}, ${stateName} - Zip ${zip}`
+                        : `${stateName} Standard Rate - Zip ${zip}`;
                     applyGSARates(zipRates, zip, label);
                     return;
                 }
 
                 // STEP 2: Try state-level lookup
-                const state = zipToState(zip);
+                const state = stateName || zipToState(zip);
                 if (state) {
                     const stateUrl = `${GSA_API_BASE}/state/${state}/year/${year}?api_key=${GSA_API_KEY}`;
                     const stateResp = await fetch(stateUrl);
                     const stateData = await stateResp.json();
 
                     if (stateData.rates && stateData.rates.length) {
-                        // Find any rate entry for the state — use first available
                         for (const rateEntry of stateData.rates) {
                             if (rateEntry.rate && rateEntry.rate.length) {
                                 const rd = rateEntry.rate[0];
                                 const months = rd.months ? rd.months.month : null;
                                 if (months && months.length) {
                                     const maxLodging = Math.max(...months.map(m => parseFloat(m.value) || 0));
-                                    // Use standard CONUS if this is a catch-all, otherwise use the rate
                                     const lodging = maxLodging > 0 ? maxLodging : STANDARD_CONUS.lodging;
                                     const meals = rd.meals > 0 ? rd.meals : STANDARD_CONUS.meals;
 
                                     loadingEl.style.display = 'none';
-                                    applyGSARates({ lodging, meals }, zip,
-                                        `${state} Standard Rate - Zip ${zip} (via state lookup)`);
+                                    const label = cityName
+                                        ? `${cityName}, ${state} - Zip ${zip}`
+                                        : `${state} Standard Rate - Zip ${zip}`;
+                                    applyGSARates({ lodging, meals }, zip, label);
                                     return;
                                 }
                             }
@@ -2563,12 +2582,13 @@
 
                 // STEP 3: Fall back to standard CONUS rates
                 loadingEl.style.display = 'none';
-                applyGSARates(STANDARD_CONUS, zip,
-                    `Standard CONUS Rate - Zip ${zip} (no specific area rate found)`);
+                const label = cityName
+                    ? `${cityName}, ${stateName} - Zip ${zip} (standard CONUS rate)`
+                    : `Standard CONUS Rate - Zip ${zip}`;
+                applyGSARates(STANDARD_CONUS, zip, label);
 
             } catch (err) {
                 loadingEl.style.display = 'none';
-                // Even on network error, apply standard CONUS so user isn't blocked
                 console.error('GSA API error:', err);
                 applyGSARates(STANDARD_CONUS, zip,
                     `Standard CONUS Rate - Zip ${zip} (offline fallback)`);
