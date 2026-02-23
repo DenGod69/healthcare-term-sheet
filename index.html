@@ -2692,28 +2692,61 @@
             calculateGSA();
         }
 
-        // Calculate GSA rates — called when GSA location changes or hours/weeks change
-        // $/Day is static from GSA lookup. $/Hr and $/Wk are editable and linked.
-        // Max $/Wk = daily rate × 7; Max $/Hr = Max $/Wk ÷ Hours/Week
-        // Users can adjust LOWER but NOT above max.
-        function calculateGSA() {
+        // Initialize GSA to max rates — called ONLY on fresh lookup
+        function initGSAValues() {
             const lodgingDay = parseFloat(document.getElementById('gsaLodgingDayVal').value) || 0;
             const mealDay = parseFloat(document.getElementById('gsaMealDayVal').value) || 0;
             const hoursWeek = parseFloat(document.getElementById('hoursPerWeek').value) || 0;
 
-            // Max rates based on daily rate × 7 ÷ hours/week
             const lodgingMaxWk = lodgingDay * 7;
             const mealMaxWk = mealDay * 7;
             const lodgingMaxHr = hoursWeek > 0 ? lodgingMaxWk / hoursWeek : 0;
             const mealMaxHr = hoursWeek > 0 ? mealMaxWk / hoursWeek : 0;
 
-            // Set initial values to the max (full GSA rate)
             document.getElementById('gsaLodgingHr').value = lodgingMaxHr.toFixed(2);
             document.getElementById('gsaMealHr').value = mealMaxHr.toFixed(2);
             document.getElementById('gsaLodgingWeek').value = lodgingMaxWk.toFixed(2);
             document.getElementById('gsaMealWeek').value = mealMaxWk.toFixed(2);
 
-            // Display max rate limits
+            updateGSAMaxDisplay();
+            updateGSATotals();
+        }
+
+        // Recalculate GSA $/Hr from existing $/Wk when hours/week changes
+        // Preserves user's weekly amounts, just updates the hourly rate
+        // Also clamps $/Wk if it exceeds the max
+        function calculateGSA() {
+            const lodgingDay = parseFloat(document.getElementById('gsaLodgingDayVal').value) || 0;
+            const mealDay = parseFloat(document.getElementById('gsaMealDayVal').value) || 0;
+            const hoursWeek = parseFloat(document.getElementById('hoursPerWeek').value) || 0;
+
+            // If no GSA rates loaded yet, nothing to do
+            if (lodgingDay <= 0 && mealDay <= 0) return;
+
+            const lodgingMaxWk = lodgingDay * 7;
+            const mealMaxWk = mealDay * 7;
+
+            // Clamp $/Wk to max if it exceeds
+            const lodgingWkInput = document.getElementById('gsaLodgingWeek');
+            const mealWkInput = document.getElementById('gsaMealWeek');
+            let lodgingWk = parseFloat(lodgingWkInput.value) || 0;
+            let mealWk = parseFloat(mealWkInput.value) || 0;
+
+            if (lodgingWk > lodgingMaxWk) {
+                lodgingWk = lodgingMaxWk;
+                lodgingWkInput.value = lodgingWk.toFixed(2);
+            }
+            if (mealWk > mealMaxWk) {
+                mealWk = mealMaxWk;
+                mealWkInput.value = mealWk.toFixed(2);
+            }
+
+            // Recalculate $/Hr from $/Wk ÷ hours/week
+            const lodgingHr = hoursWeek > 0 ? lodgingWk / hoursWeek : 0;
+            const mealHr = hoursWeek > 0 ? mealWk / hoursWeek : 0;
+            document.getElementById('gsaLodgingHr').value = lodgingHr.toFixed(2);
+            document.getElementById('gsaMealHr').value = mealHr.toFixed(2);
+
             updateGSAMaxDisplay();
             updateGSATotals();
         }
