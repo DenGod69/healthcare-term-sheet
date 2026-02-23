@@ -2521,8 +2521,14 @@
 
                 if (zipRates && zipRates.lodging > 0) {
                     loadingEl.style.display = 'none';
-                    applyGSARates(zipRates, zip,
-                        `${zipRates.city}, ${zipRates.state} (${zipRates.county} County) - Zip ${zip}`);
+                    const parts = [];
+                    if (zipRates.city) parts.push(zipRates.city);
+                    if (zipRates.county) parts.push(zipRates.county + ' County');
+                    if (zipRates.state) parts.push(zipRates.state);
+                    const label = parts.length > 0
+                        ? `${parts.join(', ')} - Zip ${zip}`
+                        : `Standard Rate, ${zipToState(zip) || ''} - Zip ${zip}`;
+                    applyGSARates(zipRates, zip, label);
                     return;
                 }
 
